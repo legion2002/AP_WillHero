@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.PreGameMenu">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3be0fe" height="600.0" stroke="BLACK" strokeType="INSIDE" width="1024.0">
+         <effect>
+            <BoxBlur height="255.0" width="0.0">
+               <input>
+                  <Blend mode="SRC_ATOP">
+                     <bottomInput>
+                        <Bloom />
+                     </bottomInput>
+                  </Blend>
+               </input>
+            </BoxBlur>
+         </effect>
+      </Rectangle>
+      <ImageView fitHeight="227.0" fitWidth="435.0" layoutX="122.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/%5Bremoval.ai%5D_tmp-61adf8c55f1a4.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="372.0" layoutY="220.0" mnemonicParsing="false" text="Load Game" />
+      <Button layoutX="375.0" layoutY="300.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="Exit" />
+      <Button layoutX="378.0" layoutY="153.0" mnemonicParsing="false" text="Play Game" />
+      <ImageView fitHeight="227.0" fitWidth="435.0" layoutX="548.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/%5Bremoval.ai%5D_tmp-61adf8c55f1a4.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
