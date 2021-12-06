@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.BoxBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.PreGameMenu">
    <children>
@@ -25,17 +28,82 @@
             </BoxBlur>
          </effect>
       </Rectangle>
-      <ImageView fitHeight="227.0" fitWidth="435.0" layoutX="122.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="71.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/%5Bremoval.ai%5D_tmp-61adf8c55f1a4.png" />
+            <Image url="@../../../images/badal.png" />
          </image>
       </ImageView>
-      <Button layoutX="372.0" layoutY="220.0" mnemonicParsing="false" text="Load Game" />
-      <Button layoutX="375.0" layoutY="300.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" text="Exit" />
-      <Button layoutX="378.0" layoutY="153.0" mnemonicParsing="false" text="Play Game" />
-      <ImageView fitHeight="227.0" fitWidth="435.0" layoutX="548.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="122.0" fitWidth="267.0" layoutX="748.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/%5Bremoval.ai%5D_tmp-61adf8c55f1a4.png" />
+            <Image url="@../../../images/badal.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="275.0" fitWidth="495.0" layoutX="71.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/longPlatform.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="131.0" fitWidth="265.0" layoutX="274.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/badal.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="748.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/badal.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="678.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/badal.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="47.0" fitWidth="38.0" layoutX="162.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/hero.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="191.0" fitWidth="229.0" layoutX="651.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/platform.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="824.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/fatplatform.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="65.0" fitWidth="53.0" layoutX="675.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/greenOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="44.0" fitWidth="38.0" layoutX="905.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/coin.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="966.0" layoutY="3.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="Dubai Regular" size="32.0" />
+         </font>
+      </Label>
+      <HBox layoutX="100.0" layoutY="318.0" prefHeight="100.0" prefWidth="200.0" />
+      <VBox layoutX="462.0" layoutY="143.0" prefHeight="200.0" prefWidth="100.0" spacing="40.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="104.0" text="Play Game" />
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="Load Game" />
+            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" text="Exit" />
+         </children>
+      </VBox>
+      <ImageView fitHeight="131.0" fitWidth="265.0" layoutX="20.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/badal.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="321.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/badal.png" />
          </image>
       </ImageView>
    </children>

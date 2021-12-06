@@ -11,8 +11,8 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LoadingPage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("PreGameMenu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 1024, 600);
         Image icon = new Image("icon.png");
         stage.getIcons().add(icon);
         stage.setTitle("Will Hero by Tanishk Goyal and Diksha Sethi");
