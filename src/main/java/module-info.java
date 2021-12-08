@@ -12,4 +12,5 @@ module com.example.ap_willhero {
 
     opens com.example.ap_willhero to javafx.fxml;
     exports com.example.ap_willhero;
+
 }
