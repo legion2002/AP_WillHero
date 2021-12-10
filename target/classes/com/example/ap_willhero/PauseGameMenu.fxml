@@ -5,14 +5,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootPauseGame" prefHeight="388.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.PreGameMenu">
+<AnchorPane fx:id="rootPauseGame" prefHeight="388.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.PreGameMenu">
    <children>
       <Button fx:id="exitButton" layoutX="127.0" layoutY="284.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
       <Button fx:id="restartGameButton" layoutX="127.0" layoutY="202.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
       <Button fx:id="playGameButton" layoutX="127.0" layoutY="122.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
-      <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="127.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="389.0" fitWidth="321.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/ExitToHomeButton.png" />
+            <Image url="@../../../images/pausemenu.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="62.0" fitWidth="60.0" layoutX="127.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
@@ -25,9 +25,9 @@
             <Image url="@../../../images/PlayGameButton.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="389.0" fitWidth="321.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="127.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/pausemenu.png" />
+            <Image url="@../../../images/ExitToHomeButton.png" />
          </image>
       </ImageView>
    </children>

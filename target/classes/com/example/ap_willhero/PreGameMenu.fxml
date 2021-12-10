@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.PreGameMenu">
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.PreGameMenu">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3be0fe" height="600.0" stroke="BLACK" strokeType="INSIDE" width="1024.0">
          <effect>
@@ -64,7 +64,7 @@
             <Image url="@../../../images/platform.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="824.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="floatingPlatform" fitHeight="150.0" fitWidth="200.0" layoutX="818.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/fatplatform.png" />
          </image>
@@ -84,17 +84,18 @@
             <Font name="Segoe UI Black" size="32.0" />
          </font>
       </Label>
-      <VBox fx:id="menu" layoutX="462.0" layoutY="143.0" prefHeight="200.0" prefWidth="100.0" spacing="40.0">
+      <VBox fx:id="menu" layoutX="461.0" layoutY="117.0" prefHeight="278.0" prefWidth="156.0" spacing="40.0">
          <children>
-            <Button fx:id="PlayGame" mnemonicParsing="false" onAction="#onPlayGameClick" prefHeight="31.0" prefWidth="104.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1.5;" text="Play Game" textFill="WHITE">
+            <Button fx:id="PlayGame" mnemonicParsing="false" onAction="#onPlayGameClick" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1.5;" text="Play Game" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Black" size="12.0" />
                </font></Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1.5;" text="Load Game" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1.5;" text="Load Game" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Black" size="12.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="107.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 1.5;" text="Exit" textFill="WHITE">
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 1.5;" text="Exit" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Black" size="12.0" />
                </font>
@@ -111,7 +112,7 @@
             <Image url="@../../../images/badal.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="hero" fitHeight="47.0" fitWidth="38.0" layoutX="162.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="hero" fitHeight="43.0" fitWidth="50.0" layoutX="162.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/hero.png" />
          </image>
@@ -152,5 +153,10 @@
             <Font name="Segoe UI Black" size="20.0" />
          </font>
       </Label>
+      <ImageView fx:id="shurikenBullet" fitHeight="49.0" fitWidth="28.0" layoutX="206.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/shurikenBullet.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
