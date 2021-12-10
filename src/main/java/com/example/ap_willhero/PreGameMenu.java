@@ -1,11 +1,14 @@
 package com.example.ap_willhero;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -26,7 +29,7 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
     @FXML
     VBox menu = new VBox();
     @FXML
-     AnchorPane root = new AnchorPane();
+    AnchorPane root = new AnchorPane();
     @FXML
     Button PlayGame = new Button();
 
@@ -37,6 +40,12 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
     ImageView orc = new ImageView();
 
     @FXML
+    private ImageView pauseMenu = new ImageView();
+
+    @FXML
+    private Button pauseMenuButton = new Button();
+
+    @FXML
     TranslateTransition heroMoving = new TranslateTransition();
 
     @FXML
@@ -45,6 +54,8 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
     @FXML
     FadeTransition menuDisappearing = new FadeTransition();
 
+    @FXML
+    FadeTransition pauseMenuAppearing = new FadeTransition();
 
 
 
@@ -87,15 +98,26 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
 
     }
 
+    public void displayPauseMenu(){
+        onPlayGameClick();
+        orcMoving.stop();
+        heroMoving.stop();
+        //FXMLLoader pauseGameLoader = new FXMLLoader(getClass().getResource("PauseGameMenu.fxml"));
+
+        //pauseMenuAppearing.play();
+        //root.getChildren().add(pauseMenu);
+
+    }
+
     @Override
     public void handle(KeyEvent keyEvent) {
         System.out.println("REACHED HERE");
 
-            if(KeyCode.W.equals(keyEvent.getCode())){
-                System.out.println("W Pressed");
-                moveHero();
+        if(KeyCode.W.equals(keyEvent.getCode())){
+            System.out.println("W Pressed");
+            moveHero();
 
-            }
+        }
 
     }
 
