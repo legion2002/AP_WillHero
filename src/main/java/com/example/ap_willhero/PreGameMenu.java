@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -101,14 +102,9 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
         onPlayGameClick();
         orcMoving.stop();
         heroMoving.stop();
-        pauseMenuAppearing.setDuration(Duration.millis(1000));
+        //FXMLLoader pauseGameLoader = new FXMLLoader(getClass().getResource("PauseGameMenu.fxml"));
 
-        pauseMenuAppearing.setNode(pauseMenu);
-        pauseMenuAppearing.setFromValue(10);
-        pauseMenuAppearing.setToValue(0);
-        pauseMenuAppearing.setAutoReverse(false);
-
-        pauseMenuAppearing.play();
+        //pauseMenuAppearing.play();
         //root.getChildren().add(pauseMenu);
 
     }
