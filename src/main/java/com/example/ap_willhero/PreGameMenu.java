@@ -1,9 +1,6 @@
 package com.example.ap_willhero;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -17,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import org.controlsfx.control.action.Action;
 
@@ -27,17 +25,21 @@ import java.util.ResourceBundle;
 public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
 
     @FXML
-    VBox menu = new VBox();
+    private VBox menu = new VBox();
     @FXML
-    AnchorPane root = new AnchorPane();
+    private AnchorPane root = new AnchorPane();
     @FXML
-    Button PlayGame = new Button();
+    private Button PlayGame = new Button();
 
     @FXML
-    ImageView hero = new ImageView();
+    private ImageView hero = new ImageView();
+
+
 
     @FXML
-    ImageView orc = new ImageView();
+    private ImageView orc = new ImageView();
+
+
 
     @FXML
     private ImageView pauseMenu = new ImageView();
@@ -52,14 +54,27 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
     TranslateTransition orcMoving = new TranslateTransition();
 
     @FXML
+    TranslateTransition platformMoving = new TranslateTransition();
+
+
+    @FXML
     FadeTransition menuDisappearing = new FadeTransition();
 
     @FXML
     FadeTransition pauseMenuAppearing = new FadeTransition();
 
+    @FXML
+    private ImageView floatingPlatform = new ImageView();
 
+    @FXML
+    private RotateTransition rotatingShuriken = new RotateTransition();
 
-    Hero h =  new Hero();
+    @FXML
+    private ImageView shurikenBullet = new ImageView();
+
+    @FXML
+    TranslateTransition movingShuriken = new TranslateTransition();
+
 
 
     public void onPlayGameClick(){
@@ -78,10 +93,11 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
     }
     public void removeMenu(){
         root.getChildren().remove(menu);
+        shootWeaponAnimation();
     }
     public void moveHero(){
         heroMoving.setByY(hero.getY() - 100);
-        heroMoving.setDuration(Duration.millis(1000));
+        heroMoving.setDuration(Duration.millis(850));
         heroMoving.setCycleCount(500);
         heroMoving.setAutoReverse(true);
         heroMoving.setNode(hero);
@@ -90,14 +106,44 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
     }
     public void moveOrc(){
         orcMoving.setByY(orc.getY() - 100);
-        orcMoving.setDuration(Duration.millis(1000));
+        orcMoving.setDuration(Duration.millis(900));
         orcMoving.setCycleCount(200);
         orcMoving.setAutoReverse(true);
         orcMoving.setNode(orc);
         orcMoving.play();
 
     }
+    public void movePlatform(){
+        platformMoving.setByY(floatingPlatform.getY() - 20);
+        platformMoving.setDuration(Duration.millis(3000));
+        platformMoving.setCycleCount(200);
+        platformMoving.setAutoReverse(true);
+        platformMoving.setNode(floatingPlatform);
+        platformMoving.play();
 
+
+    }
+    public void removeWeapon(){
+        root.getChildren().remove(shurikenBullet);
+
+    }
+
+    public void shootWeaponAnimation(){
+        rotatingShuriken.setAxis(Rotate.Z_AXIS);
+        rotatingShuriken.setByAngle(360);
+        rotatingShuriken.setCycleCount(500);
+        rotatingShuriken.setDuration(Duration.millis(600));
+//        rotatingShuriken.setAutoReverse(true);
+        rotatingShuriken.setNode(shurikenBullet);
+        rotatingShuriken.play();
+        movingShuriken.setByX(shurikenBullet.getX() + 300);
+        movingShuriken.setDuration(Duration.millis(1000));
+        movingShuriken.setAutoReverse(true);
+        movingShuriken.setNode(shurikenBullet);
+        movingShuriken.play();
+        movingShuriken.setOnFinished(e -> removeWeapon());
+
+    }
     public void displayPauseMenu(){
         onPlayGameClick();
         orcMoving.stop();
@@ -125,5 +171,7 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         moveHero();
         moveOrc();
+        movePlatform();
+
     }
 }

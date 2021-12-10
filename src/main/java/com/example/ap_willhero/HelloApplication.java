@@ -21,6 +21,7 @@ public class HelloApplication extends Application {
         scene.setOnKeyPressed(new PreGameMenu());
         stage.getIcons().add(icon);
         stage.setTitle("Will Hero by Tanishk Goyal and Diksha Sethi");
+        stage.setResizable(false);
 
 
         stage.setScene(scene);
