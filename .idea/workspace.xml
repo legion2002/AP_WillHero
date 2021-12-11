@@ -5,22 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2d456cf-03ed-412b-9c0e-8a6d4da45f82" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/shurikenBullet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/shurikenBullet.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/LoadingPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/LoadingPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/PreGameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/PauseGameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/PauseGameMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/PreGameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/Game.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/hello-view.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/HelloApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/HelloController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/LoadingPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/LoadingPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/PauseGameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/PauseGameMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/PreGameMenu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/PreGameMenu.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/Game.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/Game.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/GameController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,18 +43,23 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/example/ap_willhero" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\AP_Project\AP_WillHero\src" />
+      <recent name="D:\AP_Project\AP_WillHero\src\main\resources" />
       <recent name="D:\AP_Project\AP_WillHero\src\main\resources\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\AP_Project\AP_WillHero\src\main\java\com\example\ap_willhero" />
       <recent name="D:\AP_Project\AP_WillHero\src\main\resources" />
       <recent name="D:\AP_Project\AP_WillHero\src\main\resources\com\example\ap_willhero" />
       <recent name="D:\AP_Project\AP_WillHero\src\main\resources\images" />
       <recent name="D:\AP_Project\AP_WillHero\src\main\java" />
-      <recent name="D:\AP_Project\AP_WillHero\src\main" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.ap_willhero" />

@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -64,10 +65,13 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
     private RotateTransition rotatingShuriken = new RotateTransition();
 
     @FXML
-    private ImageView shurikenBullet = new ImageView();
+    private ImageView shurikenBullet;
 
     @FXML
     private TranslateTransition movingShuriken = new TranslateTransition();
+
+    @FXML
+    private Button fullScreenButton = new Button();
 
 
 
@@ -85,9 +89,21 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 //        root.getChildren().remove(menu);
 
     }
+
+    public void shootShurikenBullet(){
+        Image bullet = new Image("shurikenBullet.png");
+        shurikenBullet = new ImageView(bullet);
+        shurikenBullet.setFitWidth(28);
+        shurikenBullet.setFitHeight(28);
+        shurikenBullet.setLayoutX(hero.getLayoutX() + hero.getTranslateX() + 5);
+        shurikenBullet.setLayoutY(hero.getLayoutY() + hero.getTranslateY());
+        root.getChildren().add(shurikenBullet);
+        shootWeaponAnimation();
+
+    }
     public void removeMenu(){
         root.getChildren().remove(menu);
-        shootWeaponAnimation();
+
     }
     public void moveHero(){
         heroMoving.setByY(hero.getY() - 100);
@@ -125,10 +141,11 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
     public void shootWeaponAnimation(){
         rotatingShuriken.setAxis(Rotate.Z_AXIS);
         rotatingShuriken.setByAngle(360);
-        rotatingShuriken.setCycleCount(500);
-        rotatingShuriken.setDuration(Duration.millis(600));
-//        rotatingShuriken.setAutoReverse(true);
+        rotatingShuriken.setCycleCount(100);
+        rotatingShuriken.setDuration(Duration.millis(300));
+
         rotatingShuriken.setNode(shurikenBullet);
+        System.out.println("Reached Rotating Animation");
         rotatingShuriken.play();
         movingShuriken.setByX(shurikenBullet.getX() + 300);
         movingShuriken.setDuration(Duration.millis(1000));
@@ -140,13 +157,18 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
     }
     public void displayPauseMenu(){
         onPlayGameClick();
-        orcMoving.stop();
-        heroMoving.stop();
+        orcMoving.pause();
+        heroMoving.pause();
+        platformMoving.pause();
         //FXMLLoader pauseGameLoader = new FXMLLoader(getClass().getResource("PauseGameMenu.fxml"));
 
         //pauseMenuAppearing.play();
         //root.getChildren().add(pauseMenu);
 
+    }
+
+    public void onScreenClick(){
+        shootShurikenBullet();
     }
 
     @Override
@@ -155,6 +177,7 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 
         if(KeyCode.W.equals(keyEvent.getCode())){
             System.out.println("W Pressed");
+            shootShurikenBullet();
 
         }
 
