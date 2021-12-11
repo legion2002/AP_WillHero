@@ -8,12 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/Game.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/LoadGameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/LoadGameMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/LoadingPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/LoadingPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/PauseGameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/PauseGameMenu.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/Game.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/PauseGameMenu.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/PauseGameMenu.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

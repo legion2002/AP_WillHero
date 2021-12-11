@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.transform.Rotate;
@@ -33,7 +34,11 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 
 
     @FXML
-    private ImageView orc = new ImageView();
+    private ImageView greenOrc = new ImageView();
+
+    @FXML
+    private ImageView redOrc = new ImageView();
+
 
 
 
@@ -46,8 +51,8 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
     @FXML
     private TranslateTransition heroMoving = new TranslateTransition();
 
-    @FXML
-    private TranslateTransition orcMoving = new TranslateTransition();
+//    @FXML
+//    private TranslateTransition orcMoving = new TranslateTransition();
 
     @FXML
     private TranslateTransition platformMoving = new TranslateTransition();
@@ -86,8 +91,70 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
     @FXML
     private Pane pauseGameMenu = new Pane();
 
+    @FXML
+    private TranslateTransition coinAnimationTranslate = new TranslateTransition();
+
+    @FXML
+    private ImageView coin1 = new ImageView();
+
+    @FXML
+    private ImageView coin2 = new ImageView();
+
+    @FXML
+    private ImageView coin3 = new ImageView();
+
+    @FXML
+    private HBox threeCoinsBox= new HBox();
+
+    @FXML
+    private ImageView obstacle1 = new ImageView();
+    @FXML
+    private ImageView obstacle2 = new ImageView();
+    @FXML
+    private ImageView obstacle3 = new ImageView();
+    @FXML
+    private ImageView obstacle4 = new ImageView();
 
 
+    public void removeFallingPlatformNode(ImageView node){
+        gameRoot.getChildren().remove(node);
+    }
+
+    public void nodeFalling(ImageView node){
+        TranslateTransition fallNode = new TranslateTransition();
+        fallNode.setByY(node.getY() + 500);
+        fallNode.setDuration(Duration.millis(2500));
+        fallNode.setNode(node);
+        fallNode.setOnFinished(e -> removeFallingPlatformNode(node));
+
+        fallNode.play();
+
+
+    }
+
+    public void startFallingPlatformAnimation(){
+        PauseTransition pause1 = new PauseTransition();
+        PauseTransition pause2 = new PauseTransition();
+        PauseTransition pause3 = new PauseTransition();
+
+        pause1.setDuration(Duration.millis(500));
+        pause2.setDuration(Duration.millis(1000));
+        pause3.setDuration(Duration.millis(1500));
+
+
+        nodeFalling(obstacle1);
+
+        pause1.play();
+        pause1.setOnFinished(e -> nodeFalling(obstacle2));
+        pause2.play();
+        pause2.setOnFinished(e -> nodeFalling(obstacle3));
+        pause3.play();
+        pause3.setOnFinished(e -> nodeFalling(obstacle4));
+
+
+
+
+    }
     public void onPlayGameClick(){
         menuDisappearing.setDuration(Duration.millis(1000));
 
@@ -103,6 +170,15 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 
     }
 
+    public void coinAnimation(){
+        coinAnimationTranslate.setByY(coin1.getY() - 10);
+        coinAnimationTranslate.setDuration(Duration.millis(800));
+        coinAnimationTranslate.setCycleCount(500);
+        coinAnimationTranslate.setAutoReverse(true);
+        coinAnimationTranslate.setNode(threeCoinsBox);
+        coinAnimationTranslate.play();
+    }
+
     public void shootShurikenBullet(){
         Image bullet = new Image("shurikenBullet.png");
         shurikenBullet = new ImageView(bullet);
@@ -116,6 +192,8 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
     }
     public void removeMenu(){
         root.getChildren().remove(menu);
+        startFallingPlatformAnimation();
+
 
     }
     public void moveHero(){
@@ -127,9 +205,10 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
         heroMoving.play();
 
     }
-    public void moveOrc(){
+    public void moveOrc(ImageView orc, double time){
+        TranslateTransition orcMoving = new TranslateTransition();
         orcMoving.setByY(orc.getY() - 100);
-        orcMoving.setDuration(Duration.millis(900));
+        orcMoving.setDuration(Duration.millis(time));
         orcMoving.setCycleCount(200);
         orcMoving.setAutoReverse(true);
         orcMoving.setNode(orc);
@@ -169,7 +248,7 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 
     }
     public void displayPauseMenu(){
-        orcMoving.pause();
+
         heroMoving.pause();
         platformMoving.pause();
         root.getChildren().add(pauseGameMenu);
@@ -203,8 +282,9 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
         root.getChildren().remove(pauseGameMenu);
 
         moveHero();
-        moveOrc();
+        moveOrc(redOrc, 750);
+        moveOrc(greenOrc, 800);
         movePlatform();
-
+        coinAnimation();
     }
 }
