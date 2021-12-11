@@ -1,13 +1,9 @@
 package com.example.ap_willhero;
 
 import javafx.animation.*;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -16,13 +12,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-import org.controlsfx.control.action.Action;
 
 import java.net.URL;
-import java.security.Key;
 import java.util.ResourceBundle;
 
-public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
+public class GameController implements EventHandler<KeyEvent>, Initializable {
 
     @FXML
     private VBox menu = new VBox();
@@ -48,20 +42,20 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
     private Button pauseMenuButton = new Button();
 
     @FXML
-    TranslateTransition heroMoving = new TranslateTransition();
+    private TranslateTransition heroMoving = new TranslateTransition();
 
     @FXML
-    TranslateTransition orcMoving = new TranslateTransition();
+    private TranslateTransition orcMoving = new TranslateTransition();
 
     @FXML
-    TranslateTransition platformMoving = new TranslateTransition();
+    private TranslateTransition platformMoving = new TranslateTransition();
 
 
     @FXML
-    FadeTransition menuDisappearing = new FadeTransition();
+    private FadeTransition menuDisappearing = new FadeTransition();
 
     @FXML
-    FadeTransition pauseMenuAppearing = new FadeTransition();
+    private FadeTransition pauseMenuAppearing = new FadeTransition();
 
     @FXML
     private ImageView floatingPlatform = new ImageView();
@@ -73,7 +67,7 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
     private ImageView shurikenBullet = new ImageView();
 
     @FXML
-    TranslateTransition movingShuriken = new TranslateTransition();
+    private TranslateTransition movingShuriken = new TranslateTransition();
 
 
 
@@ -161,7 +155,6 @@ public class PreGameMenu implements EventHandler<KeyEvent>, Initializable {
 
         if(KeyCode.W.equals(keyEvent.getCode())){
             System.out.println("W Pressed");
-            moveHero();
 
         }
 

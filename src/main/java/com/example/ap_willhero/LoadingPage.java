@@ -25,7 +25,7 @@ public class LoadingPage {
     @FXML
     public void onButtonClick() throws IOException {
 
-        Parent root =  FXMLLoader.load(getClass().getResource("PreGameMenu.fxml"));
+        Parent root =  FXMLLoader.load(getClass().getResource("Game.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);

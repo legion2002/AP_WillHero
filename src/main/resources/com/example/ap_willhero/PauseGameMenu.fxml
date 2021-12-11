@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="rootPauseGame" prefHeight="388.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.PreGameMenu">
+<AnchorPane fx:id="rootPauseGame" prefHeight="388.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.GameController">
    <children>
       <Button fx:id="exitButton" layoutX="127.0" layoutY="284.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
       <Button fx:id="restartGameButton" layoutX="127.0" layoutY="202.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
