@@ -17,146 +17,124 @@
 
 <AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.GameController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3be0fe" height="600.0" stroke="BLACK" strokeType="INSIDE" width="1024.0">
-         <effect>
-            <BoxBlur height="255.0" width="0.0">
-               <input>
-                  <Blend mode="SRC_ATOP">
-                     <bottomInput>
-                        <Bloom />
-                     </bottomInput>
-                  </Blend>
-               </input>
-            </BoxBlur>
-         </effect>
-      </Rectangle>
-      <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="71.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/badal.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="122.0" fitWidth="267.0" layoutX="748.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/badal.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="275.0" fitWidth="495.0" layoutX="71.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/longPlatform.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="131.0" fitWidth="265.0" layoutX="274.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/badal.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="748.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/badal.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="678.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/badal.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="191.0" fitWidth="229.0" layoutX="651.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/platform.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="floatingPlatform" fitHeight="150.0" fitWidth="200.0" layoutX="818.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/fatplatform.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="orc" fitHeight="65.0" fitWidth="53.0" layoutX="675.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/greenOrc.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="49.0" fitWidth="52.0" layoutX="905.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/coin.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="963.0" layoutY="14.0" text="0" textFill="#daef1c">
-         <font>
-            <Font name="Segoe UI Black" size="32.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="321.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/badal.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="131.0" fitWidth="265.0" layoutX="20.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/badal.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="hero" fitHeight="43.0" fitWidth="50.0" layoutX="162.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/hero.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="fullScreenButton" mnemonicParsing="false" onAction="#onScreenClick" opacity="0.0" prefHeight="600.0" prefWidth="1024.0" />
-      <VBox fx:id="menu" layoutX="461.0" layoutY="117.0" prefHeight="278.0" prefWidth="156.0" spacing="40.0">
+      <AnchorPane fx:id="gameRoot" prefHeight="600.0" prefWidth="1024.0">
          <children>
-            <Button fx:id="PlayGame" mnemonicParsing="false" onAction="#onPlayGameClick" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1.5;" text="Play Game" textFill="WHITE">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3be0fe" height="600.0" stroke="BLACK" strokeType="INSIDE" width="1024.0">
+               <effect>
+                  <BoxBlur height="255.0" width="0.0">
+                     <input>
+                        <Blend mode="SRC_ATOP">
+                           <bottomInput>
+                              <Bloom />
+                           </bottomInput>
+                        </Blend>
+                     </input>
+                  </BoxBlur>
+               </effect>
+            </Rectangle>
+            <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="71.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/badal.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="122.0" fitWidth="267.0" layoutX="748.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/badal.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="275.0" fitWidth="495.0" layoutX="71.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/longPlatform.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="131.0" fitWidth="265.0" layoutX="274.0" layoutY="-15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/badal.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="748.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/badal.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="678.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/badal.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="191.0" fitWidth="229.0" layoutX="651.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/platform.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="floatingPlatform" fitHeight="150.0" fitWidth="200.0" layoutX="818.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/fatplatform.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="orc" fitHeight="65.0" fitWidth="53.0" layoutX="675.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/greenOrc.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="49.0" fitWidth="52.0" layoutX="905.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/coin.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="963.0" layoutY="14.0" text="0" textFill="#daef1c">
                <font>
-                  <Font name="Segoe UI Black" size="12.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1.5;" text="Load Game" textFill="WHITE">
-               <font>
-                  <Font name="Segoe UI Black" size="12.0" />
+                  <Font name="Segoe UI Black" size="32.0" />
                </font>
-            </Button>
-            <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 1.5;" text="Exit" textFill="WHITE">
+            </Label>
+            <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="321.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/badal.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="131.0" fitWidth="265.0" layoutX="20.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/badal.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="hero" fitHeight="43.0" fitWidth="50.0" layoutX="162.0" layoutY="304.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/hero.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="fullScreenButton" mnemonicParsing="false" onAction="#onScreenClick" opacity="0.0" prefHeight="600.0" prefWidth="1024.0" />
+            <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="17.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/settings.PNG" />
+               </image>
+            </ImageView>
+            <Button fx:id="pauseMenuButton" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#displayPauseMenu" opacity="0.0" prefHeight="56.0" prefWidth="59.0" />
+            <ImageView fitHeight="74.0" fitWidth="80.0" layoutX="32.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/KnifeWS.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="78.0" fitWidth="81.0" layoutX="127.0" layoutY="482.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/ShurikenWS.png" />
+               </image>
+            </ImageView>
+            <Circle fill="WHITE" layoutX="70.0" layoutY="556.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="WHITE" layoutX="168.0" layoutY="557.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="64.0" layoutY="542.0" text="0">
                <font>
-                  <Font name="Segoe UI Black" size="12.0" />
+                  <Font name="Segoe UI Black" size="20.0" />
                </font>
-            </Button>
+            </Label>
+            <Label layoutX="161.0" layoutY="542.0" text="1">
+               <font>
+                  <Font name="Segoe UI Black" size="20.0" />
+               </font>
+            </Label>
+            <Group />
          </children>
-      </VBox>
-
-      <Group />
-      <ImageView fitHeight="49.0" fitWidth="50.0" layoutX="24.0" layoutY="19.0" />
-      <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="17.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/settings.PNG" />
-         </image>
-      </ImageView>
-
-            
-            <Button fx:id="pauseMenuButton" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#displayPauseMenu" opacity="0.0" prefHeight="56.0" prefWidth="59.0">
-
-
-      </Button>
-      <ImageView fitHeight="74.0" fitWidth="80.0" layoutX="32.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/KnifeWS.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="78.0" fitWidth="81.0" layoutX="127.0" layoutY="482.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/ShurikenWS.png" />
-         </image>
-      </ImageView>
-      <Circle fill="WHITE" layoutX="70.0" layoutY="556.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="WHITE" layoutX="168.0" layoutY="557.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="64.0" layoutY="542.0" text="0">
-         <font>
-            <Font name="Segoe UI Black" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="161.0" layoutY="542.0" text="1">
-         <font>
-            <Font name="Segoe UI Black" size="20.0" />
-         </font>
-      </Label>
-      <Group />
-      <Pane prefHeight="600.0" prefWidth="1024.0">
+      </AnchorPane>
+      <Pane fx:id="loadGameMenu" disable="true" prefHeight="600.0" prefWidth="1024.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00070d" height="600.0" opacity="0.3" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
             <ImageView fitHeight="400.0" fitWidth="332.0" layoutX="347.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
@@ -167,14 +145,14 @@
             <Group layoutX="376.0" layoutY="212.0">
                <children>
                   <Button mnemonicParsing="false" prefHeight="87.0" prefWidth="272.0" style="-fx-background-color: #46a6fa;" />
-                  <Label layoutX="94.0" prefHeight="29.0" prefWidth="84.0" text="Game #1" textAlignment="CENTER">
+                  <Label layoutX="94.0" prefHeight="29.0" prefWidth="84.0" text="Game 1" textAlignment="CENTER">
                      <font>
                         <Font name="Segoe UI Black" size="19.0" />
                      </font>
                   </Label>
                   <Label layoutX="14.0" layoutY="37.0" prefHeight="29.0" prefWidth="140.0" text="Location : 100" textAlignment="CENTER">
                      <font>
-                        <Font name="Segoe UI Black" size="14.0" />
+                        <Font name="Segoe UI Black" size="18.0" />
                      </font>
                   </Label>
                   <Label layoutX="14.0" layoutY="60.0" prefHeight="29.0" prefWidth="140.0" text="Coins collected : 50" textAlignment="CENTER">
@@ -186,5 +164,51 @@
             </Group>
          </children>
       </Pane>
+      <Pane fx:id="pauseGameMenu" prefHeight="600.0" prefWidth="1024.0">
+         <children>
+            <ImageView fitHeight="389.0" fitWidth="321.0" layoutX="352.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/pausemenu.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="62.0" fitWidth="60.0" layoutX="483.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/RestartButton.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="55.0" fitWidth="73.0" layoutX="484.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/PlayGameButton.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="482.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/ExitToHomeButton.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="playGameButton" layoutX="483.0" layoutY="311.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+            <Button fx:id="restartGameButton" layoutX="482.0" layoutY="403.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+            <Button fx:id="exitButton" layoutX="483.0" layoutY="218.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+         </children>
+      </Pane>
+      <VBox fx:id="menu" layoutX="440.0" layoutY="180.0" prefHeight="278.0" prefWidth="156.0" spacing="40.0">
+         <children>
+            <Button fx:id="PlayGame" mnemonicParsing="false" onAction="#onPlayGameClick" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1.5;" text="Play Game" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="loadGameButton" mnemonicParsing="false" onAction="#displayLoadMenu" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1.5;" text="Load Game" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-width: 1.5;" text="Exit" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Black" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

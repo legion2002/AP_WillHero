@@ -77,6 +77,15 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
     @FXML
     private Pane loadGameMenu = new Pane();
 
+    @FXML
+    private AnchorPane gameRoot = new AnchorPane();
+
+    @FXML
+    private Button loadGameButton = new Button();
+
+    @FXML
+    private Pane pauseGameMenu = new Pane();
+
 
 
     public void onPlayGameClick(){
@@ -160,15 +169,16 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 
     }
     public void displayPauseMenu(){
-        onPlayGameClick();
         orcMoving.pause();
         heroMoving.pause();
         platformMoving.pause();
-        //FXMLLoader pauseGameLoader = new FXMLLoader(getClass().getResource("PauseGameMenu.fxml"));
+        root.getChildren().add(pauseGameMenu);
 
-        //pauseMenuAppearing.play();
-        //root.getChildren().add(pauseMenu);
 
+    }
+
+    public void displayLoadMenu(){
+        root.getChildren().add(loadGameMenu);
     }
 
     public void onScreenClick(){
@@ -189,6 +199,9 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        root.getChildren().remove(loadGameMenu);
+        root.getChildren().remove(pauseGameMenu);
+
         moveHero();
         moveOrc();
         movePlatform();
