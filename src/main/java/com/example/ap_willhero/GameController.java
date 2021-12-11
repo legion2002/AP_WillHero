@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
@@ -72,6 +73,9 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 
     @FXML
     private Button fullScreenButton = new Button();
+
+    @FXML
+    private Pane loadGameMenu = new Pane();
 
 
 
