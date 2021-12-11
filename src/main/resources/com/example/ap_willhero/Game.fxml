@@ -15,8 +15,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.GameController">
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.GameController">
    <children>
       <AnchorPane fx:id="gameRoot" prefHeight="600.0" prefWidth="1024.0">
          <children>
@@ -35,7 +36,7 @@
             </Rectangle>
             <Label layoutX="494.0" layoutY="23.0" text="0" textFill="#fcfbf0">
                <font>
-                  <Font name="Bauhaus 93" size="64.0" />
+                  <Font name="Segoe UI Black" size="64.0" />
                </font>
             </Label>
             <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="71.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
@@ -163,12 +164,12 @@
                </children>
             </HBox>
             <Button fx:id="fullScreenButton" mnemonicParsing="false" onAction="#shootShurikenBullet" opacity="0.0" prefHeight="600.0" prefWidth="1024.0" />
-            <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="17.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="43.0" fitWidth="44.0" layoutX="17.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/settings.PNG" />
                </image>
             </ImageView>
-            <Button fx:id="pauseMenuButton" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#displayPauseMenu" opacity="0.0" prefHeight="56.0" prefWidth="59.0" />
+            <Button fx:id="pauseMenuButton" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#displayPauseMenu" opacity="0.0" prefHeight="43.0" prefWidth="44.0" />
             <ImageView fitHeight="74.0" fitWidth="80.0" layoutX="32.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/KnifeWS.png" />
@@ -204,6 +205,11 @@
             <Group layoutX="376.0" layoutY="212.0">
                <children>
                   <Button mnemonicParsing="false" prefHeight="87.0" prefWidth="272.0" style="-fx-background-color: #46a6fa;" />
+                  <Label layoutX="14.0" layoutY="60.0" prefHeight="29.0" prefWidth="140.0" text="Coins collected : 50" textAlignment="CENTER">
+                     <font>
+                        <Font name="Segoe UI Black" size="14.0" />
+                     </font>
+                  </Label>
                   <Label layoutX="94.0" prefHeight="29.0" prefWidth="84.0" text="Game 1" textAlignment="CENTER">
                      <font>
                         <Font name="Segoe UI Black" size="19.0" />
@@ -212,11 +218,6 @@
                   <Label layoutX="14.0" layoutY="37.0" prefHeight="29.0" prefWidth="140.0" text="Location : 100" textAlignment="CENTER">
                      <font>
                         <Font name="Segoe UI Black" size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="14.0" layoutY="60.0" prefHeight="29.0" prefWidth="140.0" text="Coins collected : 50" textAlignment="CENTER">
-                     <font>
-                        <Font name="Segoe UI Black" size="14.0" />
                      </font>
                   </Label>
                </children>
@@ -230,24 +231,50 @@
                   <Image url="@../../../images/pausemenu.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="62.0" fitWidth="60.0" layoutX="483.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="62.0" fitWidth="60.0" layoutX="408.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/RestartButton.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="55.0" fitWidth="73.0" layoutX="484.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="55.0" fitWidth="73.0" layoutX="558.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/PlayGameButton.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="482.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="408.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/ExitToHomeButton.png" />
                </image>
             </ImageView>
-            <Button fx:id="playGameButton" layoutX="483.0" layoutY="311.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
-            <Button fx:id="restartGameButton" layoutX="482.0" layoutY="403.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
-            <Button fx:id="exitButton" layoutX="483.0" layoutY="218.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+            <ImageView fitHeight="58.0" fitWidth="60.0" layoutX="556.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/saveGameButton.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="playGameButton" layoutX="556.0" layoutY="256.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+            <Button fx:id="restartGameButton" layoutX="408.0" layoutY="359.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+            <Button fx:id="exitButton" layoutX="408.0" layoutY="256.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+            <Button fx:id="playGameButton1" layoutX="556.0" layoutY="359.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+            <Text fill="WHITE" layoutX="424.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit">
+               <font>
+                  <Font name="Segoe UI Black" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="570.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Play">
+               <font>
+                  <Font name="Segoe UI Black" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="411.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restart">
+               <font>
+                  <Font name="Segoe UI Black" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="546.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Save Game">
+               <font>
+                  <Font name="Segoe UI Black" size="15.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <VBox fx:id="menu" layoutX="440.0" layoutY="180.0" prefHeight="278.0" prefWidth="156.0" spacing="40.0">
