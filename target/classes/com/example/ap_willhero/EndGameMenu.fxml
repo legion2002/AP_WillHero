@@ -6,11 +6,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.GameController">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="611.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
       <Group />
       <ImageView fitHeight="350.0" fitWidth="303.0" layoutX="341.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -44,7 +46,7 @@
       </Text>
       <ImageView fitHeight="50.0" fitWidth="57.0" layoutX="523.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../images/ExitToHomeButton.png" />
+            <Image url="@../../../images/RestartButton.png" />
          </image>
       </ImageView>
       <Text fill="WHITE" layoutX="520.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restart" wrappingWidth="80.63232421875">
