@@ -486,7 +486,7 @@
                         <Font name="Segoe UI Black" size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="131.0" layoutY="555.0" text="1">
+                  <Label layoutX="132.0" layoutY="555.0" text="1">
                      <font>
                         <Font name="Segoe UI Black" size="20.0" />
                      </font>
