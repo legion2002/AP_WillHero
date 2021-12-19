@@ -16,11 +16,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.GameController">
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.ap_willhero.GameController">
    <children>
-      <AnchorPane fx:id="gameRoot" prefHeight="600.0" prefWidth="1024.0">
+      <AnchorPane fx:id="gameRoot" prefHeight="600.0" prefWidth="13000.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3be0fe" height="600.0" stroke="BLACK" strokeType="INSIDE" width="1024.0">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3be0fe" height="600.0" stroke="BLACK" strokeType="INSIDE" width="13000.0">
                <effect>
                   <BoxBlur height="255.0" width="0.0">
                      <input>
@@ -33,42 +33,335 @@
                   </BoxBlur>
                </effect>
             </Rectangle>
-            <Label layoutX="494.0" layoutY="23.0" text="0" textFill="#fcfbf0">
-               <font>
-                  <Font name="Segoe UI Black" size="64.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="71.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/badal.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="122.0" fitWidth="267.0" layoutX="748.0" layoutY="257.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/badal.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="191.0" fitWidth="366.0" layoutX="22.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
+            <Pane prefHeight="600.0" prefWidth="13000.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="30.0" layoutX="3000.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="4500.0" layoutY="390.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="30.0" layoutX="5550.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="30.0" layoutX="8444.0" layoutY="438.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="30.0" layoutX="10700.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="500.0" />
+               </children>
+            </Pane>
+            <Pane prefHeight="600.0" prefWidth="13000.0">
+               <children>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="560.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="82.0" fitWidth="211.0" layoutX="23.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="867.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="1029.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="224.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="94.0" fitWidth="209.0" layoutX="285.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="1791.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="82.0" fitWidth="211.0" layoutX="1254.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="2098.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="2260.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="1455.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="94.0" fitWidth="209.0" layoutX="1516.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="3042.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="82.0" fitWidth="211.0" layoutX="2505.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="3349.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="3511.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="2706.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="94.0" fitWidth="209.0" layoutX="2767.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="4274.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="82.0" fitWidth="211.0" layoutX="3737.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="4581.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="4743.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="3938.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="94.0" fitWidth="209.0" layoutX="3999.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="5525.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="82.0" fitWidth="211.0" layoutX="4988.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="5832.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="5994.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="5189.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="94.0" fitWidth="209.0" layoutX="5250.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="6217.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="6524.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="6686.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="7468.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="82.0" fitWidth="211.0" layoutX="6931.0" layoutY="144.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="7775.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="7937.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="7132.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="94.0" fitWidth="209.0" layoutX="7193.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="8624.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="82.0" fitWidth="211.0" layoutX="8087.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="8931.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="9093.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="8288.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="94.0" fitWidth="209.0" layoutX="8349.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="9316.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="9623.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="9785.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="10567.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="82.0" fitWidth="211.0" layoutX="10030.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="10874.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="11036.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="10231.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="94.0" fitWidth="209.0" layoutX="10292.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="11257.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="11564.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="11726.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="114.0" fitWidth="256.0" layoutX="12508.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="82.0" fitWidth="211.0" layoutX="11971.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="12815.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="12172.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="94.0" fitWidth="209.0" layoutX="12233.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/badal.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <ImageView fitHeight="191.0" fitWidth="400.0" layoutX="22.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/longPlatform.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="131.0" fitWidth="265.0" layoutX="391.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/badal.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="65.0" fitWidth="156.0" layoutX="748.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/badal.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="678.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/badal.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="191.0" fitWidth="229.0" layoutX="391.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="191.0" fitWidth="200.0" layoutX="391.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/platform.png" />
                </image>
@@ -78,29 +371,9 @@
                   <Image url="@../../../images/fatplatform.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="49.0" fitWidth="52.0" layoutX="905.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/coin.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="65.0" fitWidth="148.0" layoutX="321.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/badal.png" />
-               </image>
-            </ImageView>
             <ImageView fx:id="greenOrc" fitHeight="65.0" fitWidth="53.0" layoutX="409.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/greenOrc.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="963.0" layoutY="14.0" text="0" textFill="#daef1c">
-               <font>
-                  <Font name="Segoe UI Black" size="32.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="131.0" fitWidth="265.0" layoutX="20.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/badal.png" />
                </image>
             </ImageView>
             <ImageView fx:id="hero" fitHeight="43.0" fitWidth="50.0" layoutX="105.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
@@ -162,38 +435,82 @@
                   </ImageView>
                </children>
             </HBox>
-            <Button fx:id="fullScreenButton" mnemonicParsing="false" onAction="#shootShurikenBullet" opacity="0.0" prefHeight="600.0" prefWidth="1024.0" />
-            <ImageView fitHeight="43.0" fitWidth="44.0" layoutX="17.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/settings.PNG" />
-               </image>
-            </ImageView>
-            <Button fx:id="pauseMenuButton" layoutX="17.0" layoutY="14.0" mnemonicParsing="false" onAction="#displayPauseMenu" opacity="0.0" prefHeight="43.0" prefWidth="44.0" />
-            <ImageView fitHeight="74.0" fitWidth="80.0" layoutX="32.0" layoutY="485.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/KnifeWS.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="78.0" fitWidth="81.0" layoutX="127.0" layoutY="482.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/ShurikenWS.png" />
-               </image>
-            </ImageView>
-            <Circle fill="WHITE" layoutX="70.0" layoutY="556.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="168.0" layoutY="557.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="64.0" layoutY="542.0" text="0">
-               <font>
-                  <Font name="Segoe UI Black" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="161.0" layoutY="542.0" text="1">
-               <font>
-                  <Font name="Segoe UI Black" size="20.0" />
-               </font>
-            </Label>
+            <Pane prefHeight="600.0" prefWidth="13000.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="6.0" layoutY="354.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="463.0" layoutY="354.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="827.0" layoutY="362.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="1100.0" layoutY="400.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="1400.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="1900.0" layoutY="417.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="2700.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="3500.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="4100.0" layoutY="452.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="2400.0" layoutY="370.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="4900.0" layoutY="423.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="5200.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" width="350.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="5948.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" width="352.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="6400.0" layoutY="422.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="6700.0" layoutY="402.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="7200.0" layoutY="439.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="7700.0" layoutY="392.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="8094.0" layoutY="438.0" stroke="BLACK" strokeType="INSIDE" width="350.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="9042.0" layoutY="438.0" stroke="BLACK" strokeType="INSIDE" width="352.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="10299.0" layoutY="401.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="11405.0" layoutY="428.0" stroke="BLACK" strokeType="INSIDE" width="1460.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="9520.0" layoutY="493.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="9800.0" layoutY="422.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+               </children>
+            </Pane>
+            <Pane prefHeight="600.0" prefWidth="1024.0">
+               <children>
+                  <ImageView fitHeight="43.0" fitWidth="44.0" layoutX="14.0" layoutY="12.0" onMouseClicked="#displayPauseMenu" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/settings.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="74.0" fitWidth="80.0" layoutX="97.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/KnifeWS.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="78.0" fitWidth="81.0" layoutX="13.0" layoutY="496.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/ShurikenWS.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fill="WHITE" layoutX="138.0" layoutY="570.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="WHITE" layoutX="54.0" layoutY="569.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label layoutX="47.0" layoutY="554.0" text="0">
+                     <font>
+                        <Font name="Segoe UI Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="132.0" layoutY="555.0" text="1">
+                     <font>
+                        <Font name="Segoe UI Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="512.0" layoutY="-20.0" prefHeight="70.0" prefWidth="38.0" text="0" textFill="#fcfbf0">
+                     <font>
+                        <Font name="Segoe UI Black" size="64.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="49.0" fitWidth="52.0" layoutX="894.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/coin.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="949.0" layoutY="6.0" text="0" textFill="#daef1c">
+                     <font>
+                        <Font name="Segoe UI Black" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </AnchorPane>
-      <Pane fx:id="loadGameMenu" disable="true" prefHeight="600.0" prefWidth="1024.0">
+      <Pane fx:id="loadGameMenu" disable="true" prefHeight="600.0" prefWidth="1024.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00070d" height="600.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
             <ImageView fitHeight="400.0" fitWidth="332.0" layoutX="347.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
@@ -220,7 +537,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="pauseGameMenu" prefHeight="600.0" prefWidth="1024.0">
+      <Pane fx:id="pauseGameMenu" disable="true" prefHeight="600.0" prefWidth="1024.0" visible="false">
          <children>
             <ImageView fitHeight="389.0" fitWidth="321.0" layoutX="352.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -273,7 +590,7 @@
             </Text>
          </children>
       </Pane>
-      <VBox fx:id="menu" layoutX="440.0" layoutY="180.0" prefHeight="278.0" prefWidth="156.0" spacing="40.0">
+      <VBox fx:id="menu" disable="true" layoutX="440.0" layoutY="180.0" prefHeight="278.0" prefWidth="156.0" spacing="40.0" visible="false">
          <children>
             <Button fx:id="PlayGame" mnemonicParsing="false" onAction="#onPlayGameClick" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1.5;" text="Play Game" textFill="WHITE">
                <font>
