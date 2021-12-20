@@ -4,11 +4,13 @@ import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -19,10 +21,11 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GameController implements EventHandler<KeyEvent>, Initializable {
+public class GameController implements Initializable {
 
     @FXML
     private VBox menu = new VBox();
+    private EventHandler<MouseEvent> onGeneralClick;
     @FXML
     private AnchorPane root = new AnchorPane();
     @FXML
@@ -30,8 +33,6 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 
     @FXML
     private ImageView hero = new ImageView();
-
-
 
     @FXML
     private ImageView greenOrc = new ImageView();
@@ -92,6 +93,9 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
     private Pane pauseGameMenu = new Pane();
 
     @FXML
+    private Pane MainMenu = new Pane();
+
+    @FXML
     private TranslateTransition coinAnimationTranslate = new TranslateTransition();
 
     @FXML
@@ -114,6 +118,14 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
     private ImageView obstacle3 = new ImageView();
     @FXML
     private ImageView obstacle4 = new ImageView();
+
+    @FXML
+    private Pane staticPane = new Pane();
+
+    @FXML
+    private ImageView settingsButton = new ImageView();
+
+
 
 
     public void removeFallingPlatformNode(ImageView node){
@@ -191,7 +203,7 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
 
     }
     public void removeMenu(){
-        root.getChildren().remove(menu);
+        root.getChildren().remove(MainMenu);
         startFallingPlatformAnimation();
 
 
@@ -264,17 +276,7 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
         shootShurikenBullet();
     }
 
-    @Override
-    public void handle(KeyEvent keyEvent) {
-        System.out.println("REACHED HERE");
 
-        if(KeyCode.W.equals(keyEvent.getCode())){
-            System.out.println("W Pressed");
-            shootShurikenBullet();
-
-        }
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -286,5 +288,33 @@ public class GameController implements EventHandler<KeyEvent>, Initializable {
         moveOrc(greenOrc, 800);
         movePlatform();
         coinAnimation();
+        onGeneralClick = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+//                if(settingsButton.isPressed()){
+//                    System.out.println("HELLO ");
+//                }
+                if (hero.getTranslateX() <= 300) {
+                    TranslateTransition forwardStep = new TranslateTransition();
+                    forwardStep.setByX(hero.getLayoutX() + 50);
+                    forwardStep.setDuration(Duration.millis(300));
+                    forwardStep.setNode(hero);
+                    forwardStep.play();
+                } else {
+//                    hero.setLayoutX(hero.getLayoutX() -200);
+                    for (Node x : gameRoot.getChildren()) {
+                        TranslateTransition forwardStep = new TranslateTransition();
+                        if (x != hero && x != staticPane) {
+                            forwardStep.setByX(x.getLayoutX() - 100);
+                            forwardStep.setDuration(Duration.millis(200));
+                            forwardStep.setNode(x);
+                            forwardStep.play();
+
+                        }
+                    }
+                }
+            }
+        };
+        staticPane.setOnMouseClicked(onGeneralClick);
     }
 }

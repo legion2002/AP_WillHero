@@ -14,7 +14,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Game.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1024, 600);
         Image icon = new Image("icon.png");
-        scene.setOnKeyPressed(new GameController());
+//        scene.setOnKeyPressed(new GameController());
         stage.getIcons().add(icon);
         stage.setTitle("Will Hero by Tanishk Goyal and Diksha Sethi");
         stage.setResizable(false);

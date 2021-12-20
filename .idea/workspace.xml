@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-
-    <list default="true" id="a2d456cf-03ed-412b-9c0e-8a6d4da45f82" name="Changes" comment="">
+    <list default="true" id="3ee3d0c9-41ef-4a85-8267-08cb85f4b33c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/Game.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/Game.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/Hero.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/Hero.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/ap_willhero/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/ap_willhero/Game.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/Game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/Game.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/GameController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/ap_willhero/Main.class" afterDir="false" />
     </list>
-
-    <list default="true" id="3ee3d0c9-41ef-4a85-8267-08cb85f4b33c" name="Changes" comment="" />
-
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,6 +29,17 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="22W5AsWFBUvmRk5gfUqsAKo8ndH" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -40,6 +51,11 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="q" />
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -64,7 +80,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a2d456cf-03ed-412b-9c0e-8a6d4da45f82" name="Changes" comment="" />
+      <changelist id="3ee3d0c9-41ef-4a85-8267-08cb85f4b33c" name="Changes" comment="" />
       <created>1639940363032</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -82,7 +98,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -91,6 +106,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/example/ap_willhero/Main.java</url>
           <line>10</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/ap_willhero/GameController.java</url>
+          <line>205</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
