@@ -17,11 +17,11 @@ public class Knives implements Collidable{
 
     @Override
     public boolean isCollidable() {
-        return false;
+        return true;
     }
 
     @Override
-    public void collidesWith() {
+    public void collidesWith(Solid s) {
 
     }
 }

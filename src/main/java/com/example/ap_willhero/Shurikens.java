@@ -21,7 +21,7 @@ public class Shurikens implements Collidable{
     }
 
     @Override
-    public void collidesWith() {
+    public void collidesWith(Solid s) {
 
     }
 }

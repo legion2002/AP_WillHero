@@ -1,5 +1,7 @@
 package com.example.ap_willhero;
 
+import org.controlsfx.tools.Platform;
+
 public class Hero implements Collidable{
     Position pos;
     Helmet helmet;
@@ -65,7 +67,13 @@ public class Hero implements Collidable{
     }
 
     @Override
-    public void collidesWith() {
+    public void collidesWith(Solid s) {
+        Object conv = (Object) s;
+
+        if(conv instanceof Platform){
+
+
+        }
 
     }
 }
