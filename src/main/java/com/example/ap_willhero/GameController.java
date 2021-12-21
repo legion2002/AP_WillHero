@@ -316,6 +316,8 @@ public class GameController implements Initializable {
                         }
                     }
                 }
+                currLocation++;
+                currrentLocation.setText(Integer.toString(currLocation));
             }
         };
         staticPane.setOnMouseClicked(onGeneralClick);
