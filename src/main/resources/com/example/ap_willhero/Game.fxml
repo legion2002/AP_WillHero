@@ -256,7 +256,7 @@
                         <Image url="@../../../images/badal.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="8931.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="84.0" fitWidth="201.0" layoutX="8931.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/badal.png" />
                      </image>
@@ -442,7 +442,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <Pane prefHeight="600.0" prefWidth="13000.0">
+            <Pane fx:id="platformPane" prefHeight="600.0" prefWidth="13000.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="6.0" layoutY="354.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="463.0" layoutY="354.0" stroke="BLACK" strokeType="INSIDE" width="100.0" />

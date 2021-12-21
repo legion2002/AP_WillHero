@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
@@ -127,8 +128,32 @@ public class GameController implements Initializable {
     @FXML
     private ImageView settingsButton = new ImageView();
 
+    @FXML
+    private Pane platformPane = new Pane();
+
     private int currLocation;
 
+    private Game game;
+
+    public GameController(){
+        this.game = new Game(this);
+    }
+
+    public void createPlatformList(){
+        for(Node platforms : platformPane.getChildren()){
+            game.addPlatform((Rectangle)platforms);
+        }
+    }
+
+    public void setUpGame(){
+        createPlatformList();
+        game.getHero().setImage(hero);
+
+    }
+
+    public Game getGame(){
+        return this.game;
+    }
 
     public void removeFallingPlatformNode(ImageView node){
         gameRoot.getChildren().remove(node);
@@ -290,6 +315,20 @@ public class GameController implements Initializable {
         moveOrc(greenOrc, 800);
         movePlatform();
         coinAnimation();
+        setUpGame();
+        game.getHero().checkCollisionWithPlatform();
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        KeyFrame collision = new KeyFrame(Duration.millis(40), e -> {
+            game.getHero().checkCollisionWithPlatform();
+            //System.out.println(game.getHero().getTouchingPlatform());
+            //System.out.println(game.getHero().getPosition().getxPos());
+            //System.out.println(game.getHero().getPosition().getyPos());
+            if(! game.getHero().getTouchingPlatform())
+                System.out.println("Should fall");
+        });
+        timeline.getKeyFrames().add(collision);
+        timeline.play();
         currLocation = 0;
         onGeneralClick = new EventHandler<MouseEvent>() {
             @Override
@@ -317,6 +356,7 @@ public class GameController implements Initializable {
                     }
                 }
                 currLocation++;
+                game.getHero().getPosition().setxPos(game.getHero().getPosition().getxPos() + 100);
                 currrentLocation.setText(Integer.toString(currLocation));
             }
         };
