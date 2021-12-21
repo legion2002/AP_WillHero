@@ -383,7 +383,7 @@
                   <Image url="@../../../images/greenOrc.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="hero" fitHeight="50.0" fitWidth="50.0" layoutX="105.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="hero" fitHeight="50.0" fitWidth="50.0" layoutX="105.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/hero.png" />
                </image>

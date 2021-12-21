@@ -24,7 +24,7 @@ public class Hero implements Collidable{
         this.game = game;
         this.width = 50;
         this.height = 50;
-        this.touchingPlatform = true;
+        this.touchingPlatform = false;
     }
 
     public void setImage(ImageView image){
@@ -110,7 +110,7 @@ public class Hero implements Collidable{
             if(((right < platformRight && right > platformLeft) || (left > platformLeft && left < platformRight)) && (bottom > (platformTop - offset) && bottom < platformTop + offset)){
                 flag = true;
                 System.out.println("Touched platform");
-                game.getController().bounceBackHero();
+                //game.getController().bounceBackHero();
                 break;
             }
         }

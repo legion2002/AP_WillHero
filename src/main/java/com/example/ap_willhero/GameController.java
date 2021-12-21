@@ -136,6 +136,10 @@ public class GameController implements Initializable {
 
     private Game game;
 
+    private int reachHeight;
+
+    private boolean goingUp;
+
     public GameController(){
         this.game = new Game(this);
     }
@@ -328,21 +332,33 @@ public class GameController implements Initializable {
         game.getHero().checkCollisionWithPlatform();
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
+        goingUp = false;
         KeyFrame collision = new KeyFrame(Duration.millis(40), e -> {
             game.getHero().checkCollisionWithPlatform();
             //System.out.println(game.getHero().getTouchingPlatform());
             //System.out.println(game.getHero().getPosition().getxPos());
             //System.out.println(game.getHero().getPosition().getyPos());
-            if(! game.getHero().getTouchingPlatform()){
-                System.out.println("Should fall");
-                game.getHero().getImage().setLayoutY(game.getHero().getImage().getLayoutY() + 3);
-                game.getHero().getPosition().setyPos(game.getHero().getPosition().getyPos() + 3);
-            }
 
             if(game.getHero().getTouchingPlatform()){
-                game.getHero().getImage().setLayoutY(game.getHero().getImage().getLayoutY() - 3);
-                game.getHero().getPosition().setyPos(game.getHero().getPosition().getyPos() - 3);
+                reachHeight = (int)game.getHero().getImage().getLayoutY() - 100;
+                goingUp = true;
             }
+
+            if(game.getHero().getImage().getLayoutY() <= reachHeight)
+                goingUp = false;
+
+            if(! game.getHero().getTouchingPlatform() && ! goingUp){
+                System.out.println("Should fall");
+                game.getHero().getImage().setLayoutY(game.getHero().getImage().getLayoutY() + 4);
+                game.getHero().getPosition().setyPos(game.getHero().getPosition().getyPos() + 4);
+            }
+
+            else{
+                System.out.println("Going up");
+                game.getHero().getImage().setLayoutY(game.getHero().getImage().getLayoutY() - 4);
+                game.getHero().getPosition().setyPos(game.getHero().getPosition().getyPos() - 4);
+            }
+
 
         });
         timeline.getKeyFrames().add(collision);
