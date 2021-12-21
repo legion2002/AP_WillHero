@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -40,7 +41,8 @@ public class GameController implements Initializable {
     @FXML
     private ImageView redOrc = new ImageView();
 
-
+    @FXML
+    private Label currrentLocation = new Label();
 
 
     @FXML
@@ -125,7 +127,7 @@ public class GameController implements Initializable {
     @FXML
     private ImageView settingsButton = new ImageView();
 
-
+    private int currLocation;
 
 
     public void removeFallingPlatformNode(ImageView node){
@@ -288,6 +290,7 @@ public class GameController implements Initializable {
         moveOrc(greenOrc, 800);
         movePlatform();
         coinAnimation();
+        currLocation = 0;
         onGeneralClick = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
