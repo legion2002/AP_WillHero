@@ -23,7 +23,7 @@ public class Hero implements Collidable{
         currCoins = 0;
         this.game = game;
         this.width = 50;
-        this.height = 43;
+        this.height = 50;
         this.touchingPlatform = true;
     }
 
@@ -84,21 +84,38 @@ public class Hero implements Collidable{
         return this.pos;
     }
 
+    public ImageView getImage(){
+        return this.image;
+    }
+
     public void checkCollisionWithPlatform(){
         boolean flag = false;
+        int offset = 2;
         for(Rectangle platform : game.getPlatformList()){
-            if(pos.getyPos() + height <= platform.getLayoutY() && pos.getxPos() >= platform.getLayoutX() && pos.getxPos() + width <= (platform.getLayoutX() + platform.getWidth())){
+            //System.out.println("Hero Y : " + pos.getyPos());
+            //System.out.println("Hero X : " + pos.getxPos());
+            //System.out.println("Platform Y : " + platform.getLayoutY());
+            //System.out.println("Platform X left boundary: " + platform.getLayoutX());
+            //System.out.println("Platform X right boundary: " + (platform.getLayoutX() + platform.getWidth()));
+            //if(pos.getyPos() + height >= (platform.getLayoutY() - offset) || pos.getyPos() + height <= (platform.getLayoutY() + offset) && pos.getxPos() >= (platform.getLayoutX() - 25) && (pos.getxPos() + width) <= (platform.getLayoutX() + 25 + platform.getWidth())){
+            float left = pos.getxPos();
+            float right = left + width;
+            float top = pos.getyPos();
+            float bottom = top + height;
+            float platformLeft = (float)platform.getLayoutX();
+            float platformRight = (float)(platformLeft + platform.getWidth());
+            float platformTop = (float)platform.getLayoutY();
+            //System.out.println("Bottom of hero : " + bottom);
+            //System.out.println("Platform top : " + platformTop);
+            if(((right < platformRight && right > platformLeft) || (left > platformLeft && left < platformRight)) && (bottom > (platformTop - offset) && bottom < platformTop + offset)){
                 flag = true;
-
-                System.out.println("Hero Y : " + pos.getyPos());
-                System.out.println("Hero X : " + pos.getxPos());
-                System.out.println("Platform Y : " + platform.getLayoutY());
-                System.out.println("Platform X left boundary: " + platform.getLayoutX());
-                System.out.println("Platform X right boundary: " + (platform.getLayoutX() + platform.getWidth()));
                 System.out.println("Touched platform");
+                game.getController().bounceBackHero();
                 break;
             }
         }
+
+
         touchingPlatform = flag;
     }
 

@@ -383,7 +383,7 @@
                   <Image url="@../../../images/greenOrc.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="hero" fitHeight="43.0" fitWidth="50.0" layoutX="105.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="hero" fitHeight="50.0" fitWidth="50.0" layoutX="105.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/hero.png" />
                </image>
@@ -471,7 +471,7 @@
             </Pane>
          </children>
       </AnchorPane>
-      <Pane fx:id="staticPane" prefHeight="600.0" prefWidth="1024.0">
+      <Pane fx:id="staticPane" layoutY="-2.0" prefHeight="600.0" prefWidth="1024.0">
          <children>
             <ImageView fx:id="settingsButton" fitHeight="43.0" fitWidth="44.0" layoutX="14.0" layoutY="12.0" onMouseClicked="#displayPauseMenu" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -517,7 +517,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane fx:id="loadGameMenu" prefHeight="600.0" prefWidth="1024.0">
+      <Pane fx:id="loadGameMenu" prefHeight="600.0" prefWidth="1024.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00070d" height="600.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
             <ImageView fitHeight="400.0" fitWidth="332.0" layoutX="347.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
@@ -544,7 +544,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="pauseGameMenu" prefHeight="600.0" prefWidth="1024.0">
+      <Pane fx:id="pauseGameMenu" prefHeight="600.0" prefWidth="1024.0" visible="false">
          <children>
             <ImageView fitHeight="389.0" fitWidth="321.0" layoutX="352.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -597,7 +597,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="MainMenu" prefHeight="600.0" prefWidth="1024.0">
+      <Pane fx:id="MainMenu" prefHeight="600.0" prefWidth="1024.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" height="600.0" opacity="0.38" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
             <VBox fx:id="menu" layoutX="404.0" layoutY="152.0" prefHeight="278.0" prefWidth="156.0" spacing="40.0">

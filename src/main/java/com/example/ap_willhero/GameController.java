@@ -131,6 +131,7 @@ public class GameController implements Initializable {
     @FXML
     private Pane platformPane = new Pane();
 
+
     private int currLocation;
 
     private Game game;
@@ -149,6 +150,14 @@ public class GameController implements Initializable {
         createPlatformList();
         game.getHero().setImage(hero);
 
+    }
+
+    public void bounceBackHero(){
+        TranslateTransition heroJump = new TranslateTransition();
+        heroJump.setByY(hero.getY() - 2);
+        heroJump.setDuration(Duration.millis(40));
+        heroJump.setNode(hero);
+        heroJump.play();
     }
 
     public Game getGame(){
@@ -310,7 +319,7 @@ public class GameController implements Initializable {
         root.getChildren().remove(loadGameMenu);
         root.getChildren().remove(pauseGameMenu);
 
-        moveHero();
+        //moveHero();
         moveOrc(redOrc, 750);
         moveOrc(greenOrc, 800);
         movePlatform();
@@ -324,8 +333,17 @@ public class GameController implements Initializable {
             //System.out.println(game.getHero().getTouchingPlatform());
             //System.out.println(game.getHero().getPosition().getxPos());
             //System.out.println(game.getHero().getPosition().getyPos());
-            if(! game.getHero().getTouchingPlatform())
+            if(! game.getHero().getTouchingPlatform()){
                 System.out.println("Should fall");
+                game.getHero().getImage().setLayoutY(game.getHero().getImage().getLayoutY() + 3);
+                game.getHero().getPosition().setyPos(game.getHero().getPosition().getyPos() + 3);
+            }
+
+            if(game.getHero().getTouchingPlatform()){
+                game.getHero().getImage().setLayoutY(game.getHero().getImage().getLayoutY() - 3);
+                game.getHero().getPosition().setyPos(game.getHero().getPosition().getyPos() - 3);
+            }
+
         });
         timeline.getKeyFrames().add(collision);
         timeline.play();
@@ -336,13 +354,16 @@ public class GameController implements Initializable {
 //                if(settingsButton.isPressed()){
 //                    System.out.println("HELLO ");
 //                }
+                /*
                 if (hero.getTranslateX() <= 300) {
                     TranslateTransition forwardStep = new TranslateTransition();
                     forwardStep.setByX(hero.getLayoutX() + 50);
                     forwardStep.setDuration(Duration.millis(300));
                     forwardStep.setNode(hero);
                     forwardStep.play();
-                } else {
+                } else
+                */{
+
 //                    hero.setLayoutX(hero.getLayoutX() -200);
                     for (Node x : gameRoot.getChildren()) {
                         TranslateTransition forwardStep = new TranslateTransition();

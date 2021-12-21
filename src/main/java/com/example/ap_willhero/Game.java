@@ -37,6 +37,10 @@ public class Game {
         return this.PlatformList;
     }
 
+    public GameController getController(){
+        return this.gameController;
+    }
+
     public Hero getHero(){
         return this.hero;
     }
