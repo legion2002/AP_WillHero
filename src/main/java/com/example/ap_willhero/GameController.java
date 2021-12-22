@@ -336,13 +336,13 @@ public class GameController implements Initializable {
             }
 
             if(! game.getHero().getTouchingPlatform() && ! goingUp){
-                System.out.println("Should fall");
+                //System.out.println("Should fall");
                 game.getHero().translateHeroY(4);
 
             }
 
             else{
-                System.out.println("Going up");
+                //System.out.println("Going up");
                 game.getHero().translateHeroY(-4);
 
             }
@@ -369,14 +369,36 @@ public class GameController implements Initializable {
                 */{
 
 //                    hero.setLayoutX(hero.getLayoutX() -200);
-                    Timeline platformTimeline = new Timeline();
-                    platformTimeline.setCycleCount(Timeline.INDEFINITE);
-                    for (Platform x : game.getPlatformList()) {
+
+
                         /* Animation Loop
                         * 1) image shift of all objects
                         * 2) image views shift of all objects
                         * 3) */
-                        System.out.println("CLICKEDkdjfnasdjnfasdnfoajskdnfoasjdnfosdakfnosd");
+                        //System.out.println("CLICKEDkdjfnasdjnfasdnfoajskdnfoasjdnfosdakfnosd");
+
+                        int animationTime = 200;
+                        int refreshTime = 5;
+                        Timeline movingHero = new Timeline();
+                        movingHero.setCycleCount(animationTime / refreshTime);
+
+                        KeyFrame moveHero = new KeyFrame(Duration.millis(refreshTime), e -> {
+                            for (Platform x : game.getPlatformList()) {
+                                x.translatePlatformX(- game.getHero().getStepSize() * refreshTime / animationTime);
+                            }
+
+                            for(Node x : gameRoot.getChildren()){
+                                if(x != heroImage && x != staticPane && x != platformPane){
+                                    x.setLayoutX(x.getLayoutX() - game.getHero().getStepSize() * refreshTime / animationTime);
+                                }
+                            }
+                        });
+
+                        movingHero.getKeyFrames().add(moveHero);
+                        movingHero.play();
+
+
+                        /*
 
                         TranslateTransition forwardStep = new TranslateTransition();
 
@@ -386,8 +408,11 @@ public class GameController implements Initializable {
                             forwardStep.play();
 
 
+                         */
+
+
                     }
-                }
+
                 currLocation++;
 
 //                game.getHero().getPosition().setxPos(game.getHero().getPosition().getxPos() + 100);

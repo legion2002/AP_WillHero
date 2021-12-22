@@ -10,6 +10,9 @@ public class Hero extends Solid implements Collidable{
     private Weapon equippedWeapon;
     private float jumpHeight;
     private int currCoins;
+
+
+
     private int stepSize;
     private int health;
     private ImageView heroImage;
@@ -30,7 +33,9 @@ public class Hero extends Solid implements Collidable{
 
     }
 
-
+    public int getStepSize() {
+        return stepSize;
+    }
 
     public void moveForward(){
         //Had return type int
@@ -112,7 +117,7 @@ public class Hero extends Solid implements Collidable{
 
     public void checkCollisionWithPlatform(){
         boolean flag = false;
-        int offset = 2;
+        int offset = 5;
         for(Platform platform : game.getPlatformList()){
             //System.out.println("Hero Y : " + pos.getyPos());
             //System.out.println("Hero X : " + pos.getxPos());
@@ -130,6 +135,18 @@ public class Hero extends Solid implements Collidable{
 //            System.out.println("Top of hero: " + getPos().getyPos());
 //            System.out.println("Bottom of hero : " + bottom);
 //            System.out.println("Platform top : " + platformTop);
+            if((platformLeft < 1024 && platformRight > 0)) {
+                //System.out.println("Platform in frame");
+                //System.out.println("Top of hero: " + getPos().getyPos());
+                System.out.println("Bottom of hero : " + bottom);
+                System.out.println("Platform top : " + platformTop);
+                System.out.println("Platform left : " + platformLeft);
+                System.out.println("Platform right : " + platformRight);
+                System.out.println("hero left : " + left);
+                System.out.println("Hero right : " + right);
+
+            }
+
             if(((right < platformRight && right > platformLeft) || (left > platformLeft && left < platformRight)) && (bottom > (platformTop - offset) && bottom < platformTop + offset)){
                 flag = true;
                 System.out.println("Touched platform");
