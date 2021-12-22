@@ -376,6 +376,7 @@ public class GameController implements Initializable {
                         * 1) image shift of all objects
                         * 2) image views shift of all objects
                         * 3) */
+                        System.out.println("CLICKEDkdjfnasdjnfasdnfoajskdnfoasjdnfosdakfnosd");
 
                         TranslateTransition forwardStep = new TranslateTransition();
 
