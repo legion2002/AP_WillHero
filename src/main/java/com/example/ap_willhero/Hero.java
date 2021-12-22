@@ -2,10 +2,9 @@ package com.example.ap_willhero;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
-import org.controlsfx.tools.Platform;
 
-public class Hero implements Collidable{
-    private Position pos;
+public class Hero extends Solid implements Collidable{
+
     private Helmet helmet;
     private Game game;
     private Weapon equippedWeapon;
@@ -13,24 +12,25 @@ public class Hero implements Collidable{
     private int currCoins;
     private int stepSize;
     private int health;
-    private ImageView image;
-    private int height;
-    private int width;
+    private ImageView heroImage;
+
     private boolean touchingPlatform;
 
 
-    Hero(Game game){
-        currCoins = 0;
+    Hero(Game game, ImageView img){
+        this.currCoins = 0;
         this.game = game;
-        this.width = 50;
-        this.height = 50;
+        this.heroImage = img;
+        this.stepSize = 100;
+        setWidth(heroImage.getFitWidth());
+        setHeight(heroImage.getFitHeight());
+
+        setPos(new Position(heroImage.getLayoutX(), heroImage.getLayoutY()));
         this.touchingPlatform = false;
+
     }
 
-    public void setImage(ImageView image){
-        this.image = image;
-        this.pos = new Position((float)image.getLayoutX(), (float)image.getLayoutY());
-    }
+
 
     public void moveForward(){
         //Had return type int
@@ -81,32 +81,55 @@ public class Hero implements Collidable{
     }
 
     public Position getPosition(){
-        return this.pos;
+        return this.getPos();
+    }
+    @Override
+    public void setPos(Position p){
+        super.setPos(p);
+        heroImage.setLayoutX(getPos().getxPos()) ;
+        heroImage.setLayoutY(getPos().getyPos()) ;
     }
 
-    public ImageView getImage(){
-        return this.image;
+    public void translateHeroX(double translation){
+        setPos(new Position(getPos().getxPos() + translation, getPos().getyPos()));
+    }
+    public void translateHeroY(double translation){
+        setPos(new Position(getPos().getxPos(), getPos().getyPos() + translation));
+
+    }
+
+
+
+
+    public ImageView getHeroImage(){
+        return this.heroImage;
+    }
+
+    public void setHeroImage(ImageView img){
+        this.heroImage = img;
+
     }
 
     public void checkCollisionWithPlatform(){
         boolean flag = false;
         int offset = 2;
-        for(Rectangle platform : game.getPlatformList()){
+        for(Platform platform : game.getPlatformList()){
             //System.out.println("Hero Y : " + pos.getyPos());
             //System.out.println("Hero X : " + pos.getxPos());
             //System.out.println("Platform Y : " + platform.getLayoutY());
             //System.out.println("Platform X left boundary: " + platform.getLayoutX());
             //System.out.println("Platform X right boundary: " + (platform.getLayoutX() + platform.getWidth()));
             //if(pos.getyPos() + height >= (platform.getLayoutY() - offset) || pos.getyPos() + height <= (platform.getLayoutY() + offset) && pos.getxPos() >= (platform.getLayoutX() - 25) && (pos.getxPos() + width) <= (platform.getLayoutX() + 25 + platform.getWidth())){
-            float left = pos.getxPos();
-            float right = left + width;
-            float top = pos.getyPos();
-            float bottom = top + height;
-            float platformLeft = (float)platform.getLayoutX();
-            float platformRight = (float)(platformLeft + platform.getWidth());
-            float platformTop = (float)platform.getLayoutY();
-            //System.out.println("Bottom of hero : " + bottom);
-            //System.out.println("Platform top : " + platformTop);
+            double left = getPos().getxPos();
+            double right = left + getWidth();
+            double top = getPos().getyPos();
+            double bottom = top + getHeight();
+            double platformLeft = platform.getPos().getxPos();
+            double platformRight = platformLeft + platform.getWidth();
+            double platformTop = platform.getPos().getyPos();
+//            System.out.println("Top of hero: " + getPos().getyPos());
+//            System.out.println("Bottom of hero : " + bottom);
+//            System.out.println("Platform top : " + platformTop);
             if(((right < platformRight && right > platformLeft) || (left > platformLeft && left < platformRight)) && (bottom > (platformTop - offset) && bottom < platformTop + offset)){
                 flag = true;
                 System.out.println("Touched platform");
@@ -117,6 +140,13 @@ public class Hero implements Collidable{
 
 
         touchingPlatform = flag;
+    }
+
+    public boolean isDead(float abyssLevel){
+        if(this.getPosition().getyPos() > abyssLevel){
+            return true;
+        }
+        return false;
     }
 
 

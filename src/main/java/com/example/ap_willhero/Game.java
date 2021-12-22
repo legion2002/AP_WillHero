@@ -1,39 +1,43 @@
 package com.example.ap_willhero;
 
-import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
 public class Game {
     private Hero hero;
     private int totalCoins;
+
+    public float getAbyssLevel() {
+        return abyssLevel;
+    }
+
     private float abyssLevel;
     private int totalLocations;
-    private ArrayList<Rectangle> PlatformList;
-    AnchorPane root;
-    Pane platformsPane;
-    private ArrayList<Solid> SolidList = new ArrayList<>();
+    private ArrayList<Platform> PlatformList;
+    private ArrayList<Solid> SolidList;
     private GameController gameController;
 
-    @FXML
-    Pane platformPane = new Pane();
 
-    public Game(GameController gameController){
-        hero = new Hero(this);
+    public Game(GameController gc, ImageView heroImage){
+
         PlatformList = new ArrayList<>();
         SolidList = new ArrayList<>();
-        this.gameController = gameController;
+        this.gameController = gc;
+        this.abyssLevel = 500;
+        this.totalLocations = 122;
+        System.out.println("Image Position is: " + heroImage.getLayoutX() + " " + heroImage.getLayoutY());
+
+        hero = new Hero(this, heroImage);
+
     }
 
-    public void addPlatform(Rectangle platform){
+    public void addPlatform(Platform platform){
         PlatformList.add(platform);
-        //System.out.println(platform.getLayoutX());
     }
 
-    public ArrayList<Rectangle> getPlatformList(){
+    public ArrayList<Platform> getPlatformList(){
         return this.PlatformList;
     }
 

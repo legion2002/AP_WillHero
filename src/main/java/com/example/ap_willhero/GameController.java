@@ -34,7 +34,7 @@ public class GameController implements Initializable {
     private Button PlayGame = new Button();
 
     @FXML
-    private ImageView hero = new ImageView();
+    private ImageView heroImage = new ImageView();
 
     @FXML
     private ImageView greenOrc = new ImageView();
@@ -43,7 +43,7 @@ public class GameController implements Initializable {
     private ImageView redOrc = new ImageView();
 
     @FXML
-    private Label currrentLocation = new Label();
+    private Label currrentLocationLabel = new Label();
 
 
     @FXML
@@ -141,28 +141,22 @@ public class GameController implements Initializable {
     private boolean goingUp;
 
     public GameController(){
-        this.game = new Game(this);
+
     }
 
     public void createPlatformList(){
         for(Node platforms : platformPane.getChildren()){
-            game.addPlatform((Rectangle)platforms);
+
+            game.addPlatform(new Platform((Rectangle)platforms));
         }
     }
 
     public void setUpGame(){
         createPlatformList();
-        game.getHero().setImage(hero);
+
 
     }
 
-    public void bounceBackHero(){
-        TranslateTransition heroJump = new TranslateTransition();
-        heroJump.setByY(hero.getY() - 2);
-        heroJump.setDuration(Duration.millis(40));
-        heroJump.setNode(hero);
-        heroJump.play();
-    }
 
     public Game getGame(){
         return this.game;
@@ -236,8 +230,8 @@ public class GameController implements Initializable {
         shurikenBullet = new ImageView(bullet);
         shurikenBullet.setFitWidth(28);
         shurikenBullet.setFitHeight(28);
-        shurikenBullet.setLayoutX(hero.getLayoutX() + hero.getTranslateX() + 5);
-        shurikenBullet.setLayoutY(hero.getLayoutY() + hero.getTranslateY());
+        shurikenBullet.setLayoutX(game.getHero().getHeroImage().getLayoutX() + game.getHero().getHeroImage().getTranslateX() + 5);
+        shurikenBullet.setLayoutY(game.getHero().getHeroImage().getLayoutY() + game.getHero().getHeroImage().getTranslateY());
         root.getChildren().add(shurikenBullet);
         shootWeaponAnimation();
 
@@ -248,15 +242,7 @@ public class GameController implements Initializable {
 
 
     }
-    public void moveHero(){
-        heroMoving.setByY(hero.getY() - 100);
-        heroMoving.setDuration(Duration.millis(850));
-        heroMoving.setCycleCount(500);
-        heroMoving.setAutoReverse(true);
-        heroMoving.setNode(hero);
-        heroMoving.play();
 
-    }
     public void moveOrc(ImageView orc, double time){
         TranslateTransition orcMoving = new TranslateTransition();
         orcMoving.setByY(orc.getY() - 100);
@@ -312,51 +298,53 @@ public class GameController implements Initializable {
         root.getChildren().add(loadGameMenu);
     }
 
-    public void onScreenClick(){
-        shootShurikenBullet();
-    }
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.game = new Game(this,heroImage);
+
+
+        game.getHero().setHeroImage(heroImage);
         root.getChildren().remove(loadGameMenu);
         root.getChildren().remove(pauseGameMenu);
-
-        //moveHero();
-        moveOrc(redOrc, 750);
-        moveOrc(greenOrc, 800);
-        movePlatform();
-        coinAnimation();
         setUpGame();
         game.getHero().checkCollisionWithPlatform();
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         goingUp = false;
         KeyFrame collision = new KeyFrame(Duration.millis(40), e -> {
+            if(game.getHero().isDead(game.getAbyssLevel())){
+                // Start Endgame Menu Here #DIKSHA
+                System.out.println("Hero is Dead");
+                System.exit(0);
+
+            }
             game.getHero().checkCollisionWithPlatform();
             //System.out.println(game.getHero().getTouchingPlatform());
             //System.out.println(game.getHero().getPosition().getxPos());
             //System.out.println(game.getHero().getPosition().getyPos());
 
             if(game.getHero().getTouchingPlatform()){
-                reachHeight = (int)game.getHero().getImage().getLayoutY() - 100;
+                reachHeight = (int)game.getHero().getPos().getyPos() - 100;
                 goingUp = true;
             }
 
-            if(game.getHero().getImage().getLayoutY() <= reachHeight)
+            if(game.getHero().getPos().getyPos() <= reachHeight) {
                 goingUp = false;
+            }
 
             if(! game.getHero().getTouchingPlatform() && ! goingUp){
                 System.out.println("Should fall");
-                game.getHero().getImage().setLayoutY(game.getHero().getImage().getLayoutY() + 4);
-                game.getHero().getPosition().setyPos(game.getHero().getPosition().getyPos() + 4);
+                game.getHero().translateHeroY(4);
+
             }
 
             else{
                 System.out.println("Going up");
-                game.getHero().getImage().setLayoutY(game.getHero().getImage().getLayoutY() - 4);
-                game.getHero().getPosition().setyPos(game.getHero().getPosition().getyPos() - 4);
+                game.getHero().translateHeroY(-4);
+
             }
 
 
@@ -381,20 +369,28 @@ public class GameController implements Initializable {
                 */{
 
 //                    hero.setLayoutX(hero.getLayoutX() -200);
-                    for (Node x : gameRoot.getChildren()) {
+                    Timeline platformTimeline = new Timeline();
+                    platformTimeline.setCycleCount(Timeline.INDEFINITE);
+                    for (Platform x : game.getPlatformList()) {
+                        /* Animation Loop
+                        * 1) image shift of all objects
+                        * 2) image views shift of all objects
+                        * 3) */
+
                         TranslateTransition forwardStep = new TranslateTransition();
-                        if (x != hero && x != staticPane) {
-                            forwardStep.setByX(x.getLayoutX() - 100);
+
+                            forwardStep.setByX(x.basePlatform.getLayoutX() - 100);
                             forwardStep.setDuration(Duration.millis(200));
-                            forwardStep.setNode(x);
+                            forwardStep.setNode(x.basePlatform);
                             forwardStep.play();
 
-                        }
+
                     }
                 }
                 currLocation++;
-                game.getHero().getPosition().setxPos(game.getHero().getPosition().getxPos() + 100);
-                currrentLocation.setText(Integer.toString(currLocation));
+
+//                game.getHero().getPosition().setxPos(game.getHero().getPosition().getxPos() + 100);
+                currrentLocationLabel.setText(Integer.toString(currLocation));
             }
         };
         staticPane.setOnMouseClicked(onGeneralClick);

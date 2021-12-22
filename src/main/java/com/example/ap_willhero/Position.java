@@ -1,28 +1,28 @@
 package com.example.ap_willhero;
 
 public class Position {
-    private float xPos;
-    private float yPos;
+    private double xPos;
+    private double yPos;
 
-    Position(float x, float y){
+    Position(double x, double y){
         this.xPos = x;
         this.yPos = y;
 
     }
 
-    public float getxPos() {
+    public double getxPos() {
         return xPos;
     }
 
-    public void setxPos(float xPos) {
+    public void setxPos(double xPos) {
         this.xPos = xPos;
     }
 
-    public float getyPos() {
+    public double getyPos() {
         return yPos;
     }
 
-    public void setyPos(float yPos) {
+    public void setyPos(double yPos) {
         this.yPos = yPos;
     }
 

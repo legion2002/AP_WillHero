@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Blend?>
@@ -23,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.GameController">
+<AnchorPane fx:id="root" prefHeight="600.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ap_willhero.GameController">
    <children>
       <AnchorPane fx:id="gameRoot" prefHeight="600.0" prefWidth="13000.0">
          <children>
@@ -383,7 +376,7 @@
                   <Image url="@../../../images/greenOrc.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="hero" fitHeight="50.0" fitWidth="50.0" layoutX="105.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="heroImage" fitHeight="50.0" fitWidth="50.0" layoutX="105.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/hero.png" />
                </image>
@@ -469,54 +462,54 @@
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="9800.0" layoutY="422.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
                </children>
             </Pane>
+            <Pane fx:id="staticPane" prefHeight="600.0" prefWidth="1024.0">
+               <children>
+                  <ImageView fx:id="settingsButton" fitHeight="43.0" fitWidth="44.0" layoutX="14.0" layoutY="12.0" onMouseClicked="#displayPauseMenu" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/settings.PNG" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="74.0" fitWidth="80.0" layoutX="97.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/KnifeWS.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="78.0" fitWidth="81.0" layoutX="13.0" layoutY="496.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/ShurikenWS.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fill="WHITE" layoutX="138.0" layoutY="570.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="WHITE" layoutX="54.0" layoutY="569.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Label layoutX="47.0" layoutY="554.0" text="0">
+                     <font>
+                        <Font name="Segoe UI Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="131.0" layoutY="555.0" text="1">
+                     <font>
+                        <Font name="Segoe UI Black" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="currrentLocationLabel" layoutX="498.0" layoutY="-12.0" prefHeight="114.0" prefWidth="108.0" text=" 0" textFill="#fcfbf0">
+                     <font>
+                        <Font name="Segoe UI Black" size="64.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="49.0" fitWidth="52.0" layoutX="894.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/coin.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="949.0" layoutY="6.0" text="0" textFill="#daef1c">
+                     <font>
+                        <Font name="Segoe UI Black" size="32.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </AnchorPane>
-      <Pane fx:id="staticPane" layoutY="-2.0" prefHeight="600.0" prefWidth="1024.0">
-         <children>
-            <ImageView fx:id="settingsButton" fitHeight="43.0" fitWidth="44.0" layoutX="14.0" layoutY="12.0" onMouseClicked="#displayPauseMenu" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/settings.PNG" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="74.0" fitWidth="80.0" layoutX="97.0" layoutY="498.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/KnifeWS.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="78.0" fitWidth="81.0" layoutX="13.0" layoutY="496.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/ShurikenWS.png" />
-               </image>
-            </ImageView>
-            <Circle fill="WHITE" layoutX="138.0" layoutY="570.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="WHITE" layoutX="54.0" layoutY="569.0" radius="14.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="47.0" layoutY="554.0" text="0">
-               <font>
-                  <Font name="Segoe UI Black" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="131.0" layoutY="555.0" text="1">
-               <font>
-                  <Font name="Segoe UI Black" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="currrentLocation" layoutX="498.0" layoutY="-12.0" prefHeight="114.0" prefWidth="108.0" text=" 0" textFill="#fcfbf0">
-               <font>
-                  <Font name="Segoe UI Black" size="64.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="49.0" fitWidth="52.0" layoutX="894.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/coin.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="949.0" layoutY="6.0" text="0" textFill="#daef1c">
-               <font>
-                  <Font name="Segoe UI Black" size="32.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
       <Pane fx:id="loadGameMenu" prefHeight="600.0" prefWidth="1024.0" visible="false">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00070d" height="600.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="1024.0" />

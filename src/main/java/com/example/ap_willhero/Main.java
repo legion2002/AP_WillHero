@@ -15,7 +15,8 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1024, 600);
         Image icon = new Image("icon.png");
 //        scene.setOnKeyPressed(new GameController());
-        GameController Controller = (GameController) fxmlLoader.getController();
+
+//        GameController Controller = fxmlLoader.getController();
         stage.getIcons().add(icon);
         stage.setTitle("Will Hero by Tanishk Goyal and Diksha Sethi");
         stage.setResizable(false);
