@@ -135,15 +135,15 @@ public class Hero extends Solid implements Collidable{
 //            System.out.println("Top of hero: " + getPos().getyPos());
 //            System.out.println("Bottom of hero : " + bottom);
 //            System.out.println("Platform top : " + platformTop);
-            if((platformLeft < 1024 && platformRight > 0)) {
+            if(left >= platformLeft &&  right <= platformRight) {
                 //System.out.println("Platform in frame");
                 //System.out.println("Top of hero: " + getPos().getyPos());
-                System.out.println("Bottom of hero : " + bottom);
-                System.out.println("Platform top : " + platformTop);
-                System.out.println("Platform left : " + platformLeft);
-                System.out.println("Platform right : " + platformRight);
-                System.out.println("hero left : " + left);
-                System.out.println("Hero right : " + right);
+//                System.out.println("Bottom of hero : " + bottom);
+//                System.out.println("Platform top : " + platformTop);
+//                System.out.println("Platform left : " + platformLeft);
+//                System.out.println("Platform right : " + platformRight);
+//                System.out.println("hero left : " + left);
+//                System.out.println("Hero right : " + right);
 
             }
 
@@ -183,4 +183,6 @@ public class Hero extends Solid implements Collidable{
          */
 
     }
+
+
 }

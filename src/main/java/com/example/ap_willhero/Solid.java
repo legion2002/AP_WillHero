@@ -8,7 +8,16 @@ public abstract class Solid {
     private float xVelocity;
     private float yVelocity;
     private float gravity;
+    private boolean isStaged;
 
+
+    public boolean isStaged() {
+        return isStaged;
+    }
+
+    public void setStaged(boolean staged) {
+        isStaged = staged;
+    }
 
     public Position getPos() {
         return pos;
