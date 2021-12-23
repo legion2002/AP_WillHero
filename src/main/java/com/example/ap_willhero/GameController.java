@@ -45,6 +45,9 @@ public class GameController implements Initializable {
     @FXML
     private Label currrentLocationLabel = new Label();
 
+    @FXML
+    private Label coinsCollectedLabel = new Label();
+
 
     @FXML
     private ImageView pauseMenu = new ImageView();
@@ -85,6 +88,9 @@ public class GameController implements Initializable {
 
     @FXML
     private Pane loadGameMenu = new Pane();
+
+    @FXML
+    private Pane coinPane = new Pane();
 
     @FXML
     private AnchorPane gameRoot = new AnchorPane();
@@ -153,13 +159,20 @@ public class GameController implements Initializable {
 
     public void setUpGame(){
         createPlatformList();
-
+        game.generateCoins();
 
     }
 
+    public Label getCoinsCollectedLabel(){
+        return this.coinsCollectedLabel;
+    }
 
     public Game getGame(){
         return this.game;
+    }
+
+    public Pane getCoinPane(){
+        return this.coinPane;
     }
 
     public void removeFallingPlatformNode(ImageView node){
@@ -243,6 +256,10 @@ public class GameController implements Initializable {
 
     }
 
+    public AnchorPane getGameRoot(){
+        return this.gameRoot;
+    }
+
     public void moveOrc(ImageView orc, double time){
         TranslateTransition orcMoving = new TranslateTransition();
         orcMoving.setByY(orc.getY() - 100);
@@ -320,6 +337,9 @@ public class GameController implements Initializable {
                 System.out.println("Hero is Dead");
                 System.exit(0);
 
+            }
+            for(Solid gameObject : game.getSolidList()){
+                game.getHero().collidesWith(gameObject);
             }
             game.getHero().checkCollisionWithPlatform();
             //System.out.println(game.getHero().getTouchingPlatform());

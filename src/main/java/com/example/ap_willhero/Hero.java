@@ -174,7 +174,13 @@ public class Hero extends Solid implements Collidable{
 
     @Override
     public void collidesWith(Solid s) {
+        /*
+        if(s instanceof Coin){
+            Integer currentCoins = Integer.parseInt(game.getController().getCoinsCollectedLabel().getText());
+            game.getController().getCoinsCollectedLabel().setText(Integer.toString(currentCoins + 1));
+        }
 
+         */
 
     }
 }
