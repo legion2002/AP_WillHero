@@ -192,9 +192,14 @@ public class Hero extends Solid implements Collidable{
         }
 
         //Everything else if a rectangle/square -> no explicit checking
-        offset = 3;
+        //offset = 3;
+        //Collision with left of solid
+        if(heroRight > (solidLeft - offset) && heroRight < (solidLeft + offset)) {
+            System.out.println("Collision with left of solid");
+            return 1;
+        }
         //Top of solid
-        if(heroBottom > (solidTop - offset) && heroBottom < (solidTop + offset) &&
+        else if(heroBottom > (solidTop - offset) && heroBottom < (solidTop + offset) &&
                 ((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight))) {
             System.out.println("Collision with top of  solid");
             //System.out.println("Object is " + s.getClass().getName());
@@ -213,11 +218,7 @@ public class Hero extends Solid implements Collidable{
             return 3;
         }
 
-        //Collision with left of solid
-        else if(heroRight > (solidLeft - offset) && heroRight < (solidLeft + offset)) {
-            System.out.println("Collision with left of solid");
-            return 1;
-        }
+
 
         //No collision
         return 0;
