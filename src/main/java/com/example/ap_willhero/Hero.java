@@ -95,12 +95,14 @@ public class Hero extends Solid implements Collidable{
         heroImage.setLayoutY(getPos().getyPos()) ;
     }
 
-    public void translateHeroX(double translation){
-        setPos(new Position(getPos().getxPos() + translation, getPos().getyPos()));
+    @Override
+    public void translateSolidX(double i) {
+        setPos(new Position(getPos().getxPos() + i, getPos().getyPos()));
     }
-    public void translateHeroY(double translation){
-        setPos(new Position(getPos().getxPos(), getPos().getyPos() + translation));
+    @Override
+    public void translateSolidY(double i) {
 
+        setPos(new Position(getPos().getxPos(), getPos().getyPos() + i));
     }
 
 

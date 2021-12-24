@@ -60,11 +60,13 @@ public class Orc extends Solid{
 
 
     }
-
-    public void translateOrcX(double i) {
+    @Override
+    public void translateSolidX(double i) {
         setPos(new Position(getPos().getxPos() + i, getPos().getyPos()));
     }
-    public void translateOrcY(double i) {
+    @Override
+    public void translateSolidY(double i) {
+
         setPos(new Position(getPos().getxPos(), getPos().getyPos() + i));
     }
 }

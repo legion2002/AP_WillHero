@@ -42,6 +42,10 @@ public abstract class Solid {
         this.width = width;
     }
 
+    public abstract void translateSolidX(double translation);
+    public abstract void translateSolidY(double translation);
+
+
 
 
 

@@ -89,8 +89,6 @@ public class GameController implements Initializable {
     @FXML
     private Pane loadGameMenu = new Pane();
 
-    @FXML
-    private Pane coinPane = new Pane();
 
     @FXML
     private AnchorPane gameRoot = new AnchorPane();
@@ -137,6 +135,12 @@ public class GameController implements Initializable {
     @FXML
     private Pane platformPane = new Pane();
 
+    @FXML
+    private Pane cloudPane = new Pane();
+
+    @FXML
+    private Pane gameObjectsPane = new Pane();
+
 
     private int currLocation;
 
@@ -171,9 +175,6 @@ public class GameController implements Initializable {
         return this.game;
     }
 
-    public Pane getCoinPane() {
-        return this.coinPane;
-    }
 
     public void removeFallingPlatformNode(ImageView node) {
         gameRoot.getChildren().remove(node);
@@ -319,8 +320,6 @@ public class GameController implements Initializable {
     }
 
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.game = new Game(this, heroImage);
@@ -342,62 +341,64 @@ public class GameController implements Initializable {
             }
             int offset = 5;
             for (Solid gameObject : game.getSolidList()) {
-                if(gameObject.getPos().getxPos() + gameObject.getWidth() < 0){
+                if (gameObject.getPos().getxPos() + gameObject.getWidth() < 0) {
                     //Removing Old Objects
-                    if(gameObject instanceof Platform){
+                    if (gameObject instanceof Platform) {
                         game.getPlatformList().remove(gameObject);
-                    }
-                    else if(gameObject instanceof Orc){
+                    } else if (gameObject instanceof Orc) {
                         game.getOrcList().remove(gameObject);
                     }
-
+//                  Try iterating over this
 //                    game.getSolidList().remove(gameObject);
                 }
-                if(gameObject.getPos().getxPos() <= 2048 && gameObject.getPos().getxPos() > 1024){
+                if (gameObject.getPos().getxPos() <= 2048 && gameObject.getPos().getxPos() > 0) {
                     //Staging Area
 
-                    if(!gameObject.isStaged()){
+                    if (!gameObject.isStaged()) {
 
 
-                        if(gameObject instanceof GreenOrc){
+
+                        if (gameObject instanceof GreenOrc) {
                             GreenOrc g = (GreenOrc) gameObject;
                             ImageView img = new ImageView(new Image("greenOrc.png"));
                             g.setOrcImage(img);
-                            gameRoot.getChildren().add(img);
+                            gameObjectsPane.getChildren().add(img);
                             System.out.println("making greenOrc");
-                        }
-                        else if(gameObject instanceof RedOrc){
+                        } else if (gameObject instanceof RedOrc) {
                             RedOrc g = (RedOrc) gameObject;
                             ImageView img = new ImageView(new Image("redOrc.jpeg"));
                             g.setOrcImage(img);
-                            gameRoot.getChildren().add(img);
+                            gameObjectsPane.getChildren().add(img);
 
                             System.out.println("making redOrc");
 
-                        }
+                        }  else if (gameObject instanceof TreasureChest) {
 
-                        else if(gameObject instanceof WeaponChest){
-                            WeaponChest g = (WeaponChest) gameObject;
+                            TreasureChest t = (TreasureChest) gameObject;
                             ImageView img = new ImageView(new Image("chestClosed.png"));
-                            g.setChestImage(img);
-                            img.setFitWidth(TreasureChest.chestWidth);
-                            img.setFitHeight(TreasureChest.chestHeight);
+                            t.setChestImage(img);
+                            gameObjectsPane.getChildren().add(img);
+                            System.out.println("making treasure chest");
 
-                            gameRoot.getChildren().add(img);
+                        } else if (gameObject instanceof Platform) {
+                            Platform p = (Platform) gameObject;
+                            p.getBasePlatform().setOpacity(0);
+                            ImageView img;
+                            if(p.getWidth() >= 350){
+                                img = new ImageView(new Image("longPlatform.png"));
 
-                            System.out.println("making weapon chest");
-                        }
+                            }
+                            else if( p.getWidth() > 200 && p.getWidth() < 350){
+                                img = new ImageView(new Image("fatPlatform.png"));
+                            }
+                            else{
+                                img = new ImageView(new Image("normalPlatform.png"));
+                            }
+                            p.setPlatformImage(img);
+                            gameObjectsPane.getChildren().add(img);
+                            System.out.println("making Platform");
 
-                        else if(gameObject instanceof CoinChest){
-                            CoinChest g = (CoinChest) gameObject;
-                            ImageView img = new ImageView(new Image("chestClosed.png"));
-                            g.setChestImage(img);
-                            img.setFitWidth(TreasureChest.chestWidth);
-                            img.setFitHeight(TreasureChest.chestHeight);
 
-                            gameRoot.getChildren().add(img);
-
-                            System.out.println("making coin chest");
 
                         }
 
@@ -405,8 +406,9 @@ public class GameController implements Initializable {
                         gameObject.setStaged(true);
                     }
                 }
-                if(gameObject.getPos().getxPos() >= 0 && gameObject.getPos().getxPos() <= 2048){
-                    //We only have to check these objects
+                if (gameObject.getPos().getxPos() >= 0 && gameObject.getPos().getxPos() <= 2048) {
+                    //Collision Here
+                    //Only hero and orc are collidable, rest check with Solids
 
 
                 }
@@ -431,11 +433,11 @@ public class GameController implements Initializable {
 
             if (!game.getHero().getTouchingPlatform() && !goingUp) {
                 //System.out.println("Should fall");
-                game.getHero().translateHeroY(4);
+                game.getHero().translateSolidY(4);
 
             } else {
                 //System.out.println("Going up");
-                game.getHero().translateHeroY(-4);
+                game.getHero().translateSolidY(-4);
 
             }
 
@@ -455,20 +457,17 @@ public class GameController implements Initializable {
                 movingHero.setCycleCount(animationTime / refreshTime);
 
                 KeyFrame moveHero = new KeyFrame(Duration.millis(refreshTime), e -> {
-                    for (Platform x : game.getPlatformList()) {
-                        x.translatePlatformX(-game.getHero().getStepSize() * refreshTime / animationTime);
-                    }
-                    for (Orc x : game.getOrcList()){
-                        x.translateOrcX(-game.getHero().getStepSize() * refreshTime / animationTime);
 
-
+                    for (Solid x : game.getSolidList()) {
+                        x.translateSolidX(-game.getHero().getStepSize() * refreshTime / animationTime);
                     }
 
-                    for (Node x : gameRoot.getChildren()) {
-                        if (x != heroImage && x != staticPane && x != platformPane) {
-                            x.setLayoutX(x.getLayoutX() - game.getHero().getStepSize() * refreshTime / animationTime);
-                        }
+
+                    for (Node x : gameObjectsPane.getChildren()) {
+                        x.setLayoutX(x.getLayoutX() - game.getHero().getStepSize() * refreshTime / animationTime);
+
                     }
+
                 });
 
                 movingHero.getKeyFrames().add(moveHero);

@@ -43,6 +43,7 @@ public class Game {
 
     public void addPlatform(Platform platform) {
         PlatformList.add(platform);
+        SolidList.add(platform);
     }
 
     public ArrayList<Platform> getPlatformList() {
@@ -192,7 +193,7 @@ public class Game {
                 generateCoin(1, currPlatform);
             }
 
-            else if(objectForFirstHalf >= 6 && objectForFirstHalf < 8){
+            else if(objectForFirstHalf >= 6 && objectForFirstHalf <  7){
                 generateChest(1, currPlatform);
             }
 
@@ -205,8 +206,9 @@ public class Game {
                 generateCoin(2, currPlatform);
             }
 
-            else if(objectForSecondHalf >= 6 && objectForSecondHalf < 8){
+            else if(objectForSecondHalf >= 6 && objectForSecondHalf < 7){
                 generateChest(2, currPlatform);
+
             }
 
         }

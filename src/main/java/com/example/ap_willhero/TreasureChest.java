@@ -8,10 +8,24 @@ public class TreasureChest extends Solid implements Collidable{
     final static int chestHeight = 55;
     final static int chestWidth = 74;
 
+    @Override
+    public boolean isStaged() {
+        return isStaged;
+    }
+
+    @Override
+    public void setStaged(boolean staged) {
+        isStaged = staged;
+    }
+
+
+
 
     TreasureChest(double x, double y){
         this.setPos( new Position(x, y));
         isStaged = false;
+        this.setHeight(chestHeight);
+        this.setWidth(chestWidth);
 
     }
 
@@ -26,11 +40,13 @@ public class TreasureChest extends Solid implements Collidable{
 
 
     }
-
-    public void translateChestX(double i) {
+    @Override
+    public void translateSolidX(double i) {
         setPos(new Position(getPos().getxPos() + i, getPos().getyPos()));
     }
-    public void translateChestY(double i) {
+    @Override
+    public void translateSolidY(double i) {
+
         setPos(new Position(getPos().getxPos(), getPos().getyPos() + i));
     }
 

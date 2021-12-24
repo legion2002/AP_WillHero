@@ -6,33 +6,63 @@ import javafx.scene.shape.Rectangle;
 public class Platform extends Solid {
     ImageView platformImage;
     Rectangle basePlatform;
+    private boolean isStaged;
 
-    Platform(Rectangle r){
+    public Rectangle getBasePlatform() {
+        return basePlatform;
+    }
+
+    @Override
+    public boolean isStaged() {
+        return isStaged;
+    }
+
+    @Override
+    public void setStaged(boolean staged) {
+        isStaged = staged;
+    }
+
+    Platform(Rectangle r) {
 
         basePlatform = r;
-        setPos(new Position(basePlatform.getLayoutX(),basePlatform.getLayoutY()));
+        this.isStaged = false;
+        setPos(new Position(basePlatform.getLayoutX(), basePlatform.getLayoutY()));
 
         setWidth(basePlatform.getWidth());
         setHeight(basePlatform.getHeight());
     }
 
+    public void setPlatformImage(ImageView platImage) {
+        this.platformImage = platImage;
+        platformImage.setLayoutX(this.getPos().getxPos());
+        platformImage.setLayoutY(this.getPos().getyPos());
+        platformImage.setFitHeight(100);
+        platformImage.setFitWidth(this.getWidth());
+
+
+    }
+
     @Override
-    public void setPos(Position p){
+    public void setPos(Position p) {
         super.setPos(p);
         basePlatform.setLayoutX(getPos().getxPos());
         basePlatform.setLayoutY(getPos().getyPos());
-        //CHANGE THIS WHEN YOU ADD IMAGEVIEW
-//        platformImage.setLayoutX(getPos().getxPos());
-//        platformImage.setLayoutY(getPos().getyPos());
+        if (platformImage != null) {
+            platformImage.setLayoutX(getPos().getxPos());
+            platformImage.setLayoutY(getPos().getyPos());
+        }
 
 
 
     }
 
-    public void translatePlatformX(double translation){
+    @Override
+    public void translateSolidX(double translation) {
         setPos(new Position(getPos().getxPos() + translation, getPos().getyPos()));
     }
-    public void translatePlatformY(double translation){
+
+    @Override
+    public void translateSolidY(double translation) {
         setPos(new Position(getPos().getxPos(), getPos().getyPos() + translation));
 
     }
