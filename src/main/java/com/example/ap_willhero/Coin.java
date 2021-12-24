@@ -2,7 +2,7 @@ package com.example.ap_willhero;
 
 import javafx.scene.image.ImageView;
 
-public class Coin extends Solid implements Collidable{
+public class Coin extends Solid {
     private int coinVal;
     private ImageView coinImage;
     private Game game;
@@ -16,15 +16,7 @@ public class Coin extends Solid implements Collidable{
 
     }
 
-    @Override
-    public boolean isCollidable() {
-        return false;
-    }
 
-    @Override
-    public void collidesWith(Solid s) {
-
-    }
 
     public Position getPosition(){
         return this.getPos();

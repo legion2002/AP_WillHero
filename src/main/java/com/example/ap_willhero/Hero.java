@@ -170,12 +170,36 @@ public class Hero extends Solid implements Collidable{
 
 
     @Override
-    public boolean isCollidable() {
-        return false;
+    public int hasCollided(Solid s){
+        int offset = 5;
+        double left = getPos().getxPos();
+        double right = left + getWidth();
+        double top = getPos().getyPos();
+        double bottom = top + getHeight();
+        double platformLeft = s.getPos().getxPos();
+        double platformRight = platformLeft + s.getWidth();
+        double platformTop = s.getPos().getyPos();
+
+        if(left >= platformLeft &&  right <= platformRight) {
+
+
+        }
+
+        if(((right < platformRight && right > platformLeft) || (left > platformLeft && left < platformRight)) && (bottom > (platformTop - offset) && bottom < platformTop + offset)){
+
+            System.out.println("Touched top of solid");
+
+        }
+
+
+
+
+
+        return 0;
     }
 
     @Override
-    public void collidesWith(Solid s) {
+    public void collidesWith(Solid s, int collideVal) {
         /*
         if(s instanceof Coin){
             Integer currentCoins = Integer.parseInt(game.getController().getCoinsCollectedLabel().getText());

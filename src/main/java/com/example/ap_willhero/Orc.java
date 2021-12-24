@@ -2,7 +2,7 @@ package com.example.ap_willhero;
 
 import javafx.scene.image.ImageView;
 
-public class Orc extends Solid{
+public class Orc extends Solid implements Collidable{
 
     private ImageView orcImage;
     private int coinsReleased;
@@ -68,5 +68,16 @@ public class Orc extends Solid{
     public void translateSolidY(double i) {
 
         setPos(new Position(getPos().getxPos(), getPos().getyPos() + i));
+    }
+
+
+    @Override
+    public int hasCollided(Solid s) {
+        return 0;
+    }
+
+    @Override
+    public void collidesWith(Solid s, int collideVal) {
+
     }
 }

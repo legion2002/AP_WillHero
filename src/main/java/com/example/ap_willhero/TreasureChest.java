@@ -2,7 +2,7 @@ package com.example.ap_willhero;
 
 import javafx.scene.image.ImageView;
 
-public class TreasureChest extends Solid implements Collidable{
+public class TreasureChest extends Solid {
     private ImageView chestImage;
     private boolean isStaged;
     final static int chestHeight = 55;
@@ -68,13 +68,5 @@ public class TreasureChest extends Solid implements Collidable{
 
     }
 
-    @Override
-    public boolean isCollidable() {
-        return false;
-    }
 
-    @Override
-    public void collidesWith(Solid s) {
-
-    }
 }

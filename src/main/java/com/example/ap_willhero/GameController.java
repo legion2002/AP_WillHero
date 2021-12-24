@@ -408,18 +408,19 @@ public class GameController implements Initializable {
                 }
                 if (gameObject.getPos().getxPos() >= 0 && gameObject.getPos().getxPos() <= 2048) {
                     //Collision Here
-                    //Only hero and orc are collidable, rest check with Solids
+                    //Only Hero and Orc are collidable, rest check with Solids
+                    int collideVal = game.getHero().hasCollided(gameObject);
+                    if(collideVal > 0 ){
+                        game.getHero().collidesWith(gameObject, collideVal);
+                    }
+
 
 
                 }
 
-                //Main function
-                //Check if any collision takes place
-                //Check if anything needs to be staged
-                //Check if anything needs to be removed
 
-//                if (game.getHero().getPos().getxPos() <)
-//                    game.getHero().collidesWith(gameObject);
+
+
             }
             game.getHero().checkCollisionWithPlatform();
             if (game.getHero().getTouchingPlatform()) {

@@ -1,6 +1,6 @@
 package com.example.ap_willhero;
 
-public class Shurikens implements Collidable{
+public class Shurikens {
     int lifeTime;
 
     public Shurikens(){
@@ -15,13 +15,5 @@ public class Shurikens implements Collidable{
         this.lifeTime = lifeTime;
     }
 
-    @Override
-    public boolean isCollidable() {
-        return false;
-    }
 
-    @Override
-    public void collidesWith(Solid s) {
-
-    }
 }

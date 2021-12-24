@@ -1,6 +1,6 @@
 package com.example.ap_willhero;
 
-public class Knives implements Collidable{
+public class Knives {
     int lifeTime;
 
     public Knives(){
@@ -15,13 +15,5 @@ public class Knives implements Collidable{
         this.lifeTime = lifeTime;
     }
 
-    @Override
-    public boolean isCollidable() {
-        return true;
-    }
 
-    @Override
-    public void collidesWith(Solid s) {
-
-    }
 }
