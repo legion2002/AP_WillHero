@@ -159,8 +159,7 @@ public class GameController implements Initializable {
 
     public void setUpGame() {
         createPlatformList();
-        game.generateCoins();
-        game.generateOrcs();
+        game.generateGameObjects();
 
     }
 
@@ -378,6 +377,33 @@ public class GameController implements Initializable {
                             System.out.println("making redOrc");
 
                         }
+
+                        else if(gameObject instanceof WeaponChest){
+                            WeaponChest g = (WeaponChest) gameObject;
+                            ImageView img = new ImageView(new Image("chestClosed.png"));
+                            g.setChestImage(img);
+                            img.setFitWidth(TreasureChest.chestWidth);
+                            img.setFitHeight(TreasureChest.chestHeight);
+
+                            gameRoot.getChildren().add(img);
+
+                            System.out.println("making weapon chest");
+                        }
+
+                        else if(gameObject instanceof CoinChest){
+                            CoinChest g = (CoinChest) gameObject;
+                            ImageView img = new ImageView(new Image("chestClosed.png"));
+                            g.setChestImage(img);
+                            img.setFitWidth(TreasureChest.chestWidth);
+                            img.setFitHeight(TreasureChest.chestHeight);
+
+                            gameRoot.getChildren().add(img);
+
+                            System.out.println("making coin chest");
+
+                        }
+
+
                         gameObject.setStaged(true);
                     }
                 }
