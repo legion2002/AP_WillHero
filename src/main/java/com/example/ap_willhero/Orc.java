@@ -23,7 +23,6 @@ public class Orc extends Solid{
         orcImage.setFitWidth(this.getWidth());
 
 
-
     }
 
     public int getCoinsReleased() {
@@ -61,7 +60,6 @@ public class Orc extends Solid{
 
 
     }
-
 
     public void translateOrcX(double i) {
         setPos(new Position(getPos().getxPos() + i, getPos().getyPos()));
