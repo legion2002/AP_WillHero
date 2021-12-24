@@ -62,6 +62,12 @@ public class Game {
         return this.SolidList;
     }
 
+    public void removeSolid(Solid s){
+        //SolidList.remove(s);
+        if(s instanceof Coin)
+            gameController.getGameRoot().getChildren().remove(((Coin)s).getCoinImage());
+    }
+
 
 
     public void generateOrc(int half, Platform platform){

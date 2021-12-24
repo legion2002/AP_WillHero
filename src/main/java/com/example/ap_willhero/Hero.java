@@ -151,7 +151,7 @@ public class Hero extends Solid implements Collidable{
 
             if(((right < platformRight && right > platformLeft) || (left > platformLeft && left < platformRight)) && (bottom > (platformTop - offset) && bottom < platformTop + offset)){
                 flag = true;
-                System.out.println("Touched platform");
+                //System.out.println("Touched platform");
                 //game.getController().bounceBackHero();
                 break;
             }
@@ -172,41 +172,70 @@ public class Hero extends Solid implements Collidable{
     @Override
     public int hasCollided(Solid s){
         int offset = 5;
-        double left = getPos().getxPos();
-        double right = left + getWidth();
-        double top = getPos().getyPos();
-        double bottom = top + getHeight();
-        double platformLeft = s.getPos().getxPos();
-        double platformRight = platformLeft + s.getWidth();
-        double platformTop = s.getPos().getyPos();
+        double heroLeft = getPos().getxPos();
+        double heroRight = heroLeft + getWidth();
+        double heroTop = getPos().getyPos();
+        double heroBottom = heroTop + getHeight();
+        double solidLeft = s.getPos().getxPos();
+        double solidRight = solidLeft + s.getWidth();
+        double solidTop = s.getPos().getyPos();
+        double solidBottom = s.getPos().getyPos() + s.getHeight();
 
-        if(left >= platformLeft &&  right <= platformRight) {
 
+        if(s instanceof Platform){
+            if(((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight)) &&
+                    (heroBottom > (solidTop - offset) && heroBottom < solidTop + offset)){
+                System.out.println("Collision with top of platform");
+                return 2; //Collision with top of platform
+            }
 
         }
 
-        if(((right < platformRight && right > platformLeft) || (left > platformLeft && left < platformRight)) && (bottom > (platformTop - offset) && bottom < platformTop + offset)){
-
-            System.out.println("Touched top of solid");
-
+        //Everything else if a rectangle/square -> no explicit checking
+        offset = 3;
+        //Top of solid
+        if(heroBottom > (solidTop - offset) && heroBottom < (solidTop + offset) &&
+                ((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight))) {
+            System.out.println("Collision with top of  solid");
+            //System.out.println("Object is " + s.getClass().getName());
+            return 2;
+        }
+        //Collision with bottom of solid
+        else if(heroTop < (solidBottom + offset) && heroTop > (solidBottom - offset) &&
+                ((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight))) {
+            System.out.println("Collision with bottom of  solid");
+            return 4;
         }
 
+        //Collision with right of solid
+        else if(heroLeft < (solidRight + offset) && heroLeft > (solidRight - offset)) {
+            System.out.println("Collision with right of solid");
+            return 3;
+        }
 
+        //Collision with left of solid
+        else if(heroRight > (solidLeft - offset) && heroRight < (solidLeft + offset)) {
+            System.out.println("Collision with left of solid");
+            return 1;
+        }
 
-
-
+        //No collision
         return 0;
     }
 
     @Override
     public void collidesWith(Solid s, int collideVal) {
-        /*
+
         if(s instanceof Coin){
-            Integer currentCoins = Integer.parseInt(game.getController().getCoinsCollectedLabel().getText());
-            game.getController().getCoinsCollectedLabel().setText(Integer.toString(currentCoins + 1));
+            if(! ((Coin)s).isHasBeenCollected()){
+                Integer currentCoins = Integer.parseInt(game.getController().getCoinsCollectedLabel().getText());
+                game.getController().getCoinsCollectedLabel().setText(Integer.toString(currentCoins + ((Coin) s).getCoinVal()));
+                ((Coin) s).setHasBeenCollected(true);
+                game.removeSolid(s);
+            }
         }
 
-         */
+
 
     }
 

@@ -149,6 +149,7 @@ public class GameController implements Initializable {
     private int reachHeight;
 
     private boolean goingUp;
+    private boolean pauseMotion;
 
     public GameController() {
 
@@ -319,6 +320,10 @@ public class GameController implements Initializable {
         root.getChildren().add(loadGameMenu);
     }
 
+    public Pane getGameObjectsPane(){
+        return this.gameObjectsPane;
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -363,14 +368,14 @@ public class GameController implements Initializable {
                             ImageView img = new ImageView(new Image("greenOrc.png"));
                             g.setOrcImage(img);
                             gameObjectsPane.getChildren().add(img);
-                            System.out.println("making greenOrc");
+                            //System.out.println("making greenOrc");
                         } else if (gameObject instanceof RedOrc) {
                             RedOrc g = (RedOrc) gameObject;
                             ImageView img = new ImageView(new Image("redOrc.jpeg"));
                             g.setOrcImage(img);
                             gameObjectsPane.getChildren().add(img);
 
-                            System.out.println("making redOrc");
+                            //System.out.println("making redOrc");
 
                         }  else if (gameObject instanceof TreasureChest) {
 
@@ -378,7 +383,7 @@ public class GameController implements Initializable {
                             ImageView img = new ImageView(new Image("chestClosed.png"));
                             t.setChestImage(img);
                             gameObjectsPane.getChildren().add(img);
-                            System.out.println("making treasure chest");
+                            //System.out.println("making treasure chest");
 
                         } else if (gameObject instanceof Platform) {
                             Platform p = (Platform) gameObject;
@@ -396,7 +401,7 @@ public class GameController implements Initializable {
                             }
                             p.setPlatformImage(img);
                             gameObjectsPane.getChildren().add(img);
-                            System.out.println("making Platform");
+                            //System.out.println("making Platform");
 
 
 
@@ -432,11 +437,11 @@ public class GameController implements Initializable {
                 goingUp = false;
             }
 
-            if (!game.getHero().getTouchingPlatform() && !goingUp) {
+            if (!game.getHero().getTouchingPlatform() && !goingUp && !pauseMotion) {
                 //System.out.println("Should fall");
                 game.getHero().translateSolidY(4);
 
-            } else {
+            } else if(!pauseMotion){
                 //System.out.println("Going up");
                 game.getHero().translateSolidY(-4);
 
@@ -447,6 +452,7 @@ public class GameController implements Initializable {
         timeline.getKeyFrames().add(collision);
         timeline.play();
         currLocation = 0;
+        pauseMotion = false;
         onGeneralClick = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -458,6 +464,7 @@ public class GameController implements Initializable {
                 movingHero.setCycleCount(animationTime / refreshTime);
 
                 KeyFrame moveHero = new KeyFrame(Duration.millis(refreshTime), e -> {
+                    pauseMotion = true;
 
                     for (Solid x : game.getSolidList()) {
                         x.translateSolidX(-game.getHero().getStepSize() * refreshTime / animationTime);
@@ -468,6 +475,8 @@ public class GameController implements Initializable {
                         x.setLayoutX(x.getLayoutX() - game.getHero().getStepSize() * refreshTime / animationTime);
 
                     }
+
+                    pauseMotion = false;
 
                 });
 

@@ -7,15 +7,37 @@ public class Coin extends Solid {
     private ImageView coinImage;
     private Game game;
 
+
+
+
+    private boolean hasBeenCollected;
+
     public Coin(Game game, Position pos, ImageView image){
         this.game = game;
         this.coinImage = image;
         setWidth(coinImage.getFitWidth());
         setHeight(coinImage.getFitHeight());
         setPos(new Position(pos.getxPos(), pos.getyPos()));
+        coinVal = 1;
+        hasBeenCollected = false;
 
     }
 
+    public int getCoinVal(){
+        return this.coinVal;
+    }
+
+    public void setHasBeenCollected(boolean hasBeenCollected) {
+        this.hasBeenCollected = hasBeenCollected;
+    }
+
+    public boolean isHasBeenCollected() {
+        return hasBeenCollected;
+    }
+
+    public ImageView getCoinImage(){
+        return this.coinImage;
+    }
 
 
     public Position getPosition(){
