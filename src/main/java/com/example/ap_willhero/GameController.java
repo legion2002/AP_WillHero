@@ -366,8 +366,6 @@ public class GameController implements Initializable {
                             g.setOrcImage(img);
                             gameRoot.getChildren().add(img);
                             System.out.println("making greenOrc");
-
-
                         }
                         else if(gameObject instanceof RedOrc){
                             RedOrc g = (RedOrc) gameObject;
@@ -381,7 +379,7 @@ public class GameController implements Initializable {
                         gameObject.setStaged(true);
                     }
                 }
-                if(gameObject.getPos().getxPos() >= 0 && gameObject.getPos().getxPos() <= 1024){
+                if(gameObject.getPos().getxPos() >= 0 && gameObject.getPos().getxPos() <= 2048){
                     //We only have to check these objects
 
 
