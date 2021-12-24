@@ -337,7 +337,8 @@ public class GameController implements Initializable {
         timeline.setCycleCount(Timeline.INDEFINITE);
         goingUp = false;
         int countOrc = 0;
-        KeyFrame collision = new KeyFrame(Duration.millis(40), e -> {
+        int frameTimeInMillis = 40;
+        KeyFrame collision = new KeyFrame(Duration.millis(frameTimeInMillis), e -> {
             if (game.getHero().isDead(game.getAbyssLevel())) {
                 // Start Endgame Menu Here #DIKSHA
                 System.out.println("Hero is Dead");
@@ -427,25 +428,15 @@ public class GameController implements Initializable {
 
 
             }
-            game.getHero().checkCollisionWithPlatform();
-            if (game.getHero().getTouchingPlatform()) {
-                reachHeight = (int) game.getHero().getPos().getyPos() - 100;
-                goingUp = true;
-            }
+//            System.out.println("Hero velocity: " + game.getHero().getyVelocity() + "Hero Position " + game.getHero().getPos().getyPos());
 
-            if (game.getHero().getPos().getyPos() <= reachHeight) {
-                goingUp = false;
-            }
+            double s = game.getHero().getyVelocity()*frameTimeInMillis + frameTimeInMillis*frameTimeInMillis*game.getGravity()/2;
+//            System.out.println("s is " + s);
+            game.getHero().translateSolidY(s);
+            double v = game.getHero().getyVelocity() + game.getGravity()*frameTimeInMillis;
+//            System.out.println("v is " + v);
 
-            if (!game.getHero().getTouchingPlatform() && !goingUp && !pauseMotion) {
-                //System.out.println("Should fall");
-                game.getHero().translateSolidY(4);
-
-            } else if(!pauseMotion){
-                //System.out.println("Going up");
-                game.getHero().translateSolidY(-4);
-
-            }
+            game.getHero().setyVelocity(v);
 
 
         });
@@ -456,9 +447,11 @@ public class GameController implements Initializable {
         onGeneralClick = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                System.out.println("==================AFTER CLICK=============");
+                System.out.println("Hero Bottom: " + game.getHero().getPos().getyPos() + game.getHero().getHeight());
 
 
-                int animationTime = 200;
+                int animationTime = 40;
                 int refreshTime = 5;
                 Timeline movingHero = new Timeline();
                 movingHero.setCycleCount(animationTime / refreshTime);
@@ -466,6 +459,9 @@ public class GameController implements Initializable {
                 KeyFrame moveHero = new KeyFrame(Duration.millis(refreshTime), e -> {
                     pauseMotion = true;
 
+                    game.getHero().setyVelocity(0);
+                    double savedGravity = game.getGravity();
+                    game.setGravity(0);
                     for (Solid x : game.getSolidList()) {
                         x.translateSolidX(-game.getHero().getStepSize() * refreshTime / animationTime);
                     }
@@ -477,11 +473,18 @@ public class GameController implements Initializable {
                     }
 
                     pauseMotion = false;
+                    game.setGravity(savedGravity);
+
 
                 });
 
                 movingHero.getKeyFrames().add(moveHero);
                 movingHero.play();
+//                game.getHero().translateSolidX(100);
+//                for (Solid x : game.getSolidList()) {
+//                    x.translateSolidX(-100);
+//                }
+
 
 
                 currLocation++;

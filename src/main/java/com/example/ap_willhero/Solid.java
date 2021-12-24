@@ -5,9 +5,11 @@ public abstract class Solid {
     private double height;
     private double width;
     private int weight;
-    private float xVelocity;
-    private float yVelocity;
-    private float gravity;
+    private double xVelocity;
+    private double yVelocity;
+
+
+
     private boolean isStaged;
 
 
@@ -44,6 +46,23 @@ public abstract class Solid {
 
     public abstract void translateSolidX(double translation);
     public abstract void translateSolidY(double translation);
+
+    public double getxVelocity() {
+        return xVelocity;
+    }
+
+    public void setxVelocity(double xVelocity) {
+        this.xVelocity = xVelocity;
+    }
+
+    public double getyVelocity() {
+        return yVelocity;
+    }
+
+    public void setyVelocity(double yVelocity) {
+        this.yVelocity = yVelocity;
+    }
+
 
 
 

@@ -9,11 +9,20 @@ import java.util.Random;
 public class Game {
     private Hero hero;
     private int totalCoins;
-    private int gravity;
+
+
+    private double gravity;
     Random rand = new Random();
 
     public float getAbyssLevel() {
         return abyssLevel;
+    }
+    public double getGravity() {
+        return gravity;
+    }
+
+    public void setGravity(double gravity) {
+        this.gravity = gravity;
     }
 
     private float abyssLevel;
@@ -35,6 +44,7 @@ public class Game {
         this.gameController = gc;
         this.abyssLevel = 500;
         this.totalLocations = 122;
+        this.gravity = 0.001;
         System.out.println("Image Position is: " + heroImage.getLayoutX() + " " + heroImage.getLayoutY());
 
         hero = new Hero(this, heroImage);

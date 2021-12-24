@@ -171,28 +171,37 @@ public class Hero extends Solid implements Collidable{
 
     @Override
     public int hasCollided(Solid s){
-        int offset = 5;
-        double heroLeft = getPos().getxPos();
-        double heroRight = heroLeft + getWidth();
-        double heroTop = getPos().getyPos();
-        double heroBottom = heroTop + getHeight();
-        double solidLeft = s.getPos().getxPos();
-        double solidRight = solidLeft + s.getWidth();
-        double solidTop = s.getPos().getyPos();
-        double solidBottom = s.getPos().getyPos() + s.getHeight();
+        int offset = 10;
+        int heroLeft = (int)getPos().getxPos();
+        int heroRight = (int) (heroLeft + getWidth());
+        int heroTop = (int)getPos().getyPos();
+        int heroBottom = (int)(heroTop + getHeight());
+        int solidLeft = (int)(s.getPos().getxPos());
+        int solidRight = (int)(solidLeft + s.getWidth());
+        int solidTop = (int)(s.getPos().getyPos());
+        int solidBottom =(int)( s.getPos().getyPos() + s.getHeight());
 
 
         if(s instanceof Platform){
-            if(((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight)) &&
-                    (heroBottom > (solidTop - offset) && heroBottom < solidTop + offset)){
-                System.out.println("Collision with top of platform");
-                return 2; //Collision with top of platform
+
+            if(((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight))) {
+                System.out.println("Platform found below hero");
+                System.out.println("Hero Bottom: " + heroBottom);
+                System.out.println("Solid Left: " + solidLeft);
+                System.out.println("Solid Right: " + solidRight);
+                System.out.println("Solid Top: " + solidTop);
+
+
+                if ((heroBottom > (solidTop - offset) && heroBottom < solidTop + offset)) {
+                    System.out.println("Collision with top of platform");
+                    return 2; //Collision with top of platform
+                }
             }
 
         }
 
         //Everything else if a rectangle/square -> no explicit checking
-        //offset = 3;
+        offset = 8;
         //Collision with left of solid
         if(heroRight > (solidLeft - offset) && heroRight < (solidLeft + offset)) {
             System.out.println("Collision with left of solid");
@@ -235,6 +244,13 @@ public class Hero extends Solid implements Collidable{
                 game.removeSolid(s);
             }
         }
+
+        if(s instanceof Platform){
+//            System.out.println("Reached HERE");
+            this.setyVelocity(-0.5);
+//            this.setyVelocity(-0.7);
+        }
+
 
 
 
