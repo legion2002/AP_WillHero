@@ -1,6 +1,8 @@
 package com.example.ap_willhero;
 
-public abstract class Weapon {
+import java.io.Serializable;
+
+public abstract class Weapon implements Serializable {
     private int level;
     private int damage;
 

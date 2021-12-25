@@ -2,10 +2,12 @@ package com.example.ap_willhero;
 
 import javafx.scene.image.ImageView;
 
-public class Coin extends Solid {
-    private int coinVal;
-    private ImageView coinImage;
-    private Game game;
+import java.io.Serializable;
+
+public class Coin extends Solid implements Serializable {
+    transient private int coinVal;
+    transient private ImageView coinImage;
+    transient private Game game;
 
 
 

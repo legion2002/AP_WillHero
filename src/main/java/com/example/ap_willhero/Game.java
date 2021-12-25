@@ -15,17 +15,6 @@ public class Game implements Serializable {
     private double gravity;
     transient Random rand = new Random();
 
-    public float getAbyssLevel() {
-        return abyssLevel;
-    }
-    public double getGravity() {
-        return gravity;
-    }
-
-    public void setGravity(double gravity) {
-        this.gravity = gravity;
-    }
-
     private float abyssLevel;
     private int totalLocations;
     private ArrayList<Platform> PlatformList;
@@ -35,6 +24,17 @@ public class Game implements Serializable {
 
     public ArrayList<Orc> getOrcList() {
         return OrcList;
+    }
+
+    public float getAbyssLevel() {
+        return abyssLevel;
+    }
+    public double getGravity() {
+        return gravity;
+    }
+
+    public void setGravity(double gravity) {
+        this.gravity = gravity;
     }
 
     public Game(GameController gc, ImageView heroImage) {
@@ -75,8 +75,7 @@ public class Game implements Serializable {
 
     public void removeSolid(Solid s){
         //SolidList.remove(s);
-        if(s instanceof Coin)
-            gameController.getGameRoot().getChildren().remove(((Coin)s).getCoinImage());
+        gameController.getGameObjectsPane().getChildren().remove(((Coin)s).getCoinImage());
     }
 
 
@@ -125,7 +124,7 @@ public class Game implements Serializable {
         img1.setFitWidth(maximumCoinWidth);
         Coin coin1 = new Coin(this, new Position(startingPoint + coinOffsetX, platform.getPos().getyPos() + coinOffsetY), img1);
         SolidList.add(coin1);
-        gameController.getGameRoot().getChildren().add(img1);
+        gameController.getGameObjectsPane().getChildren().add(img1);
         if (platform.getWidth() / 2 < 100)
             return;
 
@@ -138,7 +137,7 @@ public class Game implements Serializable {
 
         SolidList.add(coin2);
 
-        gameController.getGameRoot().getChildren().add(img2);
+        gameController.getGameObjectsPane().getChildren().add(img2);
 
         if (platform.getWidth() / 2 > 100) {
             // We generate a batch of three coins
@@ -149,7 +148,7 @@ public class Game implements Serializable {
 
             Coin coin3 = new Coin(this, new Position(startingPoint + coinOffsetX + 2 * distanceBetweenCoins, platform.getPos().getyPos() + coinOffsetY), img3);
             SolidList.add(coin3);
-            gameController.getGameRoot().getChildren().add(img3);
+            gameController.getGameObjectsPane().getChildren().add(img3);
 
         }
 

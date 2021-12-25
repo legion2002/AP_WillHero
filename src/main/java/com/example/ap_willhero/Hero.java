@@ -3,10 +3,12 @@ package com.example.ap_willhero;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
-public class Hero extends Solid implements Collidable{
+import java.io.Serializable;
+
+public class Hero extends Solid implements Collidable, Serializable {
 
     private Helmet helmet;
-    private Game game;
+    transient private Game game;
     private Weapon equippedWeapon;
     private float jumpHeight;
     private int currCoins;
@@ -15,7 +17,7 @@ public class Hero extends Solid implements Collidable{
 
     private int stepSize;
     private int health;
-    private ImageView heroImage;
+    transient private ImageView heroImage;
 
     private boolean touchingPlatform;
 

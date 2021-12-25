@@ -13,6 +13,10 @@ import java.io.Serializable;
 
 public class Main extends Application{
 
+    public static void changeScene(Scene scene){
+
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Game.fxml"));
@@ -27,7 +31,6 @@ public class Main extends Application{
 
         stage.setScene(scene);
         stage.show();
-
 
     }
 

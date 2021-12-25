@@ -3,8 +3,10 @@ package com.example.ap_willhero;
 import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -18,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.FileOutputStream;
@@ -133,6 +136,7 @@ public class GameController implements Initializable {
     @FXML
     private Pane staticPane = new Pane();
 
+
     @FXML
     private ImageView settingsButton = new ImageView();
 
@@ -152,6 +156,9 @@ public class GameController implements Initializable {
 
     private int reachHeight;
 
+    private Stage stage;
+    private Scene currScene;
+
     private boolean goingUp;
     private boolean pauseMotion;
 
@@ -164,6 +171,24 @@ public class GameController implements Initializable {
 
             game.addPlatform(new Platform((Rectangle) platforms));
         }
+        
+    }
+
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setCurrScene(Scene currScene) {
+        this.currScene = currScene;
+    }
+
+    public Scene getCurrScene() {
+        return currScene;
     }
 
     public void setUpGame() {
@@ -175,12 +200,9 @@ public class GameController implements Initializable {
     public void serialize() throws IOException {
 
         ObjectOutputStream out = null;
-        TestingClass test = new TestingClass(1);
-        TestingClass test2 = new TestingClass(3);
         try {
             out = new ObjectOutputStream(new FileOutputStream("StoringGame.txt"));
-            out.writeObject(test); //Storing game
-            out.writeObject(test2);
+            out.writeObject(game); //Storing game
         } finally {
             out.close();
         }
@@ -371,6 +393,7 @@ public class GameController implements Initializable {
             if (game.getHero().isDead(game.getAbyssLevel())) {
                 // Start Endgame Menu Here #DIKSHA
                 System.out.println("Hero is Dead");
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("EndGameMenu.fxml"));
                 System.exit(0);
 
             }
@@ -397,15 +420,16 @@ public class GameController implements Initializable {
                             ImageView img = new ImageView(new Image("greenOrc.png"));
                             g.setOrcImage(img);
                             gameObjectsPane.getChildren().add(img);
-                            g.setyVelocity(-0.5);
+                            g.setyVelocity(-0.3);
+                            System.out.println("Gave green orc velocity");
                             //System.out.println("making greenOrc");
                         } else if (gameObject instanceof RedOrc) {
                             RedOrc g = (RedOrc) gameObject;
                             ImageView img = new ImageView(new Image("redOrc.jpeg"));
                             g.setOrcImage(img);
                             gameObjectsPane.getChildren().add(img);
-                            g.setyVelocity(-0.5);
-
+                            g.setyVelocity(-0.3);
+                            System.out.println("Gave red orc velocity");
 
                             //System.out.println("making redOrc");
 
@@ -460,6 +484,8 @@ public class GameController implements Initializable {
             double v = game.getHero().getyVelocity() + game.getGravity() * frameTimeInMillis;
             game.getHero().setyVelocity(v);
             for(Orc x : game.getOrcList()){
+                if(!x.isStaged())
+                    continue;
                 double so = x.getyVelocity() * frameTimeInMillis + frameTimeInMillis * frameTimeInMillis * game.getGravity() / 2;
                 x.translateSolidY(so);
                 x.translateSolidX(x.getxVelocity() * frameTimeInMillis);

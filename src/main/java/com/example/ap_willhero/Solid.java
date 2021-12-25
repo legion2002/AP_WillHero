@@ -1,6 +1,8 @@
 package com.example.ap_willhero;
 
-public abstract class Solid {
+import java.io.Serializable;
+
+public abstract class Solid implements Serializable {
     private Position pos;
     private double height;
     private double width;
@@ -64,7 +66,7 @@ public abstract class Solid {
     }
 
     public int hasCollided(Solid s){
-        int offset = 15;
+        int offset = 12;
         int heroLeft = (int)getPos().getxPos();
         int heroRight = (int) (heroLeft + getWidth());
         int heroTop = (int)getPos().getyPos();
@@ -96,7 +98,8 @@ public abstract class Solid {
         //Everything else if a rectangle/square -> no explicit checking
 //        offset = 8;
         //Collision with left of solid
-        if(heroRight > (solidLeft - offset) && heroRight < (solidLeft + offset)) {
+        if(heroRight > (solidLeft - offset) && heroRight < (solidLeft + offset) &&
+                (((heroTop > solidTop - offset) && (heroTop < solidBottom + offset)) || (((heroBottom > solidTop - offset) && (heroBottom < solidBottom+ offset))))) {
             System.out.println("Collision with left of solid");
             return 1;
         }
@@ -115,7 +118,8 @@ public abstract class Solid {
         }
 
         //Collision with right of solid
-        else if(heroLeft < (solidRight + offset) && heroLeft > (solidRight - offset)) {
+        else if((heroLeft < (solidRight + offset) && heroLeft > (solidRight - offset)) &&
+                (((heroTop > solidTop - offset) && (heroTop < solidBottom + offset)) || (((heroBottom > solidTop - offset) && (heroBottom < solidBottom+ offset))))){
             System.out.println("Collision with right of solid");
             return 3;
         }

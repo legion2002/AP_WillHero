@@ -1,6 +1,8 @@
 package com.example.ap_willhero;
 
-public class Knives {
+import java.io.Serializable;
+
+public class Knives implements Serializable {
     int lifeTime;
 
     public Knives(){

@@ -2,9 +2,11 @@ package com.example.ap_willhero;
 
 import javafx.scene.image.ImageView;
 
-public class Orc extends Solid implements Collidable{
+import java.io.Serializable;
 
-    private ImageView orcImage;
+public class Orc extends Solid implements Collidable, Serializable{
+
+    transient private ImageView orcImage;
     private int coinsReleased;
     private int health;
     private boolean isStaged;
@@ -74,7 +76,7 @@ public class Orc extends Solid implements Collidable{
     public void collidesWith(Solid s, int collideVal) {
 
         if(s instanceof Platform && collideVal == 2){
-            this.setyVelocity(-0.5);
+            this.setyVelocity(-0.3);
         }
 
 

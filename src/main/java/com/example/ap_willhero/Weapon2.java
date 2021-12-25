@@ -1,6 +1,8 @@
 package com.example.ap_willhero;
 
-public class Weapon2 extends Weapon{
+import java.io.Serializable;
+
+public class Weapon2 extends Weapon implements Serializable {
     public Weapon2(){
 
     }

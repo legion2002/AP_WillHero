@@ -1,6 +1,8 @@
 package com.example.ap_willhero;
 
-public class WeaponChest extends TreasureChest{
+import java.io.Serializable;
+
+public class WeaponChest extends TreasureChest implements Serializable {
     WeaponChest(double x, double y) {
         super(x, y);
     }

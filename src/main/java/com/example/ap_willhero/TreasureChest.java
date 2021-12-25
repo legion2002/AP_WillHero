@@ -2,11 +2,13 @@ package com.example.ap_willhero;
 
 import javafx.scene.image.ImageView;
 
-public class TreasureChest extends Solid {
-    private ImageView chestImage;
+import java.io.Serializable;
+
+public class TreasureChest extends Solid implements Serializable {
+    transient private ImageView chestImage;
     private boolean isStaged;
-    final static int chestHeight = 55;
-    final static int chestWidth = 74;
+    transient final static int chestHeight = 55;
+    transient final static int chestWidth = 74;
 
     @Override
     public boolean isStaged() {

@@ -1,6 +1,8 @@
 package com.example.ap_willhero;
 
-public class Shurikens {
+import java.io.Serializable;
+
+public class Shurikens implements Serializable {
     int lifeTime;
 
     public Shurikens(){

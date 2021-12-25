@@ -1,6 +1,8 @@
 package com.example.ap_willhero;
 
-public class Helmet {
+import java.io.Serializable;
+
+public class Helmet implements Serializable {
     public Helmet(){
 
     }

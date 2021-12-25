@@ -1,6 +1,8 @@
 package com.example.ap_willhero;
 
-public class Position {
+import java.io.Serializable;
+
+public class Position implements Serializable {
     private double xPos;
     private double yPos;
 

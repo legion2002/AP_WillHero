@@ -3,9 +3,11 @@ package com.example.ap_willhero;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
-public class Platform extends Solid {
-    ImageView platformImage;
-    Rectangle basePlatform;
+import java.io.Serializable;
+
+public class Platform extends Solid implements Serializable {
+    transient ImageView platformImage;
+    transient Rectangle basePlatform;
     private boolean isStaged;
 
     public Rectangle getBasePlatform() {
