@@ -1,5 +1,6 @@
 package com.example.ap_willhero;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -36,6 +37,12 @@ public class Game implements Serializable {
 
     public void setGravity(double gravity) {
         this.gravity = gravity;
+    }
+    public void killHero(){
+        System.out.println("Hero is Dead");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EndGameMenu.fxml"));
+        System.exit(0);
+
     }
 
     public Game(GameController gc, ImageView heroImage) {

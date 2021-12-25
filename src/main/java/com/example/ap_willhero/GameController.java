@@ -45,11 +45,6 @@ public class GameController implements Initializable {
     @FXML
     private ImageView heroImage = new ImageView();
 
-    @FXML
-    private ImageView greenOrc = new ImageView();
-
-    @FXML
-    private ImageView redOrc = new ImageView();
 
     @FXML
     private Label currrentLocationLabel = new Label();
@@ -64,15 +59,6 @@ public class GameController implements Initializable {
     @FXML
     private Button pauseMenuButton = new Button();
 
-    @FXML
-    private TranslateTransition heroMoving = new TranslateTransition();
-
-//    @FXML
-//    private TranslateTransition orcMoving = new TranslateTransition();
-
-    @FXML
-    private TranslateTransition platformMoving = new TranslateTransition();
-
 
     @FXML
     private FadeTransition menuDisappearing = new FadeTransition();
@@ -80,8 +66,6 @@ public class GameController implements Initializable {
     @FXML
     private FadeTransition pauseMenuAppearing = new FadeTransition();
 
-    @FXML
-    private ImageView floatingPlatform = new ImageView();
 
     @FXML
     private RotateTransition rotatingShuriken = new RotateTransition();
@@ -92,8 +76,6 @@ public class GameController implements Initializable {
     @FXML
     private TranslateTransition movingShuriken = new TranslateTransition();
 
-    @FXML
-    private Button fullScreenButton = new Button();
 
     @FXML
     private Pane loadGameMenu = new Pane();
@@ -110,30 +92,6 @@ public class GameController implements Initializable {
 
     @FXML
     private Pane MainMenu = new Pane();
-
-    @FXML
-    private TranslateTransition coinAnimationTranslate = new TranslateTransition();
-
-    @FXML
-    private ImageView coin1 = new ImageView();
-
-    @FXML
-    private ImageView coin2 = new ImageView();
-
-    @FXML
-    private ImageView coin3 = new ImageView();
-
-    @FXML
-    private HBox threeCoinsBox = new HBox();
-
-    @FXML
-    private ImageView obstacle1 = new ImageView();
-    @FXML
-    private ImageView obstacle2 = new ImageView();
-    @FXML
-    private ImageView obstacle3 = new ImageView();
-    @FXML
-    private ImageView obstacle4 = new ImageView();
 
     @FXML
     private Pane staticPane = new Pane();
@@ -155,14 +113,11 @@ public class GameController implements Initializable {
     private int currLocation;
 
     private Game game;
-
-    private int reachHeight;
-
     private Stage stage;
     private Scene currScene;
+    private KeyFrame master;
+    private KeyFrame heroStep;
 
-    private boolean goingUp;
-    private boolean pauseMotion;
 
     private ArrayList<String> savedGameSlots = new ArrayList<>();
     private int overWrite;
@@ -200,8 +155,15 @@ public class GameController implements Initializable {
     }
 
     public void setUpGame() {
+
+        this.game = new Game(this, heroImage);
+
+        game.getHero().setHeroImage(heroImage);
+        root.getChildren().remove(loadGameMenu);
+        root.getChildren().remove(pauseGameMenu);
         createPlatformList();
         game.generateGameObjects();
+        this.currLocation = 0;
 
     }
 
@@ -213,9 +175,8 @@ public class GameController implements Initializable {
         try {
             out = new ObjectOutputStream(new FileOutputStream(filename));
             out.writeObject(game); //Storing game
-            overWrite ++;
-            if(overWrite == 4)
-                overWrite = 1;
+            overWrite++;
+            if (overWrite == 4) overWrite = 1;
 
         } finally {
             out.close();
@@ -225,49 +186,6 @@ public class GameController implements Initializable {
 
     public Label getCoinsCollectedLabel() {
         return this.coinsCollectedLabel;
-    }
-
-    public Game getGame() {
-        return this.game;
-    }
-
-
-    public void removeFallingPlatformNode(ImageView node) {
-        gameRoot.getChildren().remove(node);
-    }
-
-    public void nodeFalling(ImageView node) {
-        TranslateTransition fallNode = new TranslateTransition();
-        fallNode.setByY(node.getY() + 500);
-        fallNode.setDuration(Duration.millis(2500));
-        fallNode.setNode(node);
-        fallNode.setOnFinished(e -> removeFallingPlatformNode(node));
-
-        fallNode.play();
-
-
-    }
-
-    public void startFallingPlatformAnimation() {
-        PauseTransition pause1 = new PauseTransition();
-        PauseTransition pause2 = new PauseTransition();
-        PauseTransition pause3 = new PauseTransition();
-
-        pause1.setDuration(Duration.millis(500));
-        pause2.setDuration(Duration.millis(1000));
-        pause3.setDuration(Duration.millis(1500));
-
-
-        nodeFalling(obstacle1);
-
-        pause1.play();
-        pause1.setOnFinished(e -> nodeFalling(obstacle2));
-        pause2.play();
-        pause2.setOnFinished(e -> nodeFalling(obstacle3));
-        pause3.play();
-        pause3.setOnFinished(e -> nodeFalling(obstacle4));
-
-
     }
 
     public void onPlayGameClick() {
@@ -285,14 +203,6 @@ public class GameController implements Initializable {
 
     }
 
-    public void coinAnimation() {
-        coinAnimationTranslate.setByY(coin1.getY() - 10);
-        coinAnimationTranslate.setDuration(Duration.millis(800));
-        coinAnimationTranslate.setCycleCount(500);
-        coinAnimationTranslate.setAutoReverse(true);
-        coinAnimationTranslate.setNode(threeCoinsBox);
-        coinAnimationTranslate.play();
-    }
 
     public void shootShurikenBullet() {
         Image bullet = new Image("shurikenBullet.png");
@@ -308,36 +218,10 @@ public class GameController implements Initializable {
 
     public void removeMenu() {
         root.getChildren().remove(MainMenu);
-        startFallingPlatformAnimation();
 
 
     }
 
-    public AnchorPane getGameRoot() {
-        return this.gameRoot;
-    }
-
-    public void moveOrc(ImageView orc, double time) {
-        TranslateTransition orcMoving = new TranslateTransition();
-        orcMoving.setByY(orc.getY() - 100);
-        orcMoving.setDuration(Duration.millis(time));
-        orcMoving.setCycleCount(200);
-        orcMoving.setAutoReverse(true);
-        orcMoving.setNode(orc);
-        orcMoving.play();
-
-    }
-
-    public void movePlatform() {
-        platformMoving.setByY(floatingPlatform.getY() - 20);
-        platformMoving.setDuration(Duration.millis(3000));
-        platformMoving.setCycleCount(200);
-        platformMoving.setAutoReverse(true);
-        platformMoving.setNode(floatingPlatform);
-        platformMoving.play();
-
-
-    }
 
     public void removeWeapon() {
         root.getChildren().remove(shurikenBullet);
@@ -364,8 +248,7 @@ public class GameController implements Initializable {
 
     public void displayPauseMenu() {
 
-        heroMoving.pause();
-        platformMoving.pause();
+
         root.getChildren().add(pauseGameMenu);
 
 
@@ -389,163 +272,195 @@ public class GameController implements Initializable {
 
     }
 
+    public void setUpHeroStepKeyFrame(int refreshTime, int animationTime){
+        heroStep = new KeyFrame(Duration.millis(refreshTime), e -> {
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.game = new Game(this, heroImage);
-        game.getHero().setHeroImage(heroImage);
-        root.getChildren().remove(loadGameMenu);
-        root.getChildren().remove(pauseGameMenu);
-        setUpGame();
-//        game.getHero().checkCollisionWithPlatform();
-        Timeline timeline = new Timeline();
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        goingUp = false;
-        int countOrc = 0;
-        int frameTimeInMillis = 40;
-        KeyFrame collision = new KeyFrame(Duration.millis(frameTimeInMillis), e -> {
-            if (game.getHero().isDead(game.getAbyssLevel())) {
-                // Start Endgame Menu Here #DIKSHA
-                System.out.println("Hero is Dead");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("EndGameMenu.fxml"));
-                System.exit(0);
+            game.getHero().setyVelocity(0);
+            double savedGravity = game.getGravity();
+            game.setGravity(0);
 
+            for (Solid x : game.getSolidList()) {
+                x.translateSolidX(-game.getHero().getStepSize() * refreshTime / animationTime);
             }
-            int offset = 5;
-            for (Solid gameObject : game.getSolidList()) {
-                if (gameObject.getPos().getxPos() + gameObject.getWidth() < 0) {
-                    //Removing Old Objects
-                    if (gameObject instanceof Platform) {
-                        game.getPlatformList().remove(gameObject);
-                    } else if (gameObject instanceof Orc) {
-                        game.getOrcList().remove(gameObject);
-                    }
-//                  Try iterating over this
-//                    game.getSolidList().remove(gameObject);
-                }
-                if (gameObject.getPos().getxPos() <= 2048 && gameObject.getPos().getxPos() > 0) {
-                    //Staging Area
-
-                    if (!gameObject.isStaged()) {
-
-
-                        if (gameObject instanceof GreenOrc) {
-                            GreenOrc g = (GreenOrc) gameObject;
-                            ImageView img = new ImageView(new Image("greenOrc.png"));
-                            g.setOrcImage(img);
-                            gameObjectsPane.getChildren().add(img);
-                            g.setyVelocity(-0.3);
-                            System.out.println("Gave green orc velocity");
-                            //System.out.println("making greenOrc");
-                        } else if (gameObject instanceof RedOrc) {
-                            RedOrc g = (RedOrc) gameObject;
-                            ImageView img = new ImageView(new Image("redOrc.jpeg"));
-                            g.setOrcImage(img);
-                            gameObjectsPane.getChildren().add(img);
-                            g.setyVelocity(-0.3);
-                            System.out.println("Gave red orc velocity");
-
-                            //System.out.println("making redOrc");
-
-                        } else if (gameObject instanceof TreasureChest) {
-
-                            TreasureChest t = (TreasureChest) gameObject;
-                            ImageView img = new ImageView(new Image("chestClosed.png"));
-                            t.setChestImage(img);
-                            gameObjectsPane.getChildren().add(img);
-                            //System.out.println("making treasure chest");
-
-                        } else if (gameObject instanceof Platform) {
-                            Platform p = (Platform) gameObject;
-                            p.getBasePlatform().setOpacity(0);
-                            ImageView img;
-                            if (p.getWidth() >= 350) {
-                                img = new ImageView(new Image("longPlatform.png"));
-
-                            } else if (p.getWidth() > 200 && p.getWidth() < 350) {
-                                img = new ImageView(new Image("fatPlatform.png"));
-                            } else {
-                                img = new ImageView(new Image("normalPlatform.png"));
-                            }
-                            p.setPlatformImage(img);
-                            gameObjectsPane.getChildren().add(img);
-
-
-                        }
-
-
-                        gameObject.setStaged(true);
-                    }
-                }
-                if (gameObject.getPos().getxPos() <= 2048) {
-                    //Collision Here
-                    //Only Hero and Orc are collidable, rest check with Solids
-                    int collideVal = game.getHero().hasCollided(gameObject);
-                    if (collideVal > 0) {
-                        game.getHero().collidesWith(gameObject, collideVal);
-                    }
-                    for(Orc x : game.getOrcList()){
-                        collideVal = x.hasCollided(gameObject);
-                        if(collideVal > 0){
-                            x.collidesWith(gameObject,collideVal);
-                        }
-                    }
-                }
+            for (Node x : gameObjectsPane.getChildren()) {
+                x.setLayoutX(x.getLayoutX() - game.getHero().getStepSize() * refreshTime / animationTime);
             }
-
-            double s = game.getHero().getyVelocity() * frameTimeInMillis + frameTimeInMillis * frameTimeInMillis * game.getGravity() / 2;
-            game.getHero().translateSolidY(s);
-            double v = game.getHero().getyVelocity() + game.getGravity() * frameTimeInMillis;
-            game.getHero().setyVelocity(v);
-//            game.getHero().translateSolidX(frameTimeInMillis * game.getHero().getxVelocity());
-            for(Orc x : game.getOrcList()){
-                if(!x.isStaged()){
-                    continue;
-                }
-
-                double so = x.getyVelocity() * frameTimeInMillis + frameTimeInMillis * frameTimeInMillis * game.getGravity() / 2;
-                x.translateSolidY(so);
-                x.translateSolidX(x.getxVelocity() * frameTimeInMillis);
-                double vo = x.getyVelocity() + game.getGravity() * frameTimeInMillis;
-                x.setyVelocity(vo);
-
-            }
+            game.setGravity(savedGravity);
+//                    game.getHero().setxVelocity(0);
         });
-        timeline.getKeyFrames().add(collision);
-        timeline.play();
-        currLocation = 0;
+
+    }
+    public void setUpGeneralClick() {
 
         onGeneralClick = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                int animationTime = 100;
                 int refreshTime = 5;
+                int animationTime = 100;
+                setUpHeroStepKeyFrame(5, 100);
                 Timeline movingHero = new Timeline();
                 movingHero.setCycleCount(animationTime / refreshTime);
-
-
-                KeyFrame moveHero = new KeyFrame(Duration.millis(refreshTime), e -> {
-
-                    game.getHero().setyVelocity(0);
-                    double savedGravity = game.getGravity();
-                    game.setGravity(0);
-
-                    for (Solid x : game.getSolidList()) {
-                        x.translateSolidX(-game.getHero().getStepSize() * refreshTime / animationTime);
-                    }
-                    for (Node x : gameObjectsPane.getChildren()) {
-                        x.setLayoutX(x.getLayoutX() - game.getHero().getStepSize() * refreshTime / animationTime);
-                    }
-                    game.setGravity(savedGravity);
-//                    game.getHero().setxVelocity(0);
-                });
-
-                movingHero.getKeyFrames().add(moveHero);
+                movingHero.getKeyFrames().add(heroStep);
                 movingHero.play();
                 currLocation++;
                 currrentLocationLabel.setText(Integer.toString(currLocation));
             }
         };
+    }
+
+    public void checkHeroLife() {
+        if (game.getHero().isDead(game.getAbyssLevel())) {
+            game.killHero();
+        }
+
+    }
+
+    public void garbageArea(Solid gameObject) {
+        //Removing Old Objects
+        if (gameObject instanceof Platform) {
+            game.getPlatformList().remove(gameObject);
+        } else if (gameObject instanceof Orc) {
+            game.getOrcList().remove(gameObject);
+        }
+//                  Try iterating over this
+//                    game.getSolidList().remove(gameObject);
+
+    }
+
+    public void stagingArea(Solid gameObject) {
+        //Staging Area
+
+        if (!gameObject.isStaged()) {
+
+
+            if (gameObject instanceof GreenOrc) {
+                GreenOrc g = (GreenOrc) gameObject;
+                ImageView img = new ImageView(new Image("greenOrc.png"));
+                g.setOrcImage(img);
+                gameObjectsPane.getChildren().add(img);
+                g.setyVelocity(-0.3);
+                System.out.println("Gave green orc velocity");
+                //System.out.println("making greenOrc");
+            } else if (gameObject instanceof RedOrc) {
+                RedOrc g = (RedOrc) gameObject;
+                ImageView img = new ImageView(new Image("redOrc.jpeg"));
+                g.setOrcImage(img);
+                gameObjectsPane.getChildren().add(img);
+                g.setyVelocity(-0.3);
+                System.out.println("Gave red orc velocity");
+
+                //System.out.println("making redOrc");
+
+            } else if (gameObject instanceof TreasureChest) {
+
+                TreasureChest t = (TreasureChest) gameObject;
+                ImageView img = new ImageView(new Image("chestClosed.png"));
+                t.setChestImage(img);
+                gameObjectsPane.getChildren().add(img);
+                //System.out.println("making treasure chest");
+
+            } else if (gameObject instanceof Platform) {
+                Platform p = (Platform) gameObject;
+                p.getBasePlatform().setOpacity(0);
+                ImageView img;
+                if (p.getWidth() >= 350) {
+                    img = new ImageView(new Image("longPlatform.png"));
+
+                } else if (p.getWidth() > 200 && p.getWidth() < 350) {
+                    img = new ImageView(new Image("fatPlatform.png"));
+                } else {
+                    img = new ImageView(new Image("normalPlatform.png"));
+                }
+                p.setPlatformImage(img);
+                gameObjectsPane.getChildren().add(img);
+
+
+            }
+
+
+            gameObject.setStaged(true);
+        }
+
+
+    }
+
+    public void collisionArea(Solid gameObject) {
+        //Collision Here
+        //Only Hero and Orc are collidable, rest check with Solids
+        int collideVal = game.getHero().hasCollided(gameObject);
+        if (collideVal > 0) {
+            game.getHero().collidesWith(gameObject, collideVal);
+        }
+        for (Orc x : game.getOrcList()) {
+            collideVal = x.hasCollided(gameObject);
+            if (collideVal > 0) {
+                x.collidesWith(gameObject, collideVal);
+            }
+        }
+    }
+
+    public void physicsHero(int frameTimeInMillis) {
+        double s = game.getHero().getyVelocity() * frameTimeInMillis + frameTimeInMillis * frameTimeInMillis * game.getGravity() / 2;
+        game.getHero().translateSolidY(s);
+        double v = game.getHero().getyVelocity() + game.getGravity() * frameTimeInMillis;
+        game.getHero().setyVelocity(v);
+    }
+
+    public void physicsOrc(Orc x, int frameTimeInMillis) {
+        double so = x.getyVelocity() * frameTimeInMillis + frameTimeInMillis * frameTimeInMillis * game.getGravity() / 2;
+        x.translateSolidY(so);
+        x.translateSolidX(x.getxVelocity() * frameTimeInMillis);
+        double vo = x.getyVelocity() + game.getGravity() * frameTimeInMillis;
+        x.setyVelocity(vo);
+    }
+
+    public void physicsEngine(int frameTimeInMillis) {
+
+        physicsHero(frameTimeInMillis);
+        for (Orc x : game.getOrcList()) {
+            if (x.isStaged()) {
+                physicsOrc(x, frameTimeInMillis);
+            }
+
+
+        }
+
+    }
+
+    public void setUpMasterKeyFrame() {
+        int frameTimeInMillis = 40;
+        master = new KeyFrame(Duration.millis(frameTimeInMillis), e -> {
+            checkHeroLife();
+
+
+            for (Solid gameObject : game.getSolidList()) {
+                if (gameObject.getPos().getxPos() + gameObject.getWidth() < 0) {
+                    garbageArea(gameObject);
+                }
+                if (gameObject.getPos().getxPos() <= 2048 && gameObject.getPos().getxPos() > 0) {
+                    stagingArea(gameObject);
+                }
+                if (gameObject.getPos().getxPos() <= 2048) {
+                    collisionArea(gameObject);
+
+                }
+            }
+            physicsEngine(frameTimeInMillis);
+
+
+        });
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        setUpGame();
+        setUpGeneralClick();
+        setUpMasterKeyFrame();
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.getKeyFrames().add(master);
+        timeline.play();
         staticPane.setOnMouseClicked(onGeneralClick);
     }
 }
