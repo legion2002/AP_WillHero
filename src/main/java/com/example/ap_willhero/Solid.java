@@ -96,7 +96,7 @@ public abstract class Solid implements Serializable {
         }
 
         //Everything else if a rectangle/square -> no explicit checking
-//        offset = 8;
+        offset = 12;
         //Collision with left of solid
         if(heroRight > (solidLeft - offset) && heroRight < (solidLeft + offset) &&
                 (((heroTop > solidTop - offset) && (heroTop < solidBottom + offset)) || (((heroBottom > solidTop - offset) && (heroBottom < solidBottom+ offset))))) {

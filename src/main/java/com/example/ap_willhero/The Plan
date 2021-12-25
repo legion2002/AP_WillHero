@@ -1,0 +1,10 @@
+Flow of doing work -
+1) Clean up the game controller class and put everything in functions, remove excess functions
+2) Make generateObstacles for falling platform
+3) function killHero present in gameClass
+4) function killOrc present in gameClass
+5) Weapons working
+6) Serializable
+7) Make x axis acceleration for orcs
+7) Figure out removing from solid list
+8)

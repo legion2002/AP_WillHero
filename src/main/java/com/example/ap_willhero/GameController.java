@@ -497,9 +497,12 @@ public class GameController implements Initializable {
             game.getHero().translateSolidY(s);
             double v = game.getHero().getyVelocity() + game.getGravity() * frameTimeInMillis;
             game.getHero().setyVelocity(v);
+//            game.getHero().translateSolidX(frameTimeInMillis * game.getHero().getxVelocity());
             for(Orc x : game.getOrcList()){
-                if(!x.isStaged())
+                if(!x.isStaged()){
                     continue;
+                }
+
                 double so = x.getyVelocity() * frameTimeInMillis + frameTimeInMillis * frameTimeInMillis * game.getGravity() / 2;
                 x.translateSolidY(so);
                 x.translateSolidX(x.getxVelocity() * frameTimeInMillis);
@@ -520,11 +523,13 @@ public class GameController implements Initializable {
                 Timeline movingHero = new Timeline();
                 movingHero.setCycleCount(animationTime / refreshTime);
 
+
                 KeyFrame moveHero = new KeyFrame(Duration.millis(refreshTime), e -> {
 
                     game.getHero().setyVelocity(0);
                     double savedGravity = game.getGravity();
                     game.setGravity(0);
+
                     for (Solid x : game.getSolidList()) {
                         x.translateSolidX(-game.getHero().getStepSize() * refreshTime / animationTime);
                     }
@@ -532,6 +537,7 @@ public class GameController implements Initializable {
                         x.setLayoutX(x.getLayoutX() - game.getHero().getStepSize() * refreshTime / animationTime);
                     }
                     game.setGravity(savedGravity);
+//                    game.getHero().setxVelocity(0);
                 });
 
                 movingHero.getKeyFrames().add(moveHero);

@@ -58,7 +58,7 @@ public class TreasureChest extends Solid implements Serializable {
     }
 
     public void doChestAnimation(){
-        /*
+
         Timeline chestAnimation = new Timeline();
         chestAnimation.setCycleCount(4);
         chestAnimation.setAutoReverse(false);
@@ -70,18 +70,9 @@ public class TreasureChest extends Solid implements Serializable {
             setChestImage(new ImageView(new Image(chestImageName)));
             chestNumber++;
         });
+
         chestAnimation.getKeyFrames().add(changeImage);
         chestAnimation.play();
-
-         */
-        String imageName = "chestStage";
-        chestNumber = 2;
-        for(int i = 0; i < 5; i++){
-            String chestImageName = imageName + String.valueOf(chestNumber) + ".png";
-            System.out.println(chestImageName);
-            setChestImage(new ImageView(new Image(chestImageName)));
-            chestNumber++;
-        }
 
     }
 

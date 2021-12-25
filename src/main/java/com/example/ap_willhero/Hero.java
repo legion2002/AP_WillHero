@@ -185,18 +185,33 @@ public class Hero extends Solid implements Collidable, Serializable {
             }
         }
 
-        if(s instanceof Platform && collideVal == 2){
-            this.setyVelocity(-0.5);
+        if(s instanceof Platform ){
+            if(collideVal == 2){
+                this.setyVelocity(-0.5);
+                this.setxVelocity(0);
+            }
+            else if (collideVal == 1){
+                this.setyVelocity(-0.2);
+                this.setxVelocity(0);
+            }
+            else if(collideVal == 4){
+                System.out.println("HERO CAME UNDER PLATFORM");
+                System.exit(0);
+            }
+
         }
         if(s instanceof Orc){
             if(collideVal == 1){
                 //make colliding with left here
-//                this.setxVelocity(-this.getxVelocity()/2);
-//                s.setxVelocity(this.getxVelocity()/2);
+                System.out.println("COLLIDED WITH LEFT OF ORCCCCC");
+                System.out.println("Hero X velocity is " + this.getxVelocity());
+                this.setxVelocity(-this.getxVelocity()/2);
+                this.setyVelocity(0);
+                s.setxVelocity(0.5/2);
 
             }
             else if(collideVal == 2){
-                this.setyVelocity((-0.5));
+                this.setyVelocity((-0.2));
             }
             else if(collideVal == 4){
                 System.out.println("HERO CAME UNDER ORC");
@@ -205,9 +220,9 @@ public class Hero extends Solid implements Collidable, Serializable {
         }
 
         if(s instanceof TreasureChest){
-            System.out.println("HELLOOOOOOOOOOOOOOO");
-            ((TreasureChest)s).doChestAnimation();
-            game.removeSolid(s);
+            System.out.println("do chest animation here");
+//            ((TreasureChest)s).doChestAnimation();
+//            game.removeSolid(s);
 
         }
 
