@@ -45,7 +45,7 @@ public class Game implements Serializable {
         this.gameController = gc;
         this.abyssLevel = 500;
         this.totalLocations = 122;
-        this.gravity = 0.001;
+        this.gravity = 0.0008;
         System.out.println("Image Position is: " + heroImage.getLayoutX() + " " + heroImage.getLayoutY());
 
         hero = new Hero(this, heroImage);

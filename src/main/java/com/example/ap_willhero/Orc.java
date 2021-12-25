@@ -70,14 +70,17 @@ public class Orc extends Solid implements Collidable{
         setPos(new Position(getPos().getxPos(), getPos().getyPos() + i));
     }
 
-
-    @Override
-    public int hasCollided(Solid s) {
-        return 0;
-    }
-
     @Override
     public void collidesWith(Solid s, int collideVal) {
 
+        if(s instanceof Platform && collideVal == 2){
+            this.setyVelocity(-0.5);
+        }
+
+
+
+
+
     }
+
 }

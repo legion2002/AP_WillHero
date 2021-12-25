@@ -146,8 +146,6 @@ public class GameController implements Initializable {
     private Pane gameObjectsPane = new Pane();
 
 
-
-
     private int currLocation;
 
     private Game game;
@@ -183,7 +181,7 @@ public class GameController implements Initializable {
             out = new ObjectOutputStream(new FileOutputStream("StoringGame.txt"));
             out.writeObject(test); //Storing game
             out.writeObject(test2);
-        }finally {
+        } finally {
             out.close();
         }
         System.out.println("Done serialising");
@@ -341,13 +339,13 @@ public class GameController implements Initializable {
         root.getChildren().add(loadGameMenu);
     }
 
-    public Pane getGameObjectsPane(){
+    public Pane getGameObjectsPane() {
         return this.gameObjectsPane;
     }
 
-    public void savingGame(){
+    public void savingGame() {
         System.out.println("Saving this game");
-        try{
+        try {
             serialize();
         } catch (IOException e) {
             e.printStackTrace();
@@ -394,22 +392,24 @@ public class GameController implements Initializable {
                     if (!gameObject.isStaged()) {
 
 
-
                         if (gameObject instanceof GreenOrc) {
                             GreenOrc g = (GreenOrc) gameObject;
                             ImageView img = new ImageView(new Image("greenOrc.png"));
                             g.setOrcImage(img);
                             gameObjectsPane.getChildren().add(img);
+                            g.setyVelocity(-0.5);
                             //System.out.println("making greenOrc");
                         } else if (gameObject instanceof RedOrc) {
                             RedOrc g = (RedOrc) gameObject;
                             ImageView img = new ImageView(new Image("redOrc.jpeg"));
                             g.setOrcImage(img);
                             gameObjectsPane.getChildren().add(img);
+                            g.setyVelocity(-0.5);
+
 
                             //System.out.println("making redOrc");
 
-                        }  else if (gameObject instanceof TreasureChest) {
+                        } else if (gameObject instanceof TreasureChest) {
 
                             TreasureChest t = (TreasureChest) gameObject;
                             ImageView img = new ImageView(new Image("chestClosed.png"));
@@ -421,20 +421,16 @@ public class GameController implements Initializable {
                             Platform p = (Platform) gameObject;
                             p.getBasePlatform().setOpacity(0);
                             ImageView img;
-                            if(p.getWidth() >= 350){
+                            if (p.getWidth() >= 350) {
                                 img = new ImageView(new Image("longPlatform.png"));
 
-                            }
-                            else if( p.getWidth() > 200 && p.getWidth() < 350){
+                            } else if (p.getWidth() > 200 && p.getWidth() < 350) {
                                 img = new ImageView(new Image("fatPlatform.png"));
-                            }
-                            else{
+                            } else {
                                 img = new ImageView(new Image("normalPlatform.png"));
                             }
                             p.setPlatformImage(img);
                             gameObjectsPane.getChildren().add(img);
-                            //System.out.println("making Platform");
-
 
 
                         }
@@ -447,48 +443,44 @@ public class GameController implements Initializable {
                     //Collision Here
                     //Only Hero and Orc are collidable, rest check with Solids
                     int collideVal = game.getHero().hasCollided(gameObject);
-                    if(collideVal > 0 ){
+                    if (collideVal > 0) {
                         game.getHero().collidesWith(gameObject, collideVal);
                     }
-
-
-
+                    for(Orc x : game.getOrcList()){
+                        collideVal = x.hasCollided(gameObject);
+                        if(collideVal > 0){
+                            x.collidesWith(gameObject,collideVal);
+                        }
+                    }
                 }
+            }
 
-
-
+            double s = game.getHero().getyVelocity() * frameTimeInMillis + frameTimeInMillis * frameTimeInMillis * game.getGravity() / 2;
+            game.getHero().translateSolidY(s);
+            double v = game.getHero().getyVelocity() + game.getGravity() * frameTimeInMillis;
+            game.getHero().setyVelocity(v);
+            for(Orc x : game.getOrcList()){
+                double so = x.getyVelocity() * frameTimeInMillis + frameTimeInMillis * frameTimeInMillis * game.getGravity() / 2;
+                x.translateSolidY(so);
+                x.translateSolidX(x.getxVelocity() * frameTimeInMillis);
+                double vo = x.getyVelocity() + game.getGravity() * frameTimeInMillis;
+                x.setyVelocity(vo);
 
             }
-//            System.out.println("Hero velocity: " + game.getHero().getyVelocity() + "Hero Position " + game.getHero().getPos().getyPos());
-
-            double s = game.getHero().getyVelocity()*frameTimeInMillis + frameTimeInMillis*frameTimeInMillis*game.getGravity()/2;
-//            System.out.println("s is " + s);
-            game.getHero().translateSolidY(s);
-            double v = game.getHero().getyVelocity() + game.getGravity()*frameTimeInMillis;
-//            System.out.println("v is " + v);
-
-            game.getHero().setyVelocity(v);
-
-
         });
         timeline.getKeyFrames().add(collision);
         timeline.play();
         currLocation = 0;
-        pauseMotion = false;
+
         onGeneralClick = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println("==================AFTER CLICK=============");
-                System.out.println("Hero Bottom: " + game.getHero().getPos().getyPos() + game.getHero().getHeight());
-
-
-                int animationTime = 40;
+                int animationTime = 100;
                 int refreshTime = 5;
                 Timeline movingHero = new Timeline();
                 movingHero.setCycleCount(animationTime / refreshTime);
 
                 KeyFrame moveHero = new KeyFrame(Duration.millis(refreshTime), e -> {
-                    pauseMotion = true;
 
                     game.getHero().setyVelocity(0);
                     double savedGravity = game.getGravity();
@@ -496,28 +488,14 @@ public class GameController implements Initializable {
                     for (Solid x : game.getSolidList()) {
                         x.translateSolidX(-game.getHero().getStepSize() * refreshTime / animationTime);
                     }
-
-
                     for (Node x : gameObjectsPane.getChildren()) {
                         x.setLayoutX(x.getLayoutX() - game.getHero().getStepSize() * refreshTime / animationTime);
-
                     }
-
-                    pauseMotion = false;
                     game.setGravity(savedGravity);
-
-
                 });
 
                 movingHero.getKeyFrames().add(moveHero);
                 movingHero.play();
-//                game.getHero().translateSolidX(100);
-//                for (Solid x : game.getSolidList()) {
-//                    x.translateSolidX(-100);
-//                }
-
-
-
                 currLocation++;
                 currrentLocationLabel.setText(Integer.toString(currLocation));
             }

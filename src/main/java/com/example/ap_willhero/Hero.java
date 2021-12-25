@@ -169,69 +169,7 @@ public class Hero extends Solid implements Collidable{
     }
 
 
-    @Override
-    public int hasCollided(Solid s){
-        int offset = 10;
-        int heroLeft = (int)getPos().getxPos();
-        int heroRight = (int) (heroLeft + getWidth());
-        int heroTop = (int)getPos().getyPos();
-        int heroBottom = (int)(heroTop + getHeight());
-        int solidLeft = (int)(s.getPos().getxPos());
-        int solidRight = (int)(solidLeft + s.getWidth());
-        int solidTop = (int)(s.getPos().getyPos());
-        int solidBottom =(int)( s.getPos().getyPos() + s.getHeight());
 
-
-        if(s instanceof Platform){
-
-            if(((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight))) {
-                System.out.println("Platform found below hero");
-                System.out.println("Hero Bottom: " + heroBottom);
-                System.out.println("Solid Left: " + solidLeft);
-                System.out.println("Solid Right: " + solidRight);
-                System.out.println("Solid Top: " + solidTop);
-
-
-                if ((heroBottom > (solidTop - offset) && heroBottom < solidTop + offset)) {
-                    System.out.println("Collision with top of platform");
-                    return 2; //Collision with top of platform
-                }
-            }
-
-        }
-
-        //Everything else if a rectangle/square -> no explicit checking
-        offset = 8;
-        //Collision with left of solid
-        if(heroRight > (solidLeft - offset) && heroRight < (solidLeft + offset)) {
-            System.out.println("Collision with left of solid");
-            return 1;
-        }
-        //Top of solid
-        else if(heroBottom > (solidTop - offset) && heroBottom < (solidTop + offset) &&
-                ((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight))) {
-            System.out.println("Collision with top of  solid");
-            //System.out.println("Object is " + s.getClass().getName());
-            return 2;
-        }
-        //Collision with bottom of solid
-        else if(heroTop < (solidBottom + offset) && heroTop > (solidBottom - offset) &&
-                ((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight))) {
-            System.out.println("Collision with bottom of  solid");
-            return 4;
-        }
-
-        //Collision with right of solid
-        else if(heroLeft < (solidRight + offset) && heroLeft > (solidRight - offset)) {
-            System.out.println("Collision with right of solid");
-            return 3;
-        }
-
-
-
-        //No collision
-        return 0;
-    }
 
     @Override
     public void collidesWith(Solid s, int collideVal) {
@@ -245,10 +183,23 @@ public class Hero extends Solid implements Collidable{
             }
         }
 
-        if(s instanceof Platform){
-//            System.out.println("Reached HERE");
+        if(s instanceof Platform && collideVal == 2){
             this.setyVelocity(-0.5);
-//            this.setyVelocity(-0.7);
+        }
+        if(s instanceof Orc){
+            if(collideVal == 1){
+                //make colliding with left here
+//                this.setxVelocity(-this.getxVelocity()/2);
+//                s.setxVelocity(this.getxVelocity()/2);
+
+            }
+            else if(collideVal == 2){
+                this.setyVelocity((-0.5));
+            }
+            else if(collideVal == 4){
+                System.out.println("HERO CAME UNDER ORC");
+                System.exit(0);
+            }
         }
 
 
