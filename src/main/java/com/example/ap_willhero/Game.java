@@ -22,6 +22,7 @@ public class Game implements Serializable {
     private ArrayList<Orc> OrcList;
     transient private GameController gameController;
 
+
     public ArrayList<Orc> getOrcList() {
         return OrcList;
     }
@@ -75,9 +76,11 @@ public class Game implements Serializable {
 
     public void removeSolid(Solid s){
         //SolidList.remove(s);
-        gameController.getGameObjectsPane().getChildren().remove(((Coin)s).getCoinImage());
+        if(s instanceof Coin)
+            gameController.getGameObjectsPane().getChildren().remove(((Coin)s).getCoinImage());
+        else if(s instanceof TreasureChest)
+            gameController.getGameObjectsPane().getChildren().remove(((TreasureChest)s).getChestImage());
     }
-
 
 
     public void generateOrc(int half, Platform platform){

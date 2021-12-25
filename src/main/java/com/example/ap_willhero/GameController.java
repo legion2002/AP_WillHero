@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
@@ -162,8 +164,14 @@ public class GameController implements Initializable {
     private boolean goingUp;
     private boolean pauseMotion;
 
-    public GameController() {
+    private ArrayList<String> savedGameSlots = new ArrayList<>();
+    private int overWrite;
 
+    public GameController() {
+        savedGameSlots.add("StoringGame1");
+        savedGameSlots.add("StoringGame2");
+        savedGameSlots.add("StoringGame3");
+        overWrite = 1;
     }
 
     public void createPlatformList() {
@@ -171,7 +179,7 @@ public class GameController implements Initializable {
 
             game.addPlatform(new Platform((Rectangle) platforms));
         }
-        
+
     }
 
 
@@ -199,10 +207,16 @@ public class GameController implements Initializable {
 
     public void serialize() throws IOException {
 
+        String filename = savedGameSlots.get(overWrite - 1);
+
         ObjectOutputStream out = null;
         try {
-            out = new ObjectOutputStream(new FileOutputStream("StoringGame.txt"));
+            out = new ObjectOutputStream(new FileOutputStream(filename));
             out.writeObject(game); //Storing game
+            overWrite ++;
+            if(overWrite == 4)
+                overWrite = 1;
+
         } finally {
             out.close();
         }

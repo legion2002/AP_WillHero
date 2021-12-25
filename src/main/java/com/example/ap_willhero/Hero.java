@@ -204,6 +204,13 @@ public class Hero extends Solid implements Collidable, Serializable {
             }
         }
 
+        if(s instanceof TreasureChest){
+            System.out.println("HELLOOOOOOOOOOOOOOO");
+            ((TreasureChest)s).doChestAnimation();
+            game.removeSolid(s);
+
+        }
+
 
 
 
