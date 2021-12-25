@@ -6,9 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Main extends Application {
+public class Main extends Application{
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Game.fxml"));
@@ -16,11 +20,10 @@ public class Main extends Application {
         Image icon = new Image("icon.png");
 //        scene.setOnKeyPressed(new GameController());
 
-//        GameController Controller = fxmlLoader.getController();
+        GameController Controller = fxmlLoader.getController();
         stage.getIcons().add(icon);
         stage.setTitle("Will Hero by Tanishk Goyal and Diksha Sethi");
         stage.setResizable(false);
-
 
         stage.setScene(scene);
         stage.show();

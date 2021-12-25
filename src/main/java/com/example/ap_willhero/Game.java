@@ -3,16 +3,17 @@ package com.example.ap_willhero;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Game {
+public class Game implements Serializable {
     private Hero hero;
     private int totalCoins;
 
 
     private double gravity;
-    Random rand = new Random();
+    transient Random rand = new Random();
 
     public float getAbyssLevel() {
         return abyssLevel;
@@ -30,7 +31,7 @@ public class Game {
     private ArrayList<Platform> PlatformList;
     private ArrayList<Solid> SolidList;
     private ArrayList<Orc> OrcList;
-    private GameController gameController;
+    transient private GameController gameController;
 
     public ArrayList<Orc> getOrcList() {
         return OrcList;

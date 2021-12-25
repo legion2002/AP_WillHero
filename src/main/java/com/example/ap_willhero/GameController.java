@@ -20,6 +20,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -142,6 +146,8 @@ public class GameController implements Initializable {
     private Pane gameObjectsPane = new Pane();
 
 
+
+
     private int currLocation;
 
     private Game game;
@@ -166,6 +172,21 @@ public class GameController implements Initializable {
         createPlatformList();
         game.generateGameObjects();
 
+    }
+
+    public void serialize() throws IOException {
+
+        ObjectOutputStream out = null;
+        TestingClass test = new TestingClass(1);
+        TestingClass test2 = new TestingClass(3);
+        try {
+            out = new ObjectOutputStream(new FileOutputStream("StoringGame.txt"));
+            out.writeObject(test); //Storing game
+            out.writeObject(test2);
+        }finally {
+            out.close();
+        }
+        System.out.println("Done serialising");
     }
 
     public Label getCoinsCollectedLabel() {
@@ -324,6 +345,16 @@ public class GameController implements Initializable {
         return this.gameObjectsPane;
     }
 
+    public void savingGame(){
+        System.out.println("Saving this game");
+        try{
+            serialize();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -412,7 +443,7 @@ public class GameController implements Initializable {
                         gameObject.setStaged(true);
                     }
                 }
-                if (gameObject.getPos().getxPos() >= 0 && gameObject.getPos().getxPos() <= 2048) {
+                if (gameObject.getPos().getxPos() <= 2048) {
                     //Collision Here
                     //Only Hero and Orc are collidable, rest check with Solids
                     int collideVal = game.getHero().hasCollided(gameObject);
