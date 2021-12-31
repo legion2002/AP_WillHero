@@ -1,5 +1,5 @@
 Flow of doing work -
-1) Clean up the game controller class and put everything in functions, remove excess functions
+
 2) Make generateObstacles for falling platform
 3) function killHero present in gameClass
 4) function killOrc present in gameClass

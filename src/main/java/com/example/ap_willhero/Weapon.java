@@ -10,7 +10,7 @@ public abstract class Weapon implements Serializable {
 
     }
 
-    public abstract void useWeapon();
+    public abstract void useWeapon(Game game);
 
     public void increaseLevel(){
         this.level++;

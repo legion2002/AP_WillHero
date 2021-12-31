@@ -8,7 +8,7 @@ public class Weapon2 extends Weapon implements Serializable {
     }
 
     @Override
-    public void useWeapon() {
+    public void useWeapon(Game g) {
 
     }
 

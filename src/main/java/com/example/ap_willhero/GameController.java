@@ -280,7 +280,11 @@ public class GameController implements Initializable {
             game.setGravity(0);
 
             for (Solid x : game.getSolidList()) {
-                x.translateSolidX(-game.getHero().getStepSize() * refreshTime / animationTime);
+                if(! (x instanceof Shurikens)){
+                    x.translateSolidX(-game.getHero().getStepSize() * refreshTime / animationTime);
+
+                }
+
             }
             for (Node x : gameObjectsPane.getChildren()) {
                 x.setLayoutX(x.getLayoutX() - game.getHero().getStepSize() * refreshTime / animationTime);
@@ -295,6 +299,11 @@ public class GameController implements Initializable {
         onGeneralClick = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                if(game.getHero().getEquippedWeapon() != null){
+                    Weapon currWeapon = game.getHero().getEquippedWeapon();
+                    currWeapon.useWeapon(game);
+
+                }
                 int refreshTime = 5;
                 int animationTime = 100;
                 setUpHeroStepKeyFrame(5, 100);
@@ -431,6 +440,8 @@ public class GameController implements Initializable {
         int frameTimeInMillis = 40;
         master = new KeyFrame(Duration.millis(frameTimeInMillis), e -> {
             checkHeroLife();
+            removeDeadThings();
+
 
 
             for (Solid gameObject : game.getSolidList()) {
@@ -450,6 +461,33 @@ public class GameController implements Initializable {
 
         });
     }
+
+    public void removeDeadThings() {
+        for(Orc x : game.getOrcList()){
+//            if(x.getPos().getxPos() > game.getAbyssLevel()){
+//                x.setAlive(false);
+//                if(x.isStaged()){
+//                    x.getOrcImage().setImage(null);
+//
+//                }
+//
+//            }
+            if(!x.isAlive()){
+
+                game.getSolidList().remove(x);
+            }
+        }
+        for(Solid x : game.getWeaponList()){
+            if(x instanceof Shurikens){
+                if(!(((Shurikens) x).isLive)){
+                    game.getSolidList().remove(x);
+                }
+
+            }
+        }
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

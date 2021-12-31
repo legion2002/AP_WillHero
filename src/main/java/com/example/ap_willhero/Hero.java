@@ -9,7 +9,7 @@ public class Hero extends Solid implements Collidable, Serializable {
 
     private Helmet helmet;
     transient private Game game;
-    private Weapon equippedWeapon;
+    private Weapon equippedWeapon = new Weapon1();
     private float jumpHeight;
     private int currCoins;
 
@@ -207,7 +207,8 @@ public class Hero extends Solid implements Collidable, Serializable {
                 System.out.println("Hero X velocity is " + this.getxVelocity());
                 this.setxVelocity(-this.getxVelocity()/2);
                 this.setyVelocity(0);
-                s.setxVelocity(0.5/2);
+                s.setxVelocity(0.5);
+
 
             }
             else if(collideVal == 2){

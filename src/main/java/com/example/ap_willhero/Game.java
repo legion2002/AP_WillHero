@@ -21,6 +21,8 @@ public class Game implements Serializable {
     private ArrayList<Platform> PlatformList;
     private ArrayList<Solid> SolidList;
     private ArrayList<Orc> OrcList;
+    private ArrayList<Solid> WeaponList;
+
     transient private GameController gameController;
 
 
@@ -50,6 +52,7 @@ public class Game implements Serializable {
         PlatformList = new ArrayList<>();
         SolidList = new ArrayList<>();
         OrcList  = new ArrayList<>();
+        WeaponList = new ArrayList<>();
         this.gameController = gc;
         this.abyssLevel = 500;
         this.totalLocations = 122;
@@ -239,5 +242,9 @@ public class Game implements Serializable {
 
         }
 
+    }
+
+    public ArrayList<Solid> getWeaponList() {
+        return WeaponList;
     }
 }

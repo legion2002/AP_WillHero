@@ -9,6 +9,7 @@ public class Orc extends Solid implements Collidable, Serializable{
     transient private ImageView orcImage;
     private int coinsReleased;
     private int health;
+    private boolean isAlive;
     private boolean isStaged;
 
 
@@ -43,11 +44,19 @@ public class Orc extends Solid implements Collidable, Serializable{
         this.health = health;
     }
 
+    public boolean isAlive() {
+        return isAlive;
+    }
 
+    public void setAlive(boolean alive) {
+        isAlive = alive;
+    }
 
     Orc(double x, double y){
         this.setPos( new Position(x, y));
         isStaged = false;
+        health = 1;
+        isAlive = true;
 
     }
 
@@ -77,12 +86,30 @@ public class Orc extends Solid implements Collidable, Serializable{
 
         if(s instanceof Platform && collideVal == 2){
             this.setyVelocity(-0.3);
-            this.setxVelocity(this.getxVelocity());
+            this.setxVelocity(this.getxVelocity()/2);
+            if(this.getxVelocity() < 0.01){
+                this.setxVelocity(0);
+            }
+        }
+        if(s instanceof Shurikens){
+
+            health -= 1;
+            if(health == 0){
+                killOrc();
+            }
+
         }
 
 
 
 
+
+    }
+
+    public void killOrc() {
+        System.out.println("Orc is Dead");
+        orcImage.setImage(null);
+        isAlive = false;
 
     }
 
