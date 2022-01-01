@@ -4,7 +4,9 @@ import javafx.animation.PauseTransition;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
-public class Brick{
+import java.io.Serializable;
+
+public class Brick implements Serializable {
     final static int brickWidth = 100;
     final static int brickHeight = 20;
 
@@ -12,13 +14,13 @@ public class Brick{
         return pause;
     }
 
-    private PauseTransition pause;
+    transient private PauseTransition pause;
 
     public ImageView getBrickPhoto() {
         return brickPhoto;
     }
 
-    private ImageView brickPhoto;
+    transient private ImageView brickPhoto;
     private FallingPlatform basePlatform;
 
     public Brick(FallingPlatform platform){

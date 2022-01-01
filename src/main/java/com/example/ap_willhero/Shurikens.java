@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class Shurikens extends Solid implements Serializable {
     private int lifeTime;
-    private ImageView shurikenImage;
+    transient private ImageView shurikenImage;
     boolean isLive;
     static int shurikenHeight = 30;
     static int shurikenWidth = 30;

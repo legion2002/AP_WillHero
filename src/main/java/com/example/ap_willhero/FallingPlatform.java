@@ -38,7 +38,7 @@ public class FallingPlatform extends Solid implements Serializable {
         return rectangleForPlatform;
     }
 
-    private Rectangle rectangleForPlatform;
+    transient private Rectangle rectangleForPlatform;
     private boolean isStaged;
 
     public boolean isBrickPhotosSet() {
@@ -125,7 +125,7 @@ public class FallingPlatform extends Solid implements Serializable {
             brick.getPause().setDuration(Duration.millis(brickNumber * timeGapForFalling));
             brickNumber++;
         }
-        
+
 
         for(Brick brick : bricks){
             brick.getPause().play();

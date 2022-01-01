@@ -35,6 +35,8 @@ public class Hero extends Solid implements Collidable, Serializable {
 
     }
 
+
+
     public int getStepSize() {
         return stepSize;
     }
@@ -116,6 +118,10 @@ public class Hero extends Solid implements Collidable, Serializable {
 
     public void setHeroImage(ImageView img){
         this.heroImage = img;
+        this.heroImage.setLayoutX(getPos().getxPos());
+        this.heroImage.setLayoutY(getPos().getyPos());
+        setWidth(heroImage.getFitWidth());
+        setHeight(heroImage.getFitHeight());
 
     }
 

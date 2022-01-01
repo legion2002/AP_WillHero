@@ -5,11 +5,18 @@ import javafx.scene.image.ImageView;
 import java.io.Serializable;
 
 public class Coin extends Solid implements Serializable {
-    transient private int coinVal;
+    private int coinVal;
     transient private ImageView coinImage;
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     transient private Game game;
-
-
 
 
     private boolean hasBeenCollected;
@@ -23,6 +30,12 @@ public class Coin extends Solid implements Serializable {
         coinVal = 1;
         hasBeenCollected = false;
 
+    }
+
+    public void setCoinImage(ImageView img){
+        this.coinImage = img;
+        img.setLayoutX(getPos().getxPos());
+        img.setLayoutY(getPos().getyPos());
     }
 
     public int getCoinVal(){

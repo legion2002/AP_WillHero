@@ -23,16 +23,16 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class GameController implements Initializable {
+
+    Scanner scn = new Scanner(System.in);
 
     @FXML
     private VBox menu = new VBox();
@@ -208,18 +208,6 @@ public class GameController implements Initializable {
     }
 
 
-    public void shootShurikenBullet() {
-        Image bullet = new Image("shurikenBullet.png");
-        shurikenBullet = new ImageView(bullet);
-        shurikenBullet.setFitWidth(28);
-        shurikenBullet.setFitHeight(28);
-        shurikenBullet.setLayoutX(game.getHero().getHeroImage().getLayoutX() + game.getHero().getHeroImage().getTranslateX() + 5);
-        shurikenBullet.setLayoutY(game.getHero().getHeroImage().getLayoutY() + game.getHero().getHeroImage().getTranslateY());
-        root.getChildren().add(shurikenBullet);
-        shootWeaponAnimation();
-
-    }
-
     public void removeMenu() {
         root.getChildren().remove(MainMenu);
 
@@ -227,28 +215,7 @@ public class GameController implements Initializable {
     }
 
 
-    public void removeWeapon() {
-        root.getChildren().remove(shurikenBullet);
 
-    }
-
-    public void shootWeaponAnimation() {
-        rotatingShuriken.setAxis(Rotate.Z_AXIS);
-        rotatingShuriken.setByAngle(360);
-        rotatingShuriken.setCycleCount(100);
-        rotatingShuriken.setDuration(Duration.millis(300));
-
-        rotatingShuriken.setNode(shurikenBullet);
-        System.out.println("Reached Rotating Animation");
-        rotatingShuriken.play();
-        movingShuriken.setByX(shurikenBullet.getX() + 300);
-        movingShuriken.setDuration(Duration.millis(1000));
-        movingShuriken.setAutoReverse(true);
-        movingShuriken.setNode(shurikenBullet);
-        movingShuriken.play();
-        movingShuriken.setOnFinished(e -> removeWeapon());
-
-    }
 
     public void displayPauseMenu() {
 
@@ -266,13 +233,73 @@ public class GameController implements Initializable {
         return this.gameObjectsPane;
     }
 
-    public void savingGame() {
+    public void savingGame() throws IOException, ClassNotFoundException {
+        trySerializing();
+        loadSavedGame();
+        root.getChildren().remove(pauseGameMenu);
+
+    }
+
+    public void trySerializing(){
         System.out.println("Saving this game");
         try {
             serialize();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deserialize(int chosenGame) throws IOException, ClassNotFoundException{
+        ObjectInputStream in = null;
+        try{
+            String filename = "D:\\Second Year\\First Sem\\AP\\AP Project\\AP_WillHero\\" + "StoringGame" + chosenGame;
+            in = new ObjectInputStream(new FileInputStream(filename));
+            Game loadedGame = (Game)in.readObject();
+            this.game = loadedGame;
+            game.getHero().setHeroImage(heroImage);
+            game.setGameController(this);
+        }
+        catch (EOFException e) {
+            return ;
+        }catch (ClassCastException e) {
+            System.out.println("Invalid Class Cast Exception");
+        }
+        finally {
+            in.close();
+        }
+    }
+
+    public void displayGameObjectsAfterLoading(){
+        for(Solid gameObject : game.getSolidList()){
+            if(gameObject instanceof RedOrc){
+                ImageView img = new ImageView(new Image("redOrc.jpeg"));
+                ((RedOrc)gameObject).setOrcImage(img);
+                gameObjectsPane.getChildren().add(img);
+            }
+            else if(gameObject instanceof GreenOrc){
+                ImageView img = new ImageView(new Image("greenOrc.png"));
+                ((GreenOrc)gameObject).setOrcImage(img);
+                gameObjectsPane.getChildren().add(img);
+            }
+            else if(gameObject instanceof Coin){
+                int maximumCoinWidth = 30;
+                double distanceBetweenCoins = 50;
+                ImageView img = new ImageView();
+                Image image = new Image("coin.png");
+                img.setImage(image);
+                img.setFitHeight(maximumCoinWidth);
+                img.setFitWidth(maximumCoinWidth);
+                ((Coin)gameObject).setCoinImage(img);
+                this.getGameObjectsPane().getChildren().add(img);
+            }
+        }
+    }
+
+    public void loadSavedGame() throws IOException, ClassNotFoundException {
+        int chosenGame = scn.nextInt();
+
+        deserialize(chosenGame);
+        displayGameObjectsAfterLoading();
 
     }
 

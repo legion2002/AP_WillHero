@@ -24,6 +24,10 @@ public class Game implements Serializable {
     private ArrayList<Solid> WeaponList;
     private ArrayList<FallingPlatform> FallingPlatformList;
 
+    public void setGameController(GameController gameController) {
+        this.gameController = gameController;
+    }
+
     transient private GameController gameController;
 
 
