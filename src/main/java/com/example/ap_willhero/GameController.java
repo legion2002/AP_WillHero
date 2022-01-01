@@ -309,7 +309,7 @@ public class GameController implements Initializable {
             }
 
             else if(gameObject instanceof TreasureChest){
-                ImageView img = new ImageView(new Image("chestClosed.png"))
+                ImageView img = new ImageView(new Image("chestClosed.png"));
                 ((TreasureChest)gameObject).setChestImage(img);
                 this.getGameObjectsPane().getChildren().add(img);
             }
