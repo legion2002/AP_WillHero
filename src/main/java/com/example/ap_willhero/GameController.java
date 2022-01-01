@@ -388,7 +388,7 @@ public class GameController implements Initializable {
 
             else if(gameObject instanceof FallingPlatform && !(((FallingPlatform)gameObject).isBrickPhotosSet())){
                 FallingPlatform p = (FallingPlatform) gameObject;
-                //p.getRectangleForPlatform().setOpacity(0);
+                p.getRectangleForPlatform().setOpacity(0);
                 Image img = new Image("FallingPlatformNode.png");
                 int brickNumber = 0;
                 int numberOfBricks = p.getBricks().size();

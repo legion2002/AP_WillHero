@@ -80,15 +80,10 @@ public abstract class Solid implements Serializable {
         if(s instanceof Platform){
 
             if(((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight))) {
-//                System.out.println("Platform found below hero");
-//                System.out.println("Hero Bottom: " + heroBottom);
-//                System.out.println("Solid Left: " + solidLeft);
-//                System.out.println("Solid Right: " + solidRight);
-//                System.out.println("Solid Top: " + solidTop);
 
 
                 if ((heroBottom > (solidTop - offset) && heroBottom < solidTop + offset)) {
-                    System.out.println("Collision with top of platform");
+//                    System.out.println("Collision with top of platform");
                     return 2; //Collision with top of platform
                 }
             }

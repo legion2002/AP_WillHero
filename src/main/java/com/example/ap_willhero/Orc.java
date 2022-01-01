@@ -55,7 +55,7 @@ public class Orc extends Solid implements Collidable, Serializable{
     Orc(double x, double y){
         this.setPos( new Position(x, y));
         isStaged = false;
-        health = 1;
+
         isAlive = true;
 
     }
@@ -89,6 +89,12 @@ public class Orc extends Solid implements Collidable, Serializable{
             this.setxVelocity(this.getxVelocity()/2);
             if(this.getxVelocity() < 0.01){
                 this.setxVelocity(0);
+            }
+        }
+        if(s instanceof Orc){
+            if(collideVal == 1){
+                s.setxVelocity(0.5);
+
             }
         }
 
