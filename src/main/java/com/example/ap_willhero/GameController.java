@@ -135,6 +135,10 @@ public class GameController implements Initializable {
             game.addPlatform(new Platform((Rectangle) platforms));
         }
 
+        for(Node fallingPlatforms : gameObjectsPane.getChildren()){
+            game.addFallingPlatform(new FallingPlatform((Rectangle) fallingPlatforms));
+        }
+
     }
 
 
@@ -384,6 +388,21 @@ public class GameController implements Initializable {
                 gameObjectsPane.getChildren().add(img);
 
 
+            }
+
+            else if(gameObject instanceof FallingPlatform){
+                System.out.println("FALLING PLATFORM DETECTED");
+                FallingPlatform p = (FallingPlatform) gameObject;
+                p.getRectangleForPlatform().setOpacity(0);
+                Image img = new Image("FallingPlatformNode.png");
+                int brickNumber = 0;
+                for(Brick brick : p.getBricks()){
+                    ImageView imgview = new ImageView(img);
+                    brick.setBrickImage(imgview, brickNumber);
+                    gameObjectsPane.getChildren().add(imgview);
+                    brickNumber++;
+                }
+                p.setBrickPhotosSet(true);
             }
 
 

@@ -22,6 +22,7 @@ public class Game implements Serializable {
     private ArrayList<Solid> SolidList;
     private ArrayList<Orc> OrcList;
     private ArrayList<Solid> WeaponList;
+    private ArrayList<FallingPlatform> FallingPlatformList;
 
     transient private GameController gameController;
 
@@ -53,6 +54,7 @@ public class Game implements Serializable {
         SolidList = new ArrayList<>();
         OrcList  = new ArrayList<>();
         WeaponList = new ArrayList<>();
+        FallingPlatformList = new ArrayList<>();
         this.gameController = gc;
         this.abyssLevel = 500;
         this.totalLocations = 122;
@@ -66,6 +68,11 @@ public class Game implements Serializable {
     public void addPlatform(Platform platform) {
         PlatformList.add(platform);
         SolidList.add(platform);
+    }
+
+    public void addFallingPlatform(FallingPlatform fallingPlatform){
+        FallingPlatformList.add(fallingPlatform);
+        SolidList.add(fallingPlatform);
     }
 
     public ArrayList<Platform> getPlatformList() {
