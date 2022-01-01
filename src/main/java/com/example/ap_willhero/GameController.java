@@ -307,6 +307,21 @@ public class GameController implements Initializable {
                 ((Coin)gameObject).setCoinImage(img);
                 this.getGameObjectsPane().getChildren().add(img);
             }
+
+            else if(gameObject instanceof TreasureChest){
+                ImageView img = new ImageView(new Image("chestClosed.png"))
+                ((TreasureChest)gameObject).setChestImage(img);
+                this.getGameObjectsPane().getChildren().add(img);
+            }
+
+            else if(gameObject instanceof Shurikens){
+                ImageView img = new ImageView(new Image("shuriukenBullet.png"));
+                ((Shurikens)gameObject).setShurikenImage(img);
+                this.getGameObjectsPane().getChildren().add(img);
+            }
+            else if(gameObject instanceof Platform){
+                //Write code
+            }
         }
     }
 
@@ -557,8 +572,19 @@ public class GameController implements Initializable {
 
     }
 
+    public void loadGame(ActionEvent event) throws IOException{
+        //Three buttons on load game menu
+        root = FXMLLoader.load(getClass().getResource("Game.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        currScene = new Scene(root, 1024, 600);
+
+        stage.setScene(currScene);
+        stage.show();
+    }
+
+
+
     public void restartGame(ActionEvent event) throws IOException {
-        System.out.println("HELLOIJFDOIDNFODUHNFOIUHFO");
         root = FXMLLoader.load(getClass().getResource("Game.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         currScene = new Scene(root, 1024, 600);

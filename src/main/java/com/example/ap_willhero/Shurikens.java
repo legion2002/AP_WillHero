@@ -49,7 +49,14 @@ public class Shurikens extends Solid implements Serializable {
         shurikenImage.setFitHeight(shurikenHeight);
 
 
+    }
 
+    public void setShurikenImage(ImageView img){
+        shurikenImage = img;
+        shurikenImage.setFitWidth(shurikenWidth);
+        shurikenImage.setFitHeight(shurikenHeight);
+        shurikenImage.setLayoutX(getPos().getxPos());
+        shurikenImage.setLayoutY(getPos().getyPos());
 
     }
 

@@ -11,8 +11,8 @@ import java.io.Serializable;
 public class TreasureChest extends Solid implements Serializable {
     transient private ImageView chestImage;
     private boolean isStaged;
-    transient final static int chestHeight = 55;
-    transient final static int chestWidth = 74;
+    final static int chestHeight = 55;
+    final static int chestWidth = 74;
     transient int chestNumber;
     private boolean isOpened;
 
