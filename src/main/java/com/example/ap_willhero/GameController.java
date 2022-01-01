@@ -225,8 +225,6 @@ public class GameController implements Initializable {
     public void removeMenu() {
         root.getChildren().remove(MainMenu);
 
-
-
     }
 
 
@@ -250,8 +248,8 @@ public class GameController implements Initializable {
 
     public void savingGame() throws IOException, ClassNotFoundException {
         trySerializing();
-        loadSavedGame();
         root.getChildren().remove(pauseGameMenu);
+
 
     }
 
@@ -326,9 +324,8 @@ public class GameController implements Initializable {
     }
 
     public void loadSavedGame() throws IOException, ClassNotFoundException {
-        int chosenGame = scn.nextInt();
 
-        deserialize(chosenGame);
+        deserialize(1);
         displayGameObjectsAfterLoading();
 
     }
@@ -572,14 +569,19 @@ public class GameController implements Initializable {
 
     }
 
-    public void loadGame(ActionEvent event) throws IOException{
+    public void loadGame(ActionEvent event) throws IOException, ClassNotFoundException {
         //Three buttons on load game menu
+        System.out.println("Clicking load game button");
         root = FXMLLoader.load(getClass().getResource("Game.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         currScene = new Scene(root, 1024, 600);
-
         stage.setScene(currScene);
+
+        //System.out.println("Curr coinsg" + game.getHero().getCurrCoins());
+
         stage.show();
+        loadSavedGame();
+        MainMenu.setOpacity(0);
     }
 
 
