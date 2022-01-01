@@ -200,6 +200,27 @@ public class Hero extends Solid implements Collidable, Serializable {
             }
 
         }
+
+        if(s instanceof FallingPlatform ){
+            if(collideVal == 2){
+                this.setyVelocity(-0.5);
+                this.setxVelocity(0);
+                if(!((FallingPlatform) s).isAnimationDone()){
+                    ((FallingPlatform) s).startFallingPlatformAnimation();
+                    //((FallingPlatform) s).setAnimationDone(true);
+                }
+
+            }
+            else if (collideVal == 1){
+                this.setyVelocity(-0.2);
+                this.setxVelocity(0);
+            }
+            else if(collideVal == 4){
+                System.out.println("HERO CAME UNDER PLATFORM");
+                System.exit(0);
+            }
+        }
+
         if(s instanceof Orc){
             if(collideVal == 1){
                 //make colliding with left here
@@ -226,6 +247,8 @@ public class Hero extends Solid implements Collidable, Serializable {
 //            game.removeSolid(s);
 
         }
+
+
 
 
 

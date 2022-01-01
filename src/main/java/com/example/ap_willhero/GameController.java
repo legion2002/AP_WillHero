@@ -352,17 +352,13 @@ public class GameController implements Initializable {
                 g.setOrcImage(img);
                 gameObjectsPane.getChildren().add(img);
                 g.setyVelocity(-0.3);
-                System.out.println("Gave green orc velocity");
-                //System.out.println("making greenOrc");
+
             } else if (gameObject instanceof RedOrc) {
                 RedOrc g = (RedOrc) gameObject;
                 ImageView img = new ImageView(new Image("redOrc.jpeg"));
                 g.setOrcImage(img);
                 gameObjectsPane.getChildren().add(img);
                 g.setyVelocity(-0.3);
-                System.out.println("Gave red orc velocity");
-
-                //System.out.println("making redOrc");
 
             } else if (gameObject instanceof TreasureChest) {
 
@@ -370,7 +366,7 @@ public class GameController implements Initializable {
                 ImageView img = new ImageView(new Image("chestClosed.png"));
                 t.setChestImage(img);
                 gameObjectsPane.getChildren().add(img);
-                //System.out.println("making treasure chest");
+
 
             } else if (gameObject instanceof Platform) {
                 Platform p = (Platform) gameObject;
@@ -390,15 +386,16 @@ public class GameController implements Initializable {
 
             }
 
-            else if(gameObject instanceof FallingPlatform){
-                System.out.println("FALLING PLATFORM DETECTED");
+            else if(gameObject instanceof FallingPlatform && !(((FallingPlatform)gameObject).isBrickPhotosSet())){
                 FallingPlatform p = (FallingPlatform) gameObject;
-                p.getRectangleForPlatform().setOpacity(0);
+                //p.getRectangleForPlatform().setOpacity(0);
                 Image img = new Image("FallingPlatformNode.png");
                 int brickNumber = 0;
-                for(Brick brick : p.getBricks()){
+                int numberOfBricks = p.getBricks().size();
+                for(int i = 0; i < numberOfBricks; i++){
+                    System.out.println("Adding brick number " + i);
                     ImageView imgview = new ImageView(img);
-                    brick.setBrickImage(imgview, brickNumber);
+                    p.getBricks().get(i).setBrickImage(imgview, brickNumber);
                     gameObjectsPane.getChildren().add(imgview);
                     brickNumber++;
                 }

@@ -84,19 +84,22 @@ public class Orc extends Solid implements Collidable, Serializable{
     @Override
     public void collidesWith(Solid s, int collideVal) {
 
-        if(s instanceof Platform && collideVal == 2){
+        if((s instanceof Platform || s instanceof FallingPlatform) && collideVal == 2){
             this.setyVelocity(-0.3);
             this.setxVelocity(this.getxVelocity()/2);
             if(this.getxVelocity() < 0.01){
                 this.setxVelocity(0);
             }
         }
+
         if(s instanceof Shurikens){
 
             health -= 1;
             if(health == 0){
                 killOrc();
             }
+
+
 
         }
 
