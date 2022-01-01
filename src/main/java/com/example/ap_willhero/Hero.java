@@ -9,7 +9,7 @@ public class Hero extends Solid implements Collidable, Serializable {
 
     private Helmet helmet;
     transient private Game game;
-    private Weapon equippedWeapon = new Weapon1();
+    private Weapon equippedWeapon;
     private float jumpHeight;
     private int currCoins;
 
@@ -27,6 +27,8 @@ public class Hero extends Solid implements Collidable, Serializable {
         this.game = game;
         this.heroImage = img;
         this.stepSize = 100;
+        this.helmet = new Helmet();
+        this.equippedWeapon = helmet.getWeapon1();
         setWidth(heroImage.getFitWidth());
         setHeight(heroImage.getFitHeight());
 
@@ -81,9 +83,6 @@ public class Hero extends Solid implements Collidable, Serializable {
         return this.currCoins;
     }
 
-    public void setCurrCoins(int coins){
-        this.currCoins = coins;
-    }
 
     public boolean getTouchingPlatform(){
         return touchingPlatform;
@@ -176,6 +175,12 @@ public class Hero extends Solid implements Collidable, Serializable {
         return false;
     }
 
+    public void increaseCurrCoin(int value){
+        currCoins += value;
+//        Integer currentCoins = Integer.parseInt(game.getController().getCoinsCollectedLabel().getText());
+        game.getController().getCoinsCollectedLabel().setText(Integer.toString(currCoins));
+    }
+
 
 
 
@@ -184,9 +189,9 @@ public class Hero extends Solid implements Collidable, Serializable {
 
         if(s instanceof Coin){
             if(! ((Coin)s).isHasBeenCollected()){
-                Integer currentCoins = Integer.parseInt(game.getController().getCoinsCollectedLabel().getText());
-                game.getController().getCoinsCollectedLabel().setText(Integer.toString(currentCoins + ((Coin) s).getCoinVal()));
+
                 ((Coin) s).setHasBeenCollected(true);
+                increaseCurrCoin(((Coin) s).getCoinVal());
                 game.removeSolid(s);
             }
         }
@@ -250,6 +255,24 @@ public class Hero extends Solid implements Collidable, Serializable {
         if(s instanceof TreasureChest){
             System.out.println("do chest animation here");
 //            ((TreasureChest)s).doChestAnimation();
+            ((TreasureChest) s).setOpened(true);
+                if(s instanceof WeaponChest){
+                    System.out.println("This is a weapon chest");
+                    int weaponType = ((WeaponChest) s).getWeaponType();
+
+                    if(weaponType == 1){
+
+                        helmet.getWeapon1().increaseLevel();
+                        game.getController().getShurikenLabel().setText(Integer.toString(helmet.getWeapon1().getLevel()));
+
+                    }
+                }
+                else if(s instanceof CoinChest){
+                    System.out.println("This is a coin chest");
+                    increaseCurrCoin(((CoinChest) s).getTreasureCoins());
+                }
+
+
 //            game.removeSolid(s);
 
         }

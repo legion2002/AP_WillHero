@@ -14,6 +14,15 @@ public class TreasureChest extends Solid implements Serializable {
     transient final static int chestHeight = 55;
     transient final static int chestWidth = 74;
     transient int chestNumber;
+    private boolean isOpened;
+
+    public boolean isOpened() {
+        return isOpened;
+    }
+
+    public void setOpened(boolean opened) {
+        isOpened = opened;
+    }
 
     @Override
     public boolean isStaged() {
@@ -31,6 +40,7 @@ public class TreasureChest extends Solid implements Serializable {
     TreasureChest(double x, double y){
         this.setPos( new Position(x, y));
         isStaged = false;
+        isOpened = false;
         this.setHeight(chestHeight);
         this.setWidth(chestWidth);
 

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Helmet implements Serializable {
     public Helmet(){
+        weapon1 = new Weapon1();
+        weapon2 = new Weapon2();
 
     }
     private Weapon1 weapon1;

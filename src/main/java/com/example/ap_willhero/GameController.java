@@ -1,6 +1,7 @@
 package com.example.ap_willhero;
 
 import javafx.animation.*;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.controlsfx.control.action.Action;
 
 import java.io.*;
 import java.net.URL;
@@ -46,11 +48,18 @@ public class GameController implements Initializable {
     private ImageView heroImage = new ImageView();
 
 
+
     @FXML
     private Label currrentLocationLabel = new Label();
 
     @FXML
     private Label coinsCollectedLabel = new Label();
+
+    @FXML
+    private Label shurikenLabel = new Label();
+
+    @FXML
+    private Label knifeLabel = new Label();
 
 
     @FXML
@@ -65,17 +74,6 @@ public class GameController implements Initializable {
 
     @FXML
     private FadeTransition pauseMenuAppearing = new FadeTransition();
-
-
-    @FXML
-    private RotateTransition rotatingShuriken = new RotateTransition();
-
-    @FXML
-    private ImageView shurikenBullet;
-
-    @FXML
-    private TranslateTransition movingShuriken = new TranslateTransition();
-
 
     @FXML
     private Pane loadGameMenu = new Pane();
@@ -158,6 +156,14 @@ public class GameController implements Initializable {
         return currScene;
     }
 
+    public Label getShurikenLabel() {
+        return shurikenLabel;
+    }
+
+    public Label getKnifeLabel() {
+        return knifeLabel;
+    }
+
     public void setUpGame() {
 
         this.game = new Game(this, heroImage);
@@ -193,6 +199,14 @@ public class GameController implements Initializable {
     }
 
     public void onPlayGameClick() {
+        setUpGame();
+        setUpGeneralClick();
+        setUpMasterKeyFrame();
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.getKeyFrames().add(master);
+        timeline.play();
+        staticPane.setOnMouseClicked(onGeneralClick);
         menuDisappearing.setDuration(Duration.millis(1000));
 
         menuDisappearing.setNode(menu);
@@ -210,6 +224,7 @@ public class GameController implements Initializable {
 
     public void removeMenu() {
         root.getChildren().remove(MainMenu);
+
 
 
     }
@@ -360,8 +375,11 @@ public class GameController implements Initializable {
         if (gameObject instanceof Platform) {
             game.getPlatformList().remove(gameObject);
         } else if (gameObject instanceof Orc) {
-            game.getOrcList().remove(gameObject);
+            ((Orc) gameObject).setAlive(false);
+        } else if(gameObject instanceof TreasureChest) {
+            ((TreasureChest) gameObject).setOpened(true);
         }
+
 //                  Try iterating over this
 //                    game.getSolidList().remove(gameObject);
 
@@ -528,20 +546,43 @@ public class GameController implements Initializable {
 
             }
         }
+        for(TreasureChest x : game.getTreasureChestList()){
+            if(x.isOpened()){
+                game.getSolidList().remove(x);
+//                x.setChestImage(null);
+                gameObjectsPane.getChildren().remove(x.getChestImage());
+            }
 
+        }
+
+    }
+
+    public void restartGame(ActionEvent event) throws IOException {
+        System.out.println("HELLOIJFDOIDNFODUHNFOIUHFO");
+        root = FXMLLoader.load(getClass().getResource("Game.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        currScene = new Scene(root, 1024, 600);
+
+        stage.setScene(currScene);
+        stage.show();
+    }
+
+    public void exit(){
+        System.out.println("Goodbye Fellow Adventurer");
+        System.out.println("""
+                Credits - 
+                Coded and Designed by:
+                Tanishk Goyal (2020141) - Amazing Developer
+                Diksha Sethi (2020056) - Developer
+                Adios!
+                """);
+        System.exit(0);
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        root.getChildren().remove(pauseGameMenu);
 
-        setUpGame();
-        setUpGeneralClick();
-        setUpMasterKeyFrame();
-        Timeline timeline = new Timeline();
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.getKeyFrames().add(master);
-        timeline.play();
-        staticPane.setOnMouseClicked(onGeneralClick);
     }
 }

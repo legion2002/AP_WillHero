@@ -15,11 +15,15 @@ public class Weapon1 extends Weapon implements Serializable {
     @Override
     public void useWeapon(Game game) {
 
-        Shurikens s = new Shurikens(game.getHero().getPos());
-        game.getSolidList().add(s);
-        game.getWeaponList().add(s);
-        game.getController().getGameObjectsPane().getChildren().add(s.getShurikenImage());
-        s.shootShuriken();
+
+        for(int i = 0; i < getLevel(); i++){
+            Shurikens s = new Shurikens(game.getHero().getPos());
+            game.getSolidList().add(s);
+            game.getWeaponList().add(s);
+            game.getController().getGameObjectsPane().getChildren().add(s.getShurikenImage());
+            s.shootShuriken();
+
+        }
 
 
 

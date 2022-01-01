@@ -7,6 +7,8 @@ public abstract class Weapon implements Serializable {
     private int damage;
 
     public Weapon(){
+        level = 0;
+        damage = 1;
 
     }
 

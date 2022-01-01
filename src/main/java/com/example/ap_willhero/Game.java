@@ -23,6 +23,11 @@ public class Game implements Serializable {
     private ArrayList<Orc> OrcList;
     private ArrayList<Solid> WeaponList;
     private ArrayList<FallingPlatform> FallingPlatformList;
+    private ArrayList<TreasureChest> TreasureChestList;
+
+    public ArrayList<TreasureChest> getTreasureChestList() {
+        return TreasureChestList;
+    }
 
     public void setGameController(GameController gameController) {
         this.gameController = gameController;
@@ -58,6 +63,7 @@ public class Game implements Serializable {
         SolidList = new ArrayList<>();
         OrcList  = new ArrayList<>();
         WeaponList = new ArrayList<>();
+        TreasureChestList = new ArrayList<>();
         FallingPlatformList = new ArrayList<>();
         this.gameController = gc;
         this.abyssLevel = 500;
@@ -196,10 +202,13 @@ public class Game implements Serializable {
             WeaponChest chest= new WeaponChest(randPos + startingPoint, platform.getPos().getyPos() - TreasureChest.chestHeight - offsetY);
 
             this.SolidList.add(chest);
+            this.TreasureChestList.add(chest);
         }
         else{
             CoinChest chest = new CoinChest(randPos + startingPoint, platform.getPos().getyPos() - TreasureChest.chestHeight - offsetY);
             this.SolidList.add(chest);
+            this.TreasureChestList.add(chest);
+
 
         }
 
