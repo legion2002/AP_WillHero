@@ -39,6 +39,8 @@ public class GameController implements Initializable{
     @FXML
     transient private VBox menu = new VBox();
     transient private EventHandler<MouseEvent> onGeneralClick;
+    transient private EventHandler<KeyEvent> onNumberKey;
+
 
     public AnchorPane getRoot() {
         return root;
@@ -144,7 +146,7 @@ public class GameController implements Initializable{
 
     transient private ArrayList<String> savedGameSlots = new ArrayList<>();
     transient private int overWrite;
-
+    
     public GameController() {
         savedGameSlots.add("StoringGame1");
         savedGameSlots.add("StoringGame2");
@@ -173,6 +175,9 @@ public class GameController implements Initializable{
 
     }
 
+    public EventHandler<KeyEvent> getOnNumberKey() {
+        return onNumberKey;
+    }
 
     public Stage getStage() {
         return stage;
@@ -236,19 +241,14 @@ public class GameController implements Initializable{
         setUpGame();
         setUpGeneralClick();
         setUpMasterKeyFrame();
+        setUpNumberKeyPressed();
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(master);
         timeline.play();
         staticPane.setOnMouseClicked(onGeneralClick);
-        menuDisappearing.setDuration(Duration.millis(1000));
-
-        menuDisappearing.setNode(menu);
-        menuDisappearing.setFromValue(10);
-        menuDisappearing.setToValue(0);
-        menuDisappearing.setAutoReverse(false);
-        menuDisappearing.play();
-        menuDisappearing.setOnFinished(e -> removeMenu());
+        staticPane.setOnKeyPressed(onNumberKey);
+        removeMenu();
 
 
 //        root.getChildren().remove(menu);
@@ -369,12 +369,14 @@ public class GameController implements Initializable{
 
         setUpGeneralClick();
         setUpMasterKeyFrame();
+        setUpNumberKeyPressed();
 
         Timeline timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(master);
         timeline.play();
         staticPane.setOnMouseClicked(onGeneralClick);
+        staticPane.setOnKeyPressed(onNumberKey);
 
     }
 
@@ -406,25 +408,48 @@ public class GameController implements Initializable{
         });
 
     }
+
+    public void setUpNumberKeyPressed(){
+        onNumberKey = new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                System.out.println("IN EVENT HANDLER FOR KEYSSSSS");
+                if(keyEvent.getCode().equals(KeyCode.DIGIT1) || keyEvent.getCode().equals(KeyCode.NUMPAD1)){
+                    game.getHero().setEquippedWeapon(game.getHero().getHelmet().getWeapon1());
+                }
+                if(keyEvent.getCode().equals(KeyCode.DIGIT2) || keyEvent.getCode().equals(KeyCode.NUMPAD2)){
+                    game.getHero().setEquippedWeapon(game.getHero().getHelmet().getWeapon2());
+                }
+                if(keyEvent.getCode().equals(KeyCode.SPACE)){
+                    mainClick();
+                }
+
+            }
+        };
+    }
+
+    public void mainClick(){
+        if(game.getHero().getEquippedWeapon() != null){
+            Weapon currWeapon = game.getHero().getEquippedWeapon();
+            currWeapon.useWeapon(game);
+
+        }
+        int refreshTime = 5;
+        int animationTime = 100;
+        setUpHeroStepKeyFrame(5, 100);
+        Timeline movingHero = new Timeline();
+        movingHero.setCycleCount(animationTime / refreshTime);
+        movingHero.getKeyFrames().add(heroStep);
+        movingHero.play();
+        game.getHero().setCurrentLocation(game.getHero().getCurrentLocation() + 1);
+        currrentLocationLabel.setText(Integer.toString(game.getHero().getCurrentLocation()));
+    }
     public void setUpGeneralClick() {
 
         onGeneralClick = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(game.getHero().getEquippedWeapon() != null){
-                    Weapon currWeapon = game.getHero().getEquippedWeapon();
-                    currWeapon.useWeapon(game);
-
-                }
-                int refreshTime = 5;
-                int animationTime = 100;
-                setUpHeroStepKeyFrame(5, 100);
-                Timeline movingHero = new Timeline();
-                movingHero.setCycleCount(animationTime / refreshTime);
-                movingHero.getKeyFrames().add(heroStep);
-                movingHero.play();
-                game.getHero().setCurrentLocation(game.getHero().getCurrentLocation() + 1);
-                currrentLocationLabel.setText(Integer.toString(game.getHero().getCurrentLocation()));
+                mainClick();
             }
         };
     }
@@ -577,7 +602,12 @@ public class GameController implements Initializable{
         master = new KeyFrame(Duration.millis(frameTimeInMillis), e -> {
             checkHeroLife();
             removeDeadThings();
-
+            if(game.getHero().getCurrentLocation() == 108 && game.getBoss() == null){
+                game.startBossFight();
+            }
+            if(game.getHero().getCurrentLocation() == 122){
+                game.heroWon();
+            }
 
 
             for (Solid gameObject : game.getSolidList()) {
@@ -663,6 +693,7 @@ public class GameController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         root.getChildren().remove(pauseGameMenu);
+
 
     }
 }

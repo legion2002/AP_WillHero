@@ -18,10 +18,13 @@ public class Game implements Serializable {
 
     private float abyssLevel;
     private int totalLocations;
+
+    private BossOrc boss;
     private ArrayList<Platform> PlatformList;
     private ArrayList<Solid> SolidList;
     private ArrayList<Orc> OrcList;
     private ArrayList<Solid> WeaponList;
+
 
     public ArrayList<FallingPlatform> getFallingPlatformList() {
         return FallingPlatformList;
@@ -29,6 +32,11 @@ public class Game implements Serializable {
 
     private ArrayList<FallingPlatform> FallingPlatformList;
     private ArrayList<TreasureChest> TreasureChestList;
+
+
+    public BossOrc getBoss() {
+        return boss;
+    }
 
     public ArrayList<TreasureChest> getTreasureChestList() {
         return TreasureChestList;
@@ -74,6 +82,7 @@ public class Game implements Serializable {
         this.abyssLevel = 500;
         this.totalLocations = 122;
         this.gravity = 0.0008;
+        this.totalCoins = 0;
         System.out.println("Image Position is: " + heroImage.getLayoutX() + " " + heroImage.getLayoutY());
 
         hero = new Hero(this, heroImage);
@@ -114,6 +123,23 @@ public class Game implements Serializable {
             gameController.getGameObjectsPane().getChildren().remove(((TreasureChest)s).getChestImage());
     }
 
+    public void heroWon(){
+        System.out.println("==================HERO WON====================");
+        totalCoins += hero.getCurrCoins();
+        System.exit(0);
+
+    }
+
+    public void startBossFight(){
+        System.out.println("===================BOSS FIGHT=====================");
+        BossOrc b = new BossOrc(getHero().getPos().getxPos() + 200 , 0);
+        ImageView bossImage = new ImageView(new Image("greenOrc.png"));
+        b.setOrcImage(bossImage);
+        this.SolidList.add(b);
+        this.OrcList.add(b);
+        this.gameController.getGameObjectsPane().getChildren().add(bossImage);
+        this.boss = b;
+    }
 
     public void generateOrc(int half, Platform platform){
             double startingPoint;

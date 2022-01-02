@@ -15,15 +15,14 @@ public class Main extends Application{
     GameController Controller;
     static Game currGame;
 
-    public static void changeScene(Scene scene){
-
-    }
 
     public static void loadGame(ActionEvent event) throws IOException, ClassNotFoundException {
         deserialize(1);
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("Game.fxml"));
-        Scene currScene = new Scene(loader.load(), 1024, 600);
+        Scene currScene = new Scene(loader.load(), 1024, 600 );
         GameController newGC = loader.getController();
+        newGC.setUpNumberKeyPressed();
+        currScene.setOnKeyPressed(newGC.getOnNumberKey());
 
         newGC.setGame(currGame);
         currGame.setGameController(newGC);
@@ -63,9 +62,11 @@ public class Main extends Application{
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Game.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1024, 600);
         Image icon = new Image("icon.png");
-//        scene.setOnKeyPressed(new GameController());
+
 
         GameController Controller = fxmlLoader.getController();
+        Controller.setUpNumberKeyPressed();
+        scene.setOnKeyPressed(Controller.getOnNumberKey());
         stage.getIcons().add(icon);
         stage.setTitle("Will Hero by Tanishk Goyal and Diksha Sethi");
         stage.setResizable(false);

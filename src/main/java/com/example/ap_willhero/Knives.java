@@ -17,7 +17,7 @@ public class Knives extends Solid implements Serializable {
 
     public Knives(Position p){
         this.setPos(p);
-        knifeImage = new ImageView(new Image("coin.png"));
+        knifeImage = new ImageView(new Image("knifeBullet.png"));
         this.isLive = true;
         knifeImage.setFitWidth(knifeWidth);
         knifeImage.setFitHeight(knifeHeight);
