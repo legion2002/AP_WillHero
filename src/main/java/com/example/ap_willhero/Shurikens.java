@@ -14,6 +14,7 @@ public class Shurikens extends Solid implements Serializable {
     boolean isLive;
     static int shurikenHeight = 30;
     static int shurikenWidth = 30;
+    static int shurikenOffset = 32;
 
 
 

@@ -111,9 +111,9 @@ public class Orc extends Solid implements Collidable, Serializable{
 
             health -= 1;
             if(health <= 0){
-                killOrc();
+                if(orcImage != null)
+                    killOrc();
             }
-
 
 
         }
@@ -121,20 +121,17 @@ public class Orc extends Solid implements Collidable, Serializable{
 
             health -= 1;
             if(health <= 0){
-                killOrc();
+                if(orcImage != null)
+                    killOrc();
             }
 
-
-
         }
-
-
-
 
     }
 
     public void killOrc() {
         System.out.println("Orc is Dead");
+        System.out.println("CALLED FOR BOSS");
         orcImage.setImage(null);
         isAlive = false;
 

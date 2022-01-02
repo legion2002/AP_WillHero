@@ -164,7 +164,7 @@ public class Game implements Serializable {
 
     public void startBossFight(){
         System.out.println("===================BOSS FIGHT=====================");
-        BossOrc b = new BossOrc(getHero().getPos().getxPos() + 200 , 0);
+        BossOrc b = new BossOrc(hero.getPos().getxPos() + 100 * 9 , 0);
         ImageView bossImage = new ImageView(new Image("greenOrc.png"));
         b.setOrcImage(bossImage);
         this.SolidList.add(b);

@@ -42,7 +42,7 @@ public class Hero extends Solid implements Collidable, Serializable {
         this.game = game;
         this.heroImage = img;
         this.stepSize = 100;
-        this.helmet = new Helmet();
+        this.helmet = Helmet.getInstance();
 //        this.equippedWeapon = helmet.getWeapon1();
         setWidth(heroImage.getFitWidth());
         setHeight(heroImage.getFitHeight());
@@ -184,7 +184,8 @@ public class Hero extends Solid implements Collidable, Serializable {
                 if(s instanceof BossOrc){
                     System.out.println("COLLIDED WITH LEFT OF BOSS ORC");
                     this.setyVelocity(0);
-                    this.setxVelocity(-0.5);
+                    s.setxVelocity(0.1);
+                    //getPos().setxPos(getPos().getxPos() - 10);
                 }
                 else{
                     System.out.println("COLLIDED WITH LEFT OF ORCCCCC");

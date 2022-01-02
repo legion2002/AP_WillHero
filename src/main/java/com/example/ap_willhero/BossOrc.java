@@ -7,7 +7,7 @@ public class BossOrc extends Orc implements Serializable {
     transient final static int bossOrcWidth = 200;
     BossOrc(double x, double y) {
         super(x, y);
-        this.setHealth(50);
+        this.setHealth(2);
         this.setCoinsReleased(50);
         this.setWidth(bossOrcWidth);
         this.setHeight(bossOrcHeight);

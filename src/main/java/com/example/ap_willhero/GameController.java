@@ -521,7 +521,7 @@ public class GameController implements Initializable {
     }
 
     public void resurrectHero() {
-        if (game.getHero().getCurrCoins() > 10) {
+        if (game.getHero().getCurrCoins() >= 10) {
             game.getHero().increaseCurrCoin(-10);
             game.getHero().setPos(new Position(game.getHero().getPos().getxPos(), 200));
             root.getChildren().remove(endGameMenu);
@@ -655,6 +655,9 @@ public class GameController implements Initializable {
             game.getHero().collidesWith(gameObject, collideVal);
         }
         for (Orc x : game.getOrcList()) {
+//            if(x instanceof BossOrc)
+//                System.out.println("Health" + x.getHealth() + ", isALive" + x.isAlive());
+
             collideVal = x.hasCollided(gameObject);
             if (collideVal > 0) {
                 x.collidesWith(gameObject, collideVal);
@@ -701,7 +704,7 @@ public class GameController implements Initializable {
                 ex.printStackTrace();
             }
             removeDeadThings();
-            if (game.getHero().getCurrentLocation() == 108 && game.getBoss() == null) {
+            if (game.getHero().getCurrentLocation() == 100 && game.getBoss() == null) {
                 game.startBossFight();
             }
             if (game.getHero().getCurrentLocation() == 122) {

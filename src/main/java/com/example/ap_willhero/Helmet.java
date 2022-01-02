@@ -3,9 +3,16 @@ package com.example.ap_willhero;
 import java.io.Serializable;
 
 public class Helmet implements Serializable {
-    public Helmet(){
-        weapon1 = new Weapon1();
-        weapon2 = new Weapon2();
+    private static Helmet helmet = null;
+    public static Helmet getInstance(){
+        if(helmet == null){
+            helmet = new Helmet();
+        }
+        return helmet;
+    }
+    private Helmet(){
+        weapon1 = Weapon1.getInstance();
+        weapon2 = Weapon2.getInstance();
 
     }
     private Weapon1 weapon1;

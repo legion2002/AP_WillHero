@@ -15,6 +15,9 @@ public class Knives extends Solid implements Serializable {
     static int knifeWidth = 30;
     static int knifeHeight = 30;
 
+
+    static int knifeOffset = 32;
+
     public Knives(Position p){
         this.setPos(p);
         knifeImage = new ImageView(new Image("knifeBullet.png"));
