@@ -32,8 +32,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class GameController implements Initializable{
-
+public class GameController implements Initializable {
 
 
     @FXML
@@ -63,7 +62,6 @@ public class GameController implements Initializable{
     transient private ImageView heroImage = new ImageView();
 
 
-
     @FXML
     transient private Label currrentLocationLabel = new Label();
 
@@ -89,10 +87,8 @@ public class GameController implements Initializable{
     transient private Label SavedGameCoin3 = new Label();
 
 
-
     @FXML
     transient private Button pauseMenuButton = new Button();
-
 
 
     @FXML
@@ -108,6 +104,9 @@ public class GameController implements Initializable{
     @FXML
     transient private Pane pauseGameMenu = new Pane();
 
+    @FXML
+    transient private Pane endGameMenu = new Pane();
+
     public Pane getMainMenu() {
         return MainMenu;
     }
@@ -121,6 +120,9 @@ public class GameController implements Initializable{
 
     @FXML
     transient private ImageView settingsButton = new ImageView();
+
+    @FXML
+    transient private Button resurrectButton = new Button();
 
     @FXML
     transient private Pane platformPane = new Pane();
@@ -151,7 +153,16 @@ public class GameController implements Initializable{
 
     transient private ArrayList<String> savedGameSlots = new ArrayList<>();
     transient private int overWrite;
-    
+    transient private Timeline timeline;
+
+    public Pane getEndGameMenu() {
+        return endGameMenu;
+    }
+
+    public Button getResurrectButton() {
+        return resurrectButton;
+    }
+
     public GameController() {
         savedGameSlots.add("StoringGame1");
         savedGameSlots.add("StoringGame2");
@@ -165,14 +176,14 @@ public class GameController implements Initializable{
             game.addPlatform(new Platform((Rectangle) platforms));
         }
 
-        for(Node fallingPlatforms : gameObjectsPane.getChildren()){
-            if(fallingPlatforms instanceof Rectangle){
+        for (Node fallingPlatforms : gameObjectsPane.getChildren()) {
+            if (fallingPlatforms instanceof Rectangle) {
                 game.addFallingPlatform(new FallingPlatform((Rectangle) fallingPlatforms));
 
             }
         }
         int numberOfFallingPlatforms = game.getFallingPlatformList().size();
-        for(int i = 0; i < numberOfFallingPlatforms; i++){
+        for (int i = 0; i < numberOfFallingPlatforms; i++) {
             gameObjectsPane.getChildren().remove(gameObjectsPane.getChildren().size() - 1);
         }
 
@@ -215,6 +226,7 @@ public class GameController implements Initializable{
         game.getHero().setHeroImage(heroImage);
         root.getChildren().remove(loadGameMenu);
         root.getChildren().remove(pauseGameMenu);
+        root.getChildren().remove(endGameMenu);
         createPlatformList();
         game.generateGameObjects();
         this.currLocation = 0;
@@ -247,7 +259,7 @@ public class GameController implements Initializable{
         setUpGeneralClick();
         setUpMasterKeyFrame();
         setUpNumberKeyPressed();
-        Timeline timeline = new Timeline();
+        timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(master);
         timeline.play();
@@ -257,14 +269,12 @@ public class GameController implements Initializable{
 
 
     }
-    
+
 
     public void removeMenu() {
         root.getChildren().remove(MainMenu);
 
     }
-
-
 
 
     public void displayPauseMenu() {
@@ -290,7 +300,7 @@ public class GameController implements Initializable{
 
     }
 
-    public void trySerializing(){
+    public void trySerializing() {
         System.out.println("Saving this game");
         try {
             serialize();
@@ -299,8 +309,13 @@ public class GameController implements Initializable{
         }
     }
 
+    public void pauseGame() {
+        timeline.pause();
+        displayPauseMenu();
+    }
 
-    public void displayGameObjectsAfterLoading(){
+
+    public void displayGameObjectsAfterLoading() {
 
         currrentLocationLabel.setText(Integer.toString(game.getHero().getCurrentLocation()));
         getCoinsCollectedLabel().setText(Integer.toString(game.getHero().getCurrCoins()));
@@ -310,33 +325,33 @@ public class GameController implements Initializable{
         game.getHero().setHeroImage(heroImage);
 
         gameRoot.getChildren().remove(platformPane);
-        gameRoot.getChildren().remove(loadGameMenu);
+        root.getChildren().remove(loadGameMenu);
+        root.getChildren().remove(endGameMenu);
+        root.getChildren().remove(pauseGameMenu);
 
         int numberOfFallingPlatforms = game.getFallingPlatformList().size();
-        for(int i = 0; i < numberOfFallingPlatforms; i++){
+        for (int i = 0; i < numberOfFallingPlatforms; i++) {
             gameObjectsPane.getChildren().remove(gameObjectsPane.getChildren().size() - 1);
         }
 
 
-        for(Solid gameObject : game.getSolidList()){
-            if(gameObject instanceof FallingPlatform){
+        for (Solid gameObject : game.getSolidList()) {
+            if (gameObject instanceof FallingPlatform) {
                 ((FallingPlatform) gameObject).setBrickPhotosSet(false);
-                for(Brick brick : ((FallingPlatform) gameObject).getBricks()){
+                for (Brick brick : ((FallingPlatform) gameObject).getBricks()) {
                     brick.setPause(new PauseTransition());
                 }
             }
-            if(gameObject.isStaged()){
-                if(gameObject instanceof RedOrc){
+            if (gameObject.isStaged()) {
+                if (gameObject instanceof RedOrc) {
                     ImageView img = new ImageView(new Image("redOrc.jpeg"));
-                    ((RedOrc)gameObject).setOrcImage(img);
+                    ((RedOrc) gameObject).setOrcImage(img);
                     gameObjectsPane.getChildren().add(img);
-                }
-                else if(gameObject instanceof GreenOrc){
+                } else if (gameObject instanceof GreenOrc) {
                     ImageView img = new ImageView(new Image("greenOrc.png"));
-                    ((GreenOrc)gameObject).setOrcImage(img);
+                    ((GreenOrc) gameObject).setOrcImage(img);
                     gameObjectsPane.getChildren().add(img);
-                }
-                else if(gameObject instanceof Coin){
+                } else if (gameObject instanceof Coin) {
                     int maximumCoinWidth = 30;
                     double distanceBetweenCoins = 50;
                     ImageView img = new ImageView();
@@ -344,23 +359,17 @@ public class GameController implements Initializable{
                     img.setImage(image);
                     img.setFitHeight(maximumCoinWidth);
                     img.setFitWidth(maximumCoinWidth);
-                    ((Coin)gameObject).setCoinImage(img);
+                    ((Coin) gameObject).setCoinImage(img);
                     this.getGameObjectsPane().getChildren().add(img);
-                }
-
-                else if(gameObject instanceof TreasureChest){
+                } else if (gameObject instanceof TreasureChest) {
                     ImageView img = new ImageView(new Image("chestClosed.png"));
-                    ((TreasureChest)gameObject).setChestImage(img);
+                    ((TreasureChest) gameObject).setChestImage(img);
                     this.getGameObjectsPane().getChildren().add(img);
-                }
-
-                else if(gameObject instanceof Shurikens){
+                } else if (gameObject instanceof Shurikens) {
                     ImageView img = new ImageView(new Image("shurikenBullet.png"));
-                    ((Shurikens)gameObject).setShurikenImage(img);
+                    ((Shurikens) gameObject).setShurikenImage(img);
                     this.getGameObjectsPane().getChildren().add(img);
-                }
-
-                else if(gameObject instanceof Platform){
+                } else if (gameObject instanceof Platform) {
                     Platform p = (Platform) gameObject;
                     ImageView img;
                     if (p.getWidth() >= 350) {
@@ -373,16 +382,14 @@ public class GameController implements Initializable{
                     }
                     p.setPlatformImage(img);
                     gameObjectsPane.getChildren().add(img);
-                }
-
-                else if(gameObject instanceof FallingPlatform){
+                } else if (gameObject instanceof FallingPlatform) {
                     ((FallingPlatform) gameObject).setBrickPhotosSet(false);
                     FallingPlatform p = (FallingPlatform) gameObject;
                     //p.getRectangleForPlatform().setOpacity(0);
                     Image img = new Image("FallingPlatformNode.png");
                     int brickNumber = 0;
                     int numberOfBricks = p.getBricks().size();
-                    for(int i = 0; i < numberOfBricks; i++){
+                    for (int i = 0; i < numberOfBricks; i++) {
                         System.out.println("Adding brick number " + i);
                         ImageView imgview = new ImageView(img);
                         p.getBricks().get(i).setBrickImage(imgview, brickNumber);
@@ -392,7 +399,7 @@ public class GameController implements Initializable{
                     p.setBrickPhotosSet(true);
                 }
             }
-            }
+        }
 
         game.getHero().setGame(game);
 
@@ -400,7 +407,7 @@ public class GameController implements Initializable{
         setUpMasterKeyFrame();
         setUpNumberKeyPressed();
 
-        Timeline timeline = new Timeline();
+        timeline = new Timeline();
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.getKeyFrames().add(master);
         timeline.play();
@@ -415,7 +422,7 @@ public class GameController implements Initializable{
 
     }
 
-    public void setUpHeroStepKeyFrame(int refreshTime, int animationTime){
+    public void setUpHeroStepKeyFrame(int refreshTime, int animationTime) {
         heroStep = new KeyFrame(Duration.millis(refreshTime), e -> {
 
             game.getHero().setyVelocity(0);
@@ -423,7 +430,7 @@ public class GameController implements Initializable{
             game.setGravity(0);
 
             for (Solid x : game.getSolidList()) {
-                if(! (x instanceof Shurikens)){
+                if (!(x instanceof Shurikens)) {
                     x.translateSolidX(-game.getHero().getStepSize() * refreshTime / animationTime);
 
                 }
@@ -438,18 +445,18 @@ public class GameController implements Initializable{
 
     }
 
-    public void setUpNumberKeyPressed(){
+    public void setUpNumberKeyPressed() {
         onNumberKey = new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 System.out.println("IN EVENT HANDLER FOR KEYSSSSS");
-                if(keyEvent.getCode().equals(KeyCode.DIGIT1) || keyEvent.getCode().equals(KeyCode.NUMPAD1)){
+                if (keyEvent.getCode().equals(KeyCode.DIGIT1) || keyEvent.getCode().equals(KeyCode.NUMPAD1)) {
                     game.getHero().setEquippedWeapon(game.getHero().getHelmet().getWeapon1());
                 }
-                if(keyEvent.getCode().equals(KeyCode.DIGIT2) || keyEvent.getCode().equals(KeyCode.NUMPAD2)){
+                if (keyEvent.getCode().equals(KeyCode.DIGIT2) || keyEvent.getCode().equals(KeyCode.NUMPAD2)) {
                     game.getHero().setEquippedWeapon(game.getHero().getHelmet().getWeapon2());
                 }
-                if(keyEvent.getCode().equals(KeyCode.SPACE)){
+                if (keyEvent.getCode().equals(KeyCode.SPACE)) {
                     mainClick();
                 }
 
@@ -457,8 +464,8 @@ public class GameController implements Initializable{
         };
     }
 
-    public void mainClick(){
-        if(game.getHero().getEquippedWeapon() != null){
+    public void mainClick() {
+        if (game.getHero().getEquippedWeapon() != null) {
             Weapon currWeapon = game.getHero().getEquippedWeapon();
             currWeapon.useWeapon(game);
 
@@ -473,6 +480,7 @@ public class GameController implements Initializable{
         game.getHero().setCurrentLocation(game.getHero().getCurrentLocation() + 1);
         currrentLocationLabel.setText(Integer.toString(game.getHero().getCurrentLocation()));
     }
+
     public void setUpGeneralClick() {
 
         onGeneralClick = new EventHandler<MouseEvent>() {
@@ -483,7 +491,16 @@ public class GameController implements Initializable{
         };
     }
 
-    public void checkHeroLife() {
+    public void resurrectHero() {
+        if (game.getTotalCoins() > 50) {
+            game.setTotalCoins(game.getTotalCoins() - 50);
+            timeline.play();
+            root.getChildren().remove(endGameMenu);
+            game.getHero().setPos(new Position(game.getHero().getPos().getxPos(), 100));
+        }
+    }
+
+    public void checkHeroLife() throws IOException, ClassNotFoundException {
         if (game.getHero().isDead(game.getAbyssLevel())) {
             game.killHero();
         }
@@ -496,7 +513,7 @@ public class GameController implements Initializable{
             game.getPlatformList().remove(gameObject);
         } else if (gameObject instanceof Orc) {
             ((Orc) gameObject).setAlive(false);
-        } else if(gameObject instanceof TreasureChest) {
+        } else if (gameObject instanceof TreasureChest) {
             ((TreasureChest) gameObject).setOpened(true);
         }
 
@@ -549,24 +566,20 @@ public class GameController implements Initializable{
                 gameObjectsPane.getChildren().add(img);
 
 
-            }
-
-            else if(gameObject instanceof Coin){
+            } else if (gameObject instanceof Coin) {
                 Coin c = (Coin) gameObject;
                 ImageView img = new ImageView(new Image("coin.png"));
                 img.setFitHeight(Coin.maximumCoinWidth);
                 img.setFitWidth(Coin.maximumCoinWidth);
                 c.setCoinImage(img);
                 gameObjectsPane.getChildren().add(img);
-            }
-
-            else if(gameObject instanceof FallingPlatform && !(((FallingPlatform)gameObject).isBrickPhotosSet())){
+            } else if (gameObject instanceof FallingPlatform && !(((FallingPlatform) gameObject).isBrickPhotosSet())) {
                 FallingPlatform p = (FallingPlatform) gameObject;
                 //p.getRectangleForPlatform().setOpacity(0);
                 Image img = new Image("FallingPlatformNode.png");
                 int brickNumber = 0;
                 int numberOfBricks = p.getBricks().size();
-                for(int i = 0; i < numberOfBricks; i++){
+                for (int i = 0; i < numberOfBricks; i++) {
                     System.out.println("Adding brick number " + i);
                     ImageView imgview = new ImageView(img);
                     p.getBricks().get(i).setBrickImage(imgview, brickNumber);
@@ -629,12 +642,18 @@ public class GameController implements Initializable{
     public void setUpMasterKeyFrame() {
         int frameTimeInMillis = 40;
         master = new KeyFrame(Duration.millis(frameTimeInMillis), e -> {
-            checkHeroLife();
+            try {
+                checkHeroLife();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
             removeDeadThings();
-            if(game.getHero().getCurrentLocation() == 108 && game.getBoss() == null){
+            if (game.getHero().getCurrentLocation() == 108 && game.getBoss() == null) {
                 game.startBossFight();
             }
-            if(game.getHero().getCurrentLocation() == 122){
+            if (game.getHero().getCurrentLocation() == 122) {
                 game.heroWon();
             }
 
@@ -658,7 +677,7 @@ public class GameController implements Initializable{
     }
 
     public void removeDeadThings() {
-        for(Orc x : game.getOrcList()){
+        for (Orc x : game.getOrcList()) {
 //            if(x.getPos().getxPos() > game.getAbyssLevel()){
 //                x.setAlive(false);
 //                if(x.isStaged()){
@@ -667,21 +686,21 @@ public class GameController implements Initializable{
 //                }
 //
 //            }
-            if(!x.isAlive()){
+            if (!x.isAlive()) {
 
                 game.getSolidList().remove(x);
             }
         }
-        for(Solid x : game.getWeaponList()){
-            if(x instanceof Shurikens){
-                if(!(((Shurikens) x).isLive)){
+        for (Solid x : game.getWeaponList()) {
+            if (x instanceof Shurikens) {
+                if (!(((Shurikens) x).isLive)) {
                     game.getSolidList().remove(x);
                 }
 
             }
         }
-        for(TreasureChest x : game.getTreasureChestList()){
-            if(x.isOpened()){
+        for (TreasureChest x : game.getTreasureChestList()) {
+            if (x.isOpened()) {
                 game.getSolidList().remove(x);
 //                x.setChestImage(null);
                 gameObjectsPane.getChildren().remove(x.getChestImage());
@@ -692,17 +711,19 @@ public class GameController implements Initializable{
     }
 
     public void loadGame(ActionEvent event, int gameNum) throws IOException, ClassNotFoundException {
-        Main.loadGame(event,  gameNum);
+        Main.loadGame(event, gameNum);
     }
 
-    public void exitToMainPage(){
+    public void exitToMainPage() {
         root.getChildren().remove(pauseGameMenu);
         root.getChildren().add(MainMenu);
         onGeneralClick = null;
 
     }
-    public void playFromPause(){
+
+    public void playFromPause() {
         root.getChildren().remove(pauseGameMenu);
+        timeline.play();
 
 
     }
@@ -710,14 +731,14 @@ public class GameController implements Initializable{
 
     public void restartGame(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("Game.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currScene = new Scene(root, 1024, 600);
 
         stage.setScene(currScene);
         stage.show();
     }
 
-    public void exit(){
+    public void exit() {
         System.out.println("Goodbye Fellow Adventurer");
         System.out.println("""
                 Credits - 
@@ -732,16 +753,19 @@ public class GameController implements Initializable{
     public void loadGameNumber1(ActionEvent event) throws IOException, ClassNotFoundException {
         loadGame(event, 1);
     }
+
     public void loadGameNumber2(ActionEvent event) throws IOException, ClassNotFoundException {
         loadGame(event, 2);
 
     }
+
     public void loadGameNumber3(ActionEvent event) throws IOException, ClassNotFoundException {
         loadGame(event, 3);
 
 
     }
-    public void loadGameButtonClick(){
+
+    public void loadGameButtonClick() {
         root.getChildren().remove(MainMenu);
         root.getChildren().add(loadGameMenu);
 
@@ -752,7 +776,7 @@ public class GameController implements Initializable{
     public void initialize(URL url, ResourceBundle resourceBundle) {
         root.getChildren().remove(pauseGameMenu);
         root.getChildren().remove(loadGameMenu);
-
+        root.getChildren().remove(endGameMenu);
 
 
     }

@@ -1,9 +1,14 @@
 package com.example.ap_willhero;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,6 +16,7 @@ import java.util.Random;
 public class Game implements Serializable {
     private Hero hero;
     private int totalCoins;
+    private boolean hasBeenResurrected;
 
 
     private double gravity;
@@ -33,6 +39,13 @@ public class Game implements Serializable {
     private ArrayList<FallingPlatform> FallingPlatformList;
     private ArrayList<TreasureChest> TreasureChestList;
 
+    public int getTotalCoins() {
+        return totalCoins;
+    }
+
+    public void setTotalCoins(int totalCoins) {
+        this.totalCoins = totalCoins;
+    }
 
     public BossOrc getBoss() {
         return boss;
@@ -63,10 +76,22 @@ public class Game implements Serializable {
     public void setGravity(double gravity) {
         this.gravity = gravity;
     }
-    public void killHero(){
+    public void killHero() throws IOException, ClassNotFoundException {
         System.out.println("Hero is Dead");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("EndGameMenu.fxml"));
-        System.exit(0);
+        gameController.pauseGame();
+//        gameController.setGame(null);
+        totalCoins += hero.getCurrCoins();
+        if(hasBeenResurrected){
+            System.out.println("Hero has already resurrected");
+//            gameController.getEndGameMenu().getChildren().remove(gameController.getResurrectButton());
+        }
+        else{
+            gameController.savingGame();
+
+        }
+        gameController.getRoot().getChildren().add(gameController.getEndGameMenu());
+
+
 
     }
 
@@ -83,6 +108,7 @@ public class Game implements Serializable {
         this.totalLocations = 122;
         this.gravity = 0.0008;
         this.totalCoins = 0;
+        this.hasBeenResurrected =false;
         System.out.println("Image Position is: " + heroImage.getLayoutX() + " " + heroImage.getLayoutY());
 
         hero = new Hero(this, heroImage);

@@ -104,7 +104,7 @@
             </Pane>
             <Pane fx:id="staticPane" prefHeight="600.0" prefWidth="1024.0">
                <children>
-                  <ImageView fx:id="settingsButton" fitHeight="43.0" fitWidth="44.0" layoutX="14.0" layoutY="12.0" onMouseClicked="#displayPauseMenu" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="settingsButton" fitHeight="43.0" fitWidth="44.0" layoutX="14.0" layoutY="12.0" onMouseClicked="#pauseGame" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/settings.PNG" />
                      </image>
@@ -150,6 +150,52 @@
             </Pane>
          </children>
       </AnchorPane>
+      <Pane fx:id="endGameMenu" prefHeight="600.0" prefWidth="1024.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" height="611.0" opacity="0.76" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
+            <ImageView fitHeight="350.0" fitWidth="303.0" layoutX="341.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/EndGameMenu.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="459.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score">
+               <font>
+                  <Font name="Segoe UI Black" size="21.0" />
+               </font>
+            </Text>
+            <Label layoutX="481.0" layoutY="235.0" text="0" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Black" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="resurrectButton" layoutX="383.0" layoutY="278.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="210.0" style="-fx-background-color: #46a6fa; -fx-border-color: white; -fx-background-radius: 6; -fx-border-radius: 6;" text="Ressurect using 50 coins">
+               <font>
+                  <Font name="Segoe UI Black" size="15.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="50.0" fitWidth="57.0" layoutX="397.0" layoutY="354.0" onMouseClicked="#exitToMainPage" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/ExitToHomeButton.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" layoutX="405.0" layoutY="426.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit" wrappingWidth="42.63232421875">
+               <font>
+                  <Font name="Segoe UI Black" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="50.0" fitWidth="57.0" layoutX="523.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/RestartButton.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="520.0" layoutY="354.0" mnemonicParsing="false" onAction="#restartGame" opacity="0.0" prefHeight="49.0" prefWidth="51.0" />
+            <Text fill="WHITE" layoutX="520.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restart" wrappingWidth="80.63232421875">
+               <font>
+                  <Font name="Segoe UI Black" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
       <Pane fx:id="loadGameMenu" prefHeight="600.0" prefWidth="1024.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00070d" height="600.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
