@@ -119,7 +119,7 @@ public class Game implements Serializable {
         this.gravity = 0.0008;
         this.totalCoins = 0;
         this.hasBeenResurrected =false;
-        System.out.println("Image Position is: " + heroImage.getLayoutX() + " " + heroImage.getLayoutY());
+//        System.out.println("Image Position is: " + heroImage.getLayoutX() + " " + heroImage.getLayoutY());
 
         hero = new Hero(this, heroImage);
 

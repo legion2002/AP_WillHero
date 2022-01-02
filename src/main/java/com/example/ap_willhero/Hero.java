@@ -182,15 +182,16 @@ public class Hero extends Solid implements Collidable, Serializable {
             if(collideVal == 1){
                 //make colliding with left here
                 if(s instanceof BossOrc){
-                    System.out.println("COLLIDED WITH LEFT OF BOSS ORC");
+
                     this.setyVelocity(0);
-                    s.setxVelocity(0.1);
+                    s.setxVelocity(0.3);
                     //getPos().setxPos(getPos().getxPos() - 10);
                 }
                 else{
-                    System.out.println("COLLIDED WITH LEFT OF ORCCCCC");
-                    System.out.println("Hero X velocity is " + this.getxVelocity());
-                    this.setxVelocity(-this.getxVelocity()/2);
+
+
+
+
                     this.setyVelocity(0);
                     s.setxVelocity(0.25);
                 }
@@ -208,7 +209,7 @@ public class Hero extends Solid implements Collidable, Serializable {
         }
 
         if(s instanceof TreasureChest){
-            System.out.println("do chest animation here");
+
 //            ((TreasureChest)s).doChestAnimation();
             ((TreasureChest) s).setOpened(true);
                 if(s instanceof WeaponChest){

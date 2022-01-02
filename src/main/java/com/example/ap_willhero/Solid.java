@@ -46,7 +46,7 @@ public abstract class Solid implements Serializable {
         this.yVelocity = yVelocity;
     }
     public int hasCollided(Solid s) {
-        int offset = 20;
+        int offset = 25;
         int heroLeft = (int) getPos().getxPos();
         int heroRight = (int) (heroLeft + getWidth());
         int heroTop = (int) getPos().getyPos();
@@ -75,27 +75,27 @@ public abstract class Solid implements Serializable {
         //Collision with left of solid
         if (heroRight > (solidLeft - offset) && heroRight < (solidLeft + offset) &&
                 (((heroTop > solidTop - offset) && (heroTop < solidBottom + offset)) || (((heroBottom > solidTop - offset) && (heroBottom < solidBottom + offset))))) {
-            System.out.println("Collision with left of solid");
+//            System.out.println("Collision with left of solid");
             return 1;
         }
         //Top of solid
         else if (heroBottom > (solidTop - offset) && heroBottom < (solidTop + offset) &&
                 ((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight))) {
-            System.out.println("Collision with top of  solid");
+//            System.out.println("Collision with top of  solid");
             //System.out.println("Object is " + s.getClass().getName());
             return 2;
         }
         //Collision with bottom of solid
         else if (heroTop < (solidBottom + offset) && heroTop > (solidBottom - offset) &&
                 ((heroRight < solidRight && heroRight > solidLeft) || (heroLeft > solidLeft && heroLeft < solidRight))) {
-            System.out.println("Collision with bottom of  solid");
+//            System.out.println("Collision with bottom of  solid");
             return 4;
         }
 
         //Collision with right of solid
         else if ((heroLeft < (solidRight + offset) && heroLeft > (solidRight - offset)) &&
                 (((heroTop > solidTop - offset) && (heroTop < solidBottom + offset)) || (((heroBottom > solidTop - offset) && (heroBottom < solidBottom + offset))))) {
-            System.out.println("Collision with right of solid");
+//            System.out.println("Collision with right of solid");
             return 3;
         }
 

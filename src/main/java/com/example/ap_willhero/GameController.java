@@ -419,7 +419,7 @@ public class GameController implements Initializable {
                     int brickNumber = 0;
                     int numberOfBricks = p.getBricks().size();
                     for (int i = 0; i < numberOfBricks; i++) {
-                        System.out.println("Adding brick number " + i);
+
                         ImageView imgview = new ImageView(img);
                         p.getBricks().get(i).setBrickImage(imgview, brickNumber);
                         gameObjectsPane.getChildren().add(imgview);
@@ -478,7 +478,7 @@ public class GameController implements Initializable {
         onNumberKey = new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                System.out.println("IN EVENT HANDLER FOR KEYSSSSS");
+
                 if (keyEvent.getCode().equals(KeyCode.DIGIT1) || keyEvent.getCode().equals(KeyCode.NUMPAD1)) {
                     game.getHero().setEquippedWeapon(game.getHero().getHelmet().getWeapon1());
                 }
@@ -631,7 +631,7 @@ public class GameController implements Initializable {
                 int brickNumber = 0;
                 int numberOfBricks = p.getBricks().size();
                 for (int i = 0; i < numberOfBricks; i++) {
-                    System.out.println("Adding brick number " + i);
+
                     ImageView imgview = new ImageView(img);
                     p.getBricks().get(i).setBrickImage(imgview, brickNumber);
                     gameObjectsPane.getChildren().add(imgview);
@@ -670,6 +670,8 @@ public class GameController implements Initializable {
         game.getHero().translateSolidY(s);
         double v = game.getHero().getyVelocity() + game.getGravity() * frameTimeInMillis;
         game.getHero().setyVelocity(v);
+        s = game.getHero().getxVelocity() * frameTimeInMillis;
+        game.getHero().translateSolidX(s);
     }
 
     public void physicsOrc(Orc x, int frameTimeInMillis) {
@@ -741,7 +743,9 @@ public class GameController implements Initializable {
 //
 //            }
             if (!x.isAlive()) {
-
+                if(x instanceof BossOrc){
+                    System.out.println("=================REMOVING BOSS===========");
+                }
                 game.getSolidList().remove(x);
                 if(!x.isCoinsGiven()){
                     game.getHero().increaseCurrCoin(x.getCoinsReleased());
@@ -811,7 +815,7 @@ public class GameController implements Initializable {
     public void loadGameNumber1(ActionEvent event) throws IOException, ClassNotFoundException {
         //System.out.println(SavedGameLocation1.getText() + "Label");
         if(SavedGameLocation1.getText().equals("Location : 0") && SavedGameCoin1.getText().equals("Coins : 0")){
-            System.out.println("Reached");
+
             onPlayGameClick();
         }
 

@@ -80,6 +80,8 @@ public class BonusController  {
         double v = hero.getyVelocity() + gravity * frameTimeInMillis;
         hero.setyVelocity(v);
 
+
+
     }
 
 

@@ -75,7 +75,7 @@ public class Main extends Application{
     public static void deserialize(int chosenGame) throws IOException, ClassNotFoundException{
         ObjectInputStream in = null;
         try{
-            String filename = "D:\\Second Year\\First Sem\\AP\\AP Project\\AP_WillHero\\" + "StoringGame" + chosenGame;
+            String filename = "D:\\AP_Project\\AP_WillHero\\" + "StoringGame" + chosenGame;
             in = new ObjectInputStream(new FileInputStream(filename));
             Game loadedGame = (Game)in.readObject();
             currGame = loadedGame;

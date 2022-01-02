@@ -110,8 +110,9 @@ public class Orc extends Solid implements Collidable, Serializable{
             ((Shurikens) s).isLive =false;
 
             health -= 1;
+
             if(health <= 0){
-                if(orcImage != null)
+
                     killOrc();
             }
 
@@ -119,9 +120,11 @@ public class Orc extends Solid implements Collidable, Serializable{
         }
         if(s instanceof Knives){
 
+
             health -= 1;
+
             if(health <= 0){
-                if(orcImage != null)
+
                     killOrc();
             }
 
@@ -130,9 +133,13 @@ public class Orc extends Solid implements Collidable, Serializable{
     }
 
     public void killOrc() {
-        System.out.println("Orc is Dead");
-        System.out.println("CALLED FOR BOSS");
-        orcImage.setImage(null);
+        if(this instanceof BossOrc){
+
+        }
+        if(orcImage != null){
+            orcImage.setImage(null);
+
+        }
         isAlive = false;
 
     }
