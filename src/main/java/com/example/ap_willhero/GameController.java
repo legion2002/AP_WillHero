@@ -39,10 +39,23 @@ public class GameController implements Initializable{
     @FXML
     transient private VBox menu = new VBox();
     transient private EventHandler<MouseEvent> onGeneralClick;
+
+    public AnchorPane getRoot() {
+        return root;
+    }
+
+    public void setRoot(AnchorPane root) {
+        this.root = root;
+    }
+
     @FXML
     transient private AnchorPane root = new AnchorPane();
     @FXML
     transient private Button PlayGame = new Button();
+
+    public ImageView getHeroImage() {
+        return heroImage;
+    }
 
     @FXML
     transient private ImageView heroImage = new ImageView();
@@ -88,6 +101,10 @@ public class GameController implements Initializable{
     @FXML
     transient private Pane pauseGameMenu = new Pane();
 
+    public Pane getMainMenu() {
+        return MainMenu;
+    }
+
     @FXML
     transient private Pane MainMenu = new Pane();
 
@@ -109,6 +126,14 @@ public class GameController implements Initializable{
 
 
     transient private int currLocation;
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
     transient private Game game;
     transient private Stage stage;
@@ -139,6 +164,12 @@ public class GameController implements Initializable{
 
             }
         }
+        int numberOfFallingPlatforms = game.getFallingPlatformList().size();
+        for(int i = 0; i < numberOfFallingPlatforms; i++){
+            gameObjectsPane.getChildren().remove(gameObjectsPane.getChildren().size() - 1);
+        }
+
+        gameRoot.getChildren().remove(platformPane);
 
     }
 
@@ -225,6 +256,8 @@ public class GameController implements Initializable{
     }
 
 
+
+
     public void removeMenu() {
         root.getChildren().remove(MainMenu);
 
@@ -265,73 +298,88 @@ public class GameController implements Initializable{
         }
     }
 
-    public void deserialize(int chosenGame) throws IOException, ClassNotFoundException{
-        ObjectInputStream in = null;
-        try{
-            String filename = "D:\\AP_Project\\AP_WillHero\\" + "StoringGame" + chosenGame;
-            in = new ObjectInputStream(new FileInputStream(filename));
-            Game loadedGame = (Game)in.readObject();
-            this.game = loadedGame;
-            game.getHero().setHeroImage(heroImage);
-            game.setGameController(this);
-            root.getChildren().remove(loadGameMenu);
-            root.getChildren().remove(pauseGameMenu);
-
-        }
-        catch (EOFException e) {
-            return ;
-        }catch (ClassCastException e) {
-            System.out.println("Invalid Class Cast Exception");
-        }
-        finally {
-            in.close();
-        }
-    }
 
     public void displayGameObjectsAfterLoading(){
-        for(Solid gameObject : game.getSolidList()){
-            if(gameObject instanceof RedOrc){
-                ImageView img = new ImageView(new Image("redOrc.jpeg"));
-                ((RedOrc)gameObject).setOrcImage(img);
-                gameObjectsPane.getChildren().add(img);
-            }
-            else if(gameObject instanceof GreenOrc){
-                ImageView img = new ImageView(new Image("greenOrc.png"));
-                ((GreenOrc)gameObject).setOrcImage(img);
-                gameObjectsPane.getChildren().add(img);
-            }
-            else if(gameObject instanceof Coin){
-                int maximumCoinWidth = 30;
-                double distanceBetweenCoins = 50;
-                ImageView img = new ImageView();
-                Image image = new Image("coin.png");
-                img.setImage(image);
-                img.setFitHeight(maximumCoinWidth);
-                img.setFitWidth(maximumCoinWidth);
-                ((Coin)gameObject).setCoinImage(img);
-                this.getGameObjectsPane().getChildren().add(img);
-            }
 
-            else if(gameObject instanceof TreasureChest){
-                ImageView img = new ImageView(new Image("chestClosed.png"));
-                ((TreasureChest)gameObject).setChestImage(img);
-                this.getGameObjectsPane().getChildren().add(img);
-            }
+        currrentLocationLabel.setText(Integer.toString(game.getHero().getCurrentLocation()));
+        getCoinsCollectedLabel().setText(Integer.toString(game.getHero().getCurrCoins()));
+        getShurikenLabel().setText(Integer.toString(game.getHero().getHelmet().getWeapon1().getLevel()));
+        getKnifeLabel().setText(Integer.toString(game.getHero().getHelmet().getWeapon2().getLevel()));
 
-            else if(gameObject instanceof Shurikens){
-                ImageView img = new ImageView(new Image("shuriukenBullet.png"));
-                ((Shurikens)gameObject).setShurikenImage(img);
-                this.getGameObjectsPane().getChildren().add(img);
-            }
-            else if(gameObject instanceof Platform){
-                //Write code
-            }
+        game.getHero().setHeroImage(heroImage);
+
+        gameRoot.getChildren().remove(platformPane);
+        int numberOfFallingPlatforms = game.getFallingPlatformList().size();
+        for(int i = 0; i < numberOfFallingPlatforms; i++){
+            gameObjectsPane.getChildren().remove(gameObjectsPane.getChildren().size() - 1);
         }
+
+        for(Solid gameObject : game.getSolidList()){
+            if(gameObject.isStaged()){
+                if(gameObject instanceof RedOrc){
+                    ImageView img = new ImageView(new Image("redOrc.jpeg"));
+                    ((RedOrc)gameObject).setOrcImage(img);
+                    gameObjectsPane.getChildren().add(img);
+                }
+                else if(gameObject instanceof GreenOrc){
+                    ImageView img = new ImageView(new Image("greenOrc.png"));
+                    ((GreenOrc)gameObject).setOrcImage(img);
+                    gameObjectsPane.getChildren().add(img);
+                }
+                else if(gameObject instanceof Coin){
+                    int maximumCoinWidth = 30;
+                    double distanceBetweenCoins = 50;
+                    ImageView img = new ImageView();
+                    Image image = new Image("coin.png");
+                    img.setImage(image);
+                    img.setFitHeight(maximumCoinWidth);
+                    img.setFitWidth(maximumCoinWidth);
+                    ((Coin)gameObject).setCoinImage(img);
+                    this.getGameObjectsPane().getChildren().add(img);
+                }
+
+                else if(gameObject instanceof TreasureChest){
+                    ImageView img = new ImageView(new Image("chestClosed.png"));
+                    ((TreasureChest)gameObject).setChestImage(img);
+                    this.getGameObjectsPane().getChildren().add(img);
+                }
+
+                else if(gameObject instanceof Shurikens){
+                    ImageView img = new ImageView(new Image("shurikenBullet.png"));
+                    ((Shurikens)gameObject).setShurikenImage(img);
+                    this.getGameObjectsPane().getChildren().add(img);
+                }
+
+                else if(gameObject instanceof Platform){
+                    Platform p = (Platform) gameObject;
+                    ImageView img;
+                    if (p.getWidth() >= 350) {
+                        img = new ImageView(new Image("longPlatform.png"));
+
+                    } else if (p.getWidth() > 200 && p.getWidth() < 350) {
+                        img = new ImageView(new Image("fatPlatform.png"));
+                    } else {
+                        img = new ImageView(new Image("normalPlatform.png"));
+                    }
+                    p.setPlatformImage(img);
+                    gameObjectsPane.getChildren().add(img);
+                }
+            }
+            }
+
+        setUpGeneralClick();
+        setUpMasterKeyFrame();
+
+        Timeline timeline = new Timeline();
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.getKeyFrames().add(master);
+        timeline.play();
+        staticPane.setOnMouseClicked(onGeneralClick);
+
     }
 
     public void loadSavedGame() throws IOException, ClassNotFoundException {
 
-        deserialize(1);
         displayGameObjectsAfterLoading();
 
     }
@@ -375,8 +423,8 @@ public class GameController implements Initializable{
                 movingHero.setCycleCount(animationTime / refreshTime);
                 movingHero.getKeyFrames().add(heroStep);
                 movingHero.play();
-                currLocation++;
-                currrentLocationLabel.setText(Integer.toString(currLocation));
+                game.getHero().setCurrentLocation(game.getHero().getCurrentLocation() + 1);
+                currrentLocationLabel.setText(Integer.toString(game.getHero().getCurrentLocation()));
             }
         };
     }
@@ -433,7 +481,7 @@ public class GameController implements Initializable{
 
             } else if (gameObject instanceof Platform) {
                 Platform p = (Platform) gameObject;
-                p.getBasePlatform().setOpacity(0);
+                //p.getBasePlatform().setOpacity(0);
                 ImageView img;
                 if (p.getWidth() >= 350) {
                     img = new ImageView(new Image("longPlatform.png"));
@@ -451,7 +499,7 @@ public class GameController implements Initializable{
 
             else if(gameObject instanceof FallingPlatform && !(((FallingPlatform)gameObject).isBrickPhotosSet())){
                 FallingPlatform p = (FallingPlatform) gameObject;
-                p.getRectangleForPlatform().setOpacity(0);
+                //p.getRectangleForPlatform().setOpacity(0);
                 Image img = new Image("FallingPlatformNode.png");
                 int brickNumber = 0;
                 int numberOfBricks = p.getBricks().size();
@@ -576,18 +624,7 @@ public class GameController implements Initializable{
     }
 
     public void loadGame(ActionEvent event) throws IOException, ClassNotFoundException {
-        //Three buttons on load game menu
-        System.out.println("Clicking load game button");
-        root = FXMLLoader.load(getClass().getResource("Game.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        currScene = new Scene(root, 1024, 600);
-        stage.setScene(currScene);
-
-        //System.out.println("Curr coinsg" + game.getHero().getCurrCoins());
-
-        stage.show();
-        loadSavedGame();
-        MainMenu.setOpacity(0);
+        Main.loadGame(event);
     }
 
 

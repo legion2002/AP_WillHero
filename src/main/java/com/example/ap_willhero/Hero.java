@@ -13,6 +13,15 @@ public class Hero extends Solid implements Collidable, Serializable {
     private float jumpHeight;
     private int currCoins;
 
+    public int getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public void setCurrentLocation(int currentLocation) {
+        this.currentLocation = currentLocation;
+    }
+
+    private int currentLocation;
 
 
     private int stepSize;
@@ -34,6 +43,7 @@ public class Hero extends Solid implements Collidable, Serializable {
 
         setPos(new Position(heroImage.getLayoutX(), heroImage.getLayoutY()));
         this.touchingPlatform = false;
+        this.currentLocation = 0;
 
     }
 

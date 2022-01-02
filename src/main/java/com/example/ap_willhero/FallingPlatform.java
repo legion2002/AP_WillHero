@@ -74,8 +74,12 @@ public class FallingPlatform extends Solid implements Serializable {
     @Override
     public void setPos(Position p){
         super.setPos(p);
-        rectangleForPlatform.setLayoutX(getPos().getxPos());
-        rectangleForPlatform.setLayoutY(getPos().getyPos());
+
+        if(rectangleForPlatform != null){
+            rectangleForPlatform.setLayoutX(getPos().getxPos());
+            rectangleForPlatform.setLayoutY(getPos().getyPos());
+        }
+
         if(brickPhotosSet && !animationDone){
             int brickNumber = 0;
             for(Brick brick : bricks){
@@ -112,7 +116,8 @@ public class FallingPlatform extends Solid implements Serializable {
         fallBrick.setOnFinished(e -> removeFallingPlatformBrick(node));
 
         fallBrick.play();
-        rectangleForPlatform.setWidth(rectangleForPlatform.getWidth() - 100);
+        this.setWidth(getWidth() - 100);
+//        rectangleForPlatform.setWidth(rectangleForPlatform.getWidth() - 100);
         this.setPos(new Position(this.getPos().getxPos() + 100, this.getPos().getyPos()));
 
     }

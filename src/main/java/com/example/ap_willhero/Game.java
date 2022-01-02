@@ -22,6 +22,11 @@ public class Game implements Serializable {
     private ArrayList<Solid> SolidList;
     private ArrayList<Orc> OrcList;
     private ArrayList<Solid> WeaponList;
+
+    public ArrayList<FallingPlatform> getFallingPlatformList() {
+        return FallingPlatformList;
+    }
+
     private ArrayList<FallingPlatform> FallingPlatformList;
     private ArrayList<TreasureChest> TreasureChestList;
 

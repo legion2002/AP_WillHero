@@ -7,6 +7,11 @@ import java.io.Serializable;
 
 public class Platform extends Solid implements Serializable {
     transient ImageView platformImage;
+
+    public void setBasePlatform(Rectangle basePlatform) {
+        this.basePlatform = basePlatform;
+    }
+
     transient Rectangle basePlatform;
     private boolean isStaged;
 
@@ -47,8 +52,10 @@ public class Platform extends Solid implements Serializable {
     @Override
     public void setPos(Position p) {
         super.setPos(p);
-        basePlatform.setLayoutX(getPos().getxPos());
-        basePlatform.setLayoutY(getPos().getyPos());
+        if(basePlatform != null){
+            basePlatform.setLayoutX(getPos().getxPos());
+            basePlatform.setLayoutY(getPos().getyPos());
+        }
         if (platformImage != null) {
             platformImage.setLayoutX(getPos().getxPos());
             platformImage.setLayoutY(getPos().getyPos());
@@ -68,4 +75,5 @@ public class Platform extends Solid implements Serializable {
         setPos(new Position(getPos().getxPos(), getPos().getyPos() + translation));
 
     }
+
 }
