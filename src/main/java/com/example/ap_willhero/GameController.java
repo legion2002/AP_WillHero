@@ -32,93 +32,93 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-public class GameController implements Initializable {
-
-    Scanner scn = new Scanner(System.in);
-
-    @FXML
-    private VBox menu = new VBox();
-    private EventHandler<MouseEvent> onGeneralClick;
-    @FXML
-    private AnchorPane root = new AnchorPane();
-    @FXML
-    private Button PlayGame = new Button();
-
-    @FXML
-    private ImageView heroImage = new ImageView();
+public class GameController implements Initializable{
 
 
 
     @FXML
-    private Label currrentLocationLabel = new Label();
+    transient private VBox menu = new VBox();
+    transient private EventHandler<MouseEvent> onGeneralClick;
+    @FXML
+    transient private AnchorPane root = new AnchorPane();
+    @FXML
+    transient private Button PlayGame = new Button();
 
     @FXML
-    private Label coinsCollectedLabel = new Label();
+    transient private ImageView heroImage = new ImageView();
 
-    @FXML
-    private Label shurikenLabel = new Label();
-
-    @FXML
-    private Label knifeLabel = new Label();
-
-
-    @FXML
-    private ImageView pauseMenu = new ImageView();
-
-    @FXML
-    private Button pauseMenuButton = new Button();
 
 
     @FXML
-    private FadeTransition menuDisappearing = new FadeTransition();
+    transient private Label currrentLocationLabel = new Label();
 
     @FXML
-    private FadeTransition pauseMenuAppearing = new FadeTransition();
+    transient private Label coinsCollectedLabel = new Label();
 
     @FXML
-    private Pane loadGameMenu = new Pane();
-
-
-    @FXML
-    private AnchorPane gameRoot = new AnchorPane();
+    transient private Label shurikenLabel = new Label();
 
     @FXML
-    private Button loadGameButton = new Button();
-
-    @FXML
-    private Pane pauseGameMenu = new Pane();
-
-    @FXML
-    private Pane MainMenu = new Pane();
-
-    @FXML
-    private Pane staticPane = new Pane();
+    transient private Label knifeLabel = new Label();
 
 
     @FXML
-    private ImageView settingsButton = new ImageView();
+    transient private ImageView pauseMenu = new ImageView();
 
     @FXML
-    private Pane platformPane = new Pane();
+    transient private Button pauseMenuButton = new Button();
+
 
     @FXML
-    private Pane cloudPane = new Pane();
+    transient private FadeTransition menuDisappearing = new FadeTransition();
 
     @FXML
-    private Pane gameObjectsPane = new Pane();
+    transient private FadeTransition pauseMenuAppearing = new FadeTransition();
+
+    @FXML
+    transient private Pane loadGameMenu = new Pane();
 
 
-    private int currLocation;
+    @FXML
+    transient private AnchorPane gameRoot = new AnchorPane();
 
-    private Game game;
-    private Stage stage;
-    private Scene currScene;
-    private KeyFrame master;
-    private KeyFrame heroStep;
+    @FXML
+    transient private Button loadGameButton = new Button();
+
+    @FXML
+    transient private Pane pauseGameMenu = new Pane();
+
+    @FXML
+    transient private Pane MainMenu = new Pane();
+
+    @FXML
+    transient private Pane staticPane = new Pane();
 
 
-    private ArrayList<String> savedGameSlots = new ArrayList<>();
-    private int overWrite;
+    @FXML
+    transient private ImageView settingsButton = new ImageView();
+
+    @FXML
+    transient private Pane platformPane = new Pane();
+
+    @FXML
+    transient private Pane cloudPane = new Pane();
+
+    @FXML
+    transient private Pane gameObjectsPane = new Pane();
+
+
+    transient private int currLocation;
+
+    transient private Game game;
+    transient private Stage stage;
+    transient private Scene currScene;
+    transient private KeyFrame master;
+    transient private KeyFrame heroStep;
+
+
+    transient private ArrayList<String> savedGameSlots = new ArrayList<>();
+    transient private int overWrite;
 
     public GameController() {
         savedGameSlots.add("StoringGame1");
@@ -134,7 +134,10 @@ public class GameController implements Initializable {
         }
 
         for(Node fallingPlatforms : gameObjectsPane.getChildren()){
-            game.addFallingPlatform(new FallingPlatform((Rectangle) fallingPlatforms));
+            if(fallingPlatforms instanceof Rectangle){
+                game.addFallingPlatform(new FallingPlatform((Rectangle) fallingPlatforms));
+
+            }
         }
 
     }
@@ -265,12 +268,15 @@ public class GameController implements Initializable {
     public void deserialize(int chosenGame) throws IOException, ClassNotFoundException{
         ObjectInputStream in = null;
         try{
-            String filename = "D:\\Second Year\\First Sem\\AP\\AP Project\\AP_WillHero\\" + "StoringGame" + chosenGame;
+            String filename = "D:\\AP_Project\\AP_WillHero\\" + "StoringGame" + chosenGame;
             in = new ObjectInputStream(new FileInputStream(filename));
             Game loadedGame = (Game)in.readObject();
             this.game = loadedGame;
             game.getHero().setHeroImage(heroImage);
             game.setGameController(this);
+            root.getChildren().remove(loadGameMenu);
+            root.getChildren().remove(pauseGameMenu);
+
         }
         catch (EOFException e) {
             return ;

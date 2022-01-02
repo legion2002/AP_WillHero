@@ -28,7 +28,7 @@ public class Hero extends Solid implements Collidable, Serializable {
         this.heroImage = img;
         this.stepSize = 100;
         this.helmet = new Helmet();
-        this.equippedWeapon = helmet.getWeapon1();
+//        this.equippedWeapon = helmet.getWeapon1();
         setWidth(heroImage.getFitWidth());
         setHeight(heroImage.getFitHeight());
 
@@ -43,29 +43,7 @@ public class Hero extends Solid implements Collidable, Serializable {
         return stepSize;
     }
 
-    public void moveForward(){
-        //Had return type int
-    }
 
-    public void jump(){
-        //Had return type int
-    }
-
-    public void useWeapon(){
-
-    }
-
-    public void collectCoins(){
-
-    }
-
-    public void upgradeWeapon(){
-
-    }
-
-    public void switchCurrentWeapon(){
-
-    }
 
     public Helmet getHelmet(){
         return this.helmet;
@@ -83,10 +61,6 @@ public class Hero extends Solid implements Collidable, Serializable {
         return this.currCoins;
     }
 
-
-    public boolean getTouchingPlatform(){
-        return touchingPlatform;
-    }
 
     public Position getPosition(){
         return this.getPos();
@@ -264,6 +238,18 @@ public class Hero extends Solid implements Collidable, Serializable {
 
                         helmet.getWeapon1().increaseLevel();
                         game.getController().getShurikenLabel().setText(Integer.toString(helmet.getWeapon1().getLevel()));
+                        if(equippedWeapon == null){
+                            equippedWeapon = helmet.getWeapon1();
+                        }
+
+                    }
+                    else if(weaponType == 2){
+
+                        helmet.getWeapon2().increaseLevel();
+                        game.getController().getKnifeLabel().setText(Integer.toString(helmet.getWeapon2().getLevel()));
+                        if(equippedWeapon == null){
+                            equippedWeapon = helmet.getWeapon2();
+                        }
 
                     }
                 }
@@ -271,10 +257,6 @@ public class Hero extends Solid implements Collidable, Serializable {
                     System.out.println("This is a coin chest");
                     increaseCurrCoin(((CoinChest) s).getTreasureCoins());
                 }
-
-
-//            game.removeSolid(s);
-
         }
 
 

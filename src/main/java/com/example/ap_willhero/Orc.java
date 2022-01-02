@@ -101,14 +101,23 @@ public class Orc extends Solid implements Collidable, Serializable{
         if(s instanceof Shurikens){
 
             health -= 1;
-            if(health == 0){
+            if(health <= 0){
                 killOrc();
             }
 
 
 
         }
+        if(s instanceof Knives){
 
+            health -= 1;
+            if(health <= 0){
+                killOrc();
+            }
+
+
+
+        }
 
 
 
