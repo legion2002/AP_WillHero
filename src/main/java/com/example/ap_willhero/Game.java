@@ -39,6 +39,14 @@ public class Game implements Serializable {
     private ArrayList<FallingPlatform> FallingPlatformList;
     private ArrayList<TreasureChest> TreasureChestList;
 
+    public boolean isHasBeenResurrected() {
+        return hasBeenResurrected;
+    }
+
+    public void setHasBeenResurrected(boolean hasBeenResurrected) {
+        this.hasBeenResurrected = hasBeenResurrected;
+    }
+
     public int getTotalCoins() {
         return totalCoins;
     }
@@ -76,20 +84,19 @@ public class Game implements Serializable {
     public void setGravity(double gravity) {
         this.gravity = gravity;
     }
-    public void killHero() throws IOException, ClassNotFoundException {
+    public void killHero(){
         System.out.println("Hero is Dead");
-        gameController.pauseGame();
-//        gameController.setGame(null);
+        gameController.getTimeline().pause();
         totalCoins += hero.getCurrCoins();
         if(hasBeenResurrected){
             System.out.println("Hero has already resurrected");
-//            gameController.getEndGameMenu().getChildren().remove(gameController.getResurrectButton());
+            gameController.getEndGameMenu().getChildren().remove(gameController.getResurrectButton());
         }
-        else{
-            gameController.savingGame();
 
-        }
         gameController.getRoot().getChildren().add(gameController.getEndGameMenu());
+        gameController.getResurrectCoins().setText(Integer.toString(hero.getCurrCoins()));
+        gameController.getResurrectLocation().setText(Integer.toString(hero.getCurrentLocation()));
+
 
 
 

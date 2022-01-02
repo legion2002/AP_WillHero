@@ -158,17 +158,17 @@
                   <Image url="@../../../images/EndGameMenu.png" />
                </image>
             </ImageView>
-            <Text fill="WHITE" layoutX="459.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score">
+            <Text fill="WHITE" layoutX="395.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins">
                <font>
                   <Font name="Segoe UI Black" size="21.0" />
                </font>
             </Text>
-            <Label layoutX="481.0" layoutY="235.0" text="0" textFill="WHITE">
+            <Label fx:id="resurrectCoins" layoutX="418.0" layoutY="243.0" text="0" textFill="WHITE">
                <font>
                   <Font name="Segoe UI Black" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="resurrectButton" layoutX="383.0" layoutY="278.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="210.0" style="-fx-background-color: #46a6fa; -fx-border-color: white; -fx-background-radius: 6; -fx-border-radius: 6;" text="Ressurect using 50 coins">
+            <Button fx:id="resurrectButton" layoutX="383.0" layoutY="278.0" mnemonicParsing="false" onAction="#resurrectHero" prefHeight="50.0" prefWidth="210.0" style="-fx-background-color: #46a6fa; -fx-border-color: white; -fx-background-radius: 6; -fx-border-radius: 6;" text="Ressurect using 10 coins">
                <font>
                   <Font name="Segoe UI Black" size="15.0" />
                </font>
@@ -194,6 +194,16 @@
                   <Font name="Segoe UI Black" size="18.0" />
                </font>
             </Text>
+            <Text fill="WHITE" layoutX="504.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location">
+               <font>
+                  <Font name="Segoe UI Black" size="21.0" />
+               </font>
+            </Text>
+            <Label fx:id="resurrectLocation" layoutX="540.0" layoutY="243.0" text="0" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Black" size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Pane fx:id="loadGameMenu" prefHeight="600.0" prefWidth="1024.0">

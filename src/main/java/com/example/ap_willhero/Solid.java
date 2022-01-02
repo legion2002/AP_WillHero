@@ -46,7 +46,7 @@ public abstract class Solid implements Serializable {
         this.yVelocity = yVelocity;
     }
     public int hasCollided(Solid s) {
-        int offset = 12;
+        int offset = 20;
         int heroLeft = (int) getPos().getxPos();
         int heroRight = (int) (heroLeft + getWidth());
         int heroTop = (int) getPos().getyPos();
@@ -71,7 +71,7 @@ public abstract class Solid implements Serializable {
         }
 
         //Everything else if a rectangle/square -> no explicit checking
-        offset = 12;
+
         //Collision with left of solid
         if (heroRight > (solidLeft - offset) && heroRight < (solidLeft + offset) &&
                 (((heroTop > solidTop - offset) && (heroTop < solidBottom + offset)) || (((heroBottom > solidTop - offset) && (heroBottom < solidBottom + offset))))) {

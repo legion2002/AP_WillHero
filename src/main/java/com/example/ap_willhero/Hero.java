@@ -152,7 +152,7 @@ public class Hero extends Solid implements Collidable, Serializable {
             }
             else if(collideVal == 4){
                 System.out.println("HERO CAME UNDER PLATFORM");
-                System.exit(0);
+                game.killHero();
             }
 
         }
@@ -180,11 +180,19 @@ public class Hero extends Solid implements Collidable, Serializable {
         if(s instanceof Orc){
             if(collideVal == 1){
                 //make colliding with left here
-                System.out.println("COLLIDED WITH LEFT OF ORCCCCC");
-                System.out.println("Hero X velocity is " + this.getxVelocity());
-                this.setxVelocity(-this.getxVelocity()/2);
-                this.setyVelocity(0);
-                s.setxVelocity(0.5);
+                if(s instanceof BossOrc){
+                    System.out.println("COLLIDED WITH LEFT OF BOSS ORC");
+                    this.setyVelocity(0);
+                    this.setxVelocity(-0.5);
+                }
+                else{
+                    System.out.println("COLLIDED WITH LEFT OF ORCCCCC");
+                    System.out.println("Hero X velocity is " + this.getxVelocity());
+                    this.setxVelocity(-this.getxVelocity()/2);
+                    this.setyVelocity(0);
+                    s.setxVelocity(0.25);
+                }
+
 
 
             }
@@ -193,7 +201,7 @@ public class Hero extends Solid implements Collidable, Serializable {
             }
             else if(collideVal == 4){
                 System.out.println("HERO CAME UNDER ORC");
-                System.exit(0);
+                game.killHero();
             }
         }
 

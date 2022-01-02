@@ -25,12 +25,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.action.Action;
 
+import javax.crypto.KeyAgreementSpi;
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class GameController implements Initializable {
 
@@ -67,6 +65,12 @@ public class GameController implements Initializable {
 
     @FXML
     transient private Label coinsCollectedLabel = new Label();
+
+    @FXML
+    transient private Label resurrectCoins = new Label();
+
+    @FXML
+    transient private Label resurrectLocation = new Label();
 
     @FXML
     transient private Label shurikenLabel = new Label();
@@ -136,6 +140,14 @@ public class GameController implements Initializable {
 
     transient private int currLocation;
 
+    public Label getResurrectCoins() {
+        return resurrectCoins;
+    }
+
+    public Label getResurrectLocation() {
+        return resurrectLocation;
+    }
+
     public Game getGame() {
         return game;
     }
@@ -154,6 +166,10 @@ public class GameController implements Initializable {
     transient private ArrayList<String> savedGameSlots = new ArrayList<>();
 
     transient private Timeline timeline;
+
+    public Timeline getTimeline() {
+        return timeline;
+    }
 
     public Pane getEndGameMenu() {
         return endGameMenu;
@@ -505,11 +521,26 @@ public class GameController implements Initializable {
     }
 
     public void resurrectHero() {
-        if (game.getTotalCoins() > 50) {
-            game.setTotalCoins(game.getTotalCoins() - 50);
-            timeline.play();
+        if (game.getHero().getCurrCoins() > 10) {
+            game.getHero().increaseCurrCoin(-10);
+            game.getHero().setPos(new Position(game.getHero().getPos().getxPos(), 200));
             root.getChildren().remove(endGameMenu);
-            game.getHero().setPos(new Position(game.getHero().getPos().getxPos(), 100));
+            double moveHeroBy = 0;
+            for(Platform p : game.getPlatformList()){
+                if(p.getPos().getxPos() >  0 && p.getPos().getxPos()<1024){
+                    moveHeroBy = game.getHero().getPos().getxPos() - p.getPos().getxPos();
+                }
+            }
+            for(Solid s : game.getSolidList()){
+                s.translateSolidX(-(moveHeroBy - game.getHero().getWidth()));
+            }
+            game.setHasBeenResurrected(true);
+            timeline.play();
+
+
+        }
+        else{
+            System.out.println("Insufficient Coins");
         }
     }
 
@@ -546,14 +577,21 @@ public class GameController implements Initializable {
                 ImageView img = new ImageView(new Image("greenOrc.png"));
                 g.setOrcImage(img);
                 gameObjectsPane.getChildren().add(img);
-                g.setyVelocity(-0.3);
+                Random rand = new Random();
+                double random = rand.nextDouble() * (0.1);
+
+                g.setyVelocity(-0.3 - random);
 
             } else if (gameObject instanceof RedOrc) {
                 RedOrc g = (RedOrc) gameObject;
                 ImageView img = new ImageView(new Image("redOrc.jpeg"));
                 g.setOrcImage(img);
                 gameObjectsPane.getChildren().add(img);
-                g.setyVelocity(-0.3);
+                Random rand = new Random();
+                double random =  rand.nextDouble() * (0.1);
+
+                g.setyVelocity(-0.3 - random);
+//                g.setyVelocity(-0.3);
 
             } else if (gameObject instanceof TreasureChest) {
 
@@ -672,7 +710,7 @@ public class GameController implements Initializable {
 
 
             for (Solid gameObject : game.getSolidList()) {
-                if (gameObject.getPos().getxPos() + gameObject.getWidth() < 0) {
+                if (gameObject.getPos().getxPos() + gameObject.getWidth() < -500) {
                     garbageArea(gameObject);
                 }
                 if (gameObject.getPos().getxPos() <= 2048 && gameObject.getPos().getxPos() > 0) {

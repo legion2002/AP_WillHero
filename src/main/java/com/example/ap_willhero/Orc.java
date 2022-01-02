@@ -93,7 +93,7 @@ public class Orc extends Solid implements Collidable, Serializable{
         }
         if(s instanceof Orc){
             if(collideVal == 1){
-                s.setxVelocity(0.5);
+                s.setxVelocity(0.1);
 
             }
         }
