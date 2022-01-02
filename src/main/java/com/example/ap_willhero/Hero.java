@@ -36,6 +36,7 @@ public class Hero extends Solid implements Collidable, Serializable {
     private boolean touchingPlatform;
 
 
+
     Hero(Game game, ImageView img){
         this.currCoins = 0;
         this.game = game;
@@ -137,7 +138,7 @@ public class Hero extends Solid implements Collidable, Serializable {
 
                 ((Coin) s).setHasBeenCollected(true);
                 increaseCurrCoin(((Coin) s).getCoinVal());
-                game.removeSolid(s);
+
             }
         }
 

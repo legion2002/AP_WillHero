@@ -740,6 +740,11 @@ public class GameController implements Initializable {
             if (!x.isAlive()) {
 
                 game.getSolidList().remove(x);
+                if(!x.isCoinsGiven()){
+                    game.getHero().increaseCurrCoin(x.getCoinsReleased());
+                    x.setCoinsGiven(true);
+
+                }
             }
         }
         for (Solid x : game.getWeaponList()) {
@@ -757,6 +762,12 @@ public class GameController implements Initializable {
                 gameObjectsPane.getChildren().remove(x.getChestImage());
             }
 
+        }
+        for(Coin x : game.getCoinList()){
+            if(x.isHasBeenCollected()){
+                game.getSolidList().remove(x);
+                gameObjectsPane.getChildren().remove(x.getCoinImage());
+            }
         }
 
     }

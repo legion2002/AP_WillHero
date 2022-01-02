@@ -30,6 +30,8 @@ public class Game implements Serializable {
     private ArrayList<Solid> SolidList;
     private ArrayList<Orc> OrcList;
     private ArrayList<Solid> WeaponList;
+    private ArrayList<Coin> CoinList;
+
 
 
     public ArrayList<FallingPlatform> getFallingPlatformList() {
@@ -110,6 +112,7 @@ public class Game implements Serializable {
         WeaponList = new ArrayList<>();
         TreasureChestList = new ArrayList<>();
         FallingPlatformList = new ArrayList<>();
+        CoinList = new ArrayList<>();
         this.gameController = gc;
         this.abyssLevel = 500;
         this.totalLocations = 122;
@@ -148,12 +151,8 @@ public class Game implements Serializable {
         return this.SolidList;
     }
 
-    public void removeSolid(Solid s){
-        //SolidList.remove(s);
-        if(s instanceof Coin)
-            gameController.getGameObjectsPane().getChildren().remove(((Coin)s).getCoinImage());
-        else if(s instanceof TreasureChest)
-            gameController.getGameObjectsPane().getChildren().remove(((TreasureChest)s).getChestImage());
+    public ArrayList<Coin> getCoinList() {
+        return CoinList;
     }
 
     public void heroWon(){
@@ -214,6 +213,7 @@ public class Game implements Serializable {
 
         Coin coin1 = new Coin(this, new Position(startingPoint + coinOffsetX, platform.getPos().getyPos() + coinOffsetY));
         SolidList.add(coin1);
+        CoinList.add(coin1);
 
         if (platform.getWidth() / 2 < 100)
             return;
@@ -222,6 +222,8 @@ public class Game implements Serializable {
 
 
         SolidList.add(coin2);
+        CoinList.add(coin2);
+
 
 
         if (platform.getWidth() / 2 > 100) {
@@ -229,6 +231,8 @@ public class Game implements Serializable {
 
             Coin coin3 = new Coin(this, new Position(startingPoint + coinOffsetX + 2 * distanceBetweenCoins, platform.getPos().getyPos() + coinOffsetY));
             SolidList.add(coin3);
+            CoinList.add(coin3);
+
 
 
         }

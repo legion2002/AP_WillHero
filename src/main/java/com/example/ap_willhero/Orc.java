@@ -11,8 +11,16 @@ public class Orc extends Solid implements Collidable, Serializable{
     private int health;
     private boolean isAlive;
     private boolean isStaged;
+    private boolean coinsGiven;
 
 
+    public boolean isCoinsGiven() {
+        return coinsGiven;
+    }
+
+    public void setCoinsGiven(boolean coinsGiven) {
+        this.coinsGiven = coinsGiven;
+    }
 
     public ImageView getOrcImage() {
         return orcImage;
@@ -55,7 +63,7 @@ public class Orc extends Solid implements Collidable, Serializable{
     Orc(double x, double y){
         this.setPos( new Position(x, y));
         isStaged = false;
-
+        coinsGiven = false;
         isAlive = true;
 
     }
@@ -99,6 +107,7 @@ public class Orc extends Solid implements Collidable, Serializable{
         }
 
         if(s instanceof Shurikens){
+            ((Shurikens) s).isLive =false;
 
             health -= 1;
             if(health <= 0){
