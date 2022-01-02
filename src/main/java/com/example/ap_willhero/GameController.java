@@ -152,7 +152,7 @@ public class GameController implements Initializable {
 
 
     transient private ArrayList<String> savedGameSlots = new ArrayList<>();
-    transient private int overWrite;
+
     transient private Timeline timeline;
 
     public Pane getEndGameMenu() {
@@ -167,7 +167,6 @@ public class GameController implements Initializable {
         savedGameSlots.add("StoringGame1");
         savedGameSlots.add("StoringGame2");
         savedGameSlots.add("StoringGame3");
-        overWrite = 1;
     }
 
     public void createPlatformList() {
@@ -235,19 +234,35 @@ public class GameController implements Initializable {
 
     public void serialize() throws IOException {
 
-        String filename = savedGameSlots.get(overWrite - 1);
+        String filename = savedGameSlots.get(Main.overWrite - 1);
 
         ObjectOutputStream out = null;
         try {
             out = new ObjectOutputStream(new FileOutputStream(filename));
             out.writeObject(game); //Storing game
-            overWrite++;
-            if (overWrite == 4) overWrite = 1;
+            setLabelsForLoadGames(Main.overWrite, this.game);
+            Main.overWrite++;
+            System.out.println("File created" + filename);
+            if (Main.overWrite == 4) Main.overWrite = 1;
 
         } finally {
             out.close();
         }
-        System.out.println("Done serialising");
+    }
+
+    public void setLabelsForLoadGames(int gameNumber, Game loadedGame){
+        if(gameNumber == 1){
+            SavedGameCoin1.setText("Coins : " +Integer.toString(loadedGame.getHero().getCurrCoins()));
+            SavedGameLocation1.setText("Location : " +Integer.toString(loadedGame.getHero().getCurrentLocation()));
+        }
+        else if(gameNumber == 2){
+            SavedGameCoin2.setText("Coins : " +Integer.toString(loadedGame.getHero().getCurrCoins()));
+            SavedGameLocation2.setText("Location : " + Integer.toString(loadedGame.getHero().getCurrentLocation()));
+        }
+        else{
+            SavedGameCoin3.setText("Coins : " +Integer.toString(loadedGame.getHero().getCurrCoins()));
+            SavedGameLocation3.setText("Location : " +Integer.toString(loadedGame.getHero().getCurrentLocation()));
+        }
     }
 
     public Label getCoinsCollectedLabel() {
@@ -295,13 +310,11 @@ public class GameController implements Initializable {
 
     public void savingGame() throws IOException, ClassNotFoundException {
         trySerializing();
-        root.getChildren().remove(pauseGameMenu);
-
+        exitToMainPage();
 
     }
 
     public void trySerializing() {
-        System.out.println("Saving this game");
         try {
             serialize();
         } catch (IOException e) {
@@ -714,11 +727,8 @@ public class GameController implements Initializable {
         Main.loadGame(event, gameNum);
     }
 
-    public void exitToMainPage() {
-        root.getChildren().remove(pauseGameMenu);
-        root.getChildren().add(MainMenu);
-        onGeneralClick = null;
-
+    public void exitToMainPage() throws IOException, ClassNotFoundException{
+        Main.exitToMainMenu();
     }
 
     public void playFromPause() {
@@ -729,13 +739,9 @@ public class GameController implements Initializable {
     }
 
 
-    public void restartGame(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("Game.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currScene = new Scene(root, 1024, 600);
+    public void restartGame(ActionEvent event) throws IOException, ClassNotFoundException {
+        Main.restartGame(event);
 
-        stage.setScene(currScene);
-        stage.show();
     }
 
     public void exit() {
@@ -751,22 +757,63 @@ public class GameController implements Initializable {
     }
 
     public void loadGameNumber1(ActionEvent event) throws IOException, ClassNotFoundException {
-        loadGame(event, 1);
+        //System.out.println(SavedGameLocation1.getText() + "Label");
+        if(SavedGameLocation1.getText().equals("Location : 0") && SavedGameCoin1.getText().equals("Coins : 0")){
+            System.out.println("Reached");
+            onPlayGameClick();
+        }
+
+        else
+            loadGame(event, 1);
     }
 
     public void loadGameNumber2(ActionEvent event) throws IOException, ClassNotFoundException {
-        loadGame(event, 2);
+        //System.out.println(SavedGameLocation2.getText() + "Label");
+        if(SavedGameLocation2.getText().equals("Location : 0") && SavedGameCoin2.getText().equals("Coins : 0"))
+            onPlayGameClick();
+        else
+            loadGame(event, 2);
 
     }
 
     public void loadGameNumber3(ActionEvent event) throws IOException, ClassNotFoundException {
-        loadGame(event, 3);
+        if(SavedGameLocation3.getText().equals("Location : 0") && SavedGameCoin3.getText().equals("Coins : 0"))
+            onPlayGameClick();
+        else
+            loadGame(event, 3);
 
 
     }
 
+    public void setLoadGameDetails(String filename, int gameNumber){
+        ObjectInputStream in = null;
+        try{
+            in = new ObjectInputStream(new FileInputStream(filename));
+            Game loadedGame = (Game)in.readObject();
+            setLabelsForLoadGames(gameNumber, loadedGame);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void loadGameButtonClick() {
         root.getChildren().remove(MainMenu);
+        File f = new File("StoringGame1");
+        if(f.exists()){
+            setLoadGameDetails("StoringGame1", 1);
+        }
+        f = new File("StoringGame2");
+        if(f.exists()){
+            setLoadGameDetails("StoringGame2", 2);
+        }
+        f = new File("StoringGame3");
+        if(f.exists()){
+            setLoadGameDetails("StoringGame3", 3);
+        }
         root.getChildren().add(loadGameMenu);
 
     }
