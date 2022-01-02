@@ -14,6 +14,10 @@ public class Brick implements Serializable {
         return pause;
     }
 
+    public void setPause(PauseTransition pause) {
+        this.pause = pause;
+    }
+
     transient private PauseTransition pause;
 
     public ImageView getBrickPhoto() {

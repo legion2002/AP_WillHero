@@ -8,6 +8,11 @@ import java.io.Serializable;
 public class Hero extends Solid implements Collidable, Serializable {
 
     private Helmet helmet;
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     transient private Game game;
     private Weapon equippedWeapon;
     private float jumpHeight;
@@ -108,49 +113,6 @@ public class Hero extends Solid implements Collidable, Serializable {
 
     }
 
-    public void checkCollisionWithPlatform(){
-        boolean flag = false;
-        int offset = 5;
-        for(Platform platform : game.getPlatformList()){
-            //System.out.println("Hero Y : " + pos.getyPos());
-            //System.out.println("Hero X : " + pos.getxPos());
-            //System.out.println("Platform Y : " + platform.getLayoutY());
-            //System.out.println("Platform X left boundary: " + platform.getLayoutX());
-            //System.out.println("Platform X right boundary: " + (platform.getLayoutX() + platform.getWidth()));
-            //if(pos.getyPos() + height >= (platform.getLayoutY() - offset) || pos.getyPos() + height <= (platform.getLayoutY() + offset) && pos.getxPos() >= (platform.getLayoutX() - 25) && (pos.getxPos() + width) <= (platform.getLayoutX() + 25 + platform.getWidth())){
-            double left = getPos().getxPos();
-            double right = left + getWidth();
-            double top = getPos().getyPos();
-            double bottom = top + getHeight();
-            double platformLeft = platform.getPos().getxPos();
-            double platformRight = platformLeft + platform.getWidth();
-            double platformTop = platform.getPos().getyPos();
-//            System.out.println("Top of hero: " + getPos().getyPos());
-//            System.out.println("Bottom of hero : " + bottom);
-//            System.out.println("Platform top : " + platformTop);
-            if(left >= platformLeft &&  right <= platformRight) {
-                //System.out.println("Platform in frame");
-                //System.out.println("Top of hero: " + getPos().getyPos());
-//                System.out.println("Bottom of hero : " + bottom);
-//                System.out.println("Platform top : " + platformTop);
-//                System.out.println("Platform left : " + platformLeft);
-//                System.out.println("Platform right : " + platformRight);
-//                System.out.println("hero left : " + left);
-//                System.out.println("Hero right : " + right);
-
-            }
-
-            if(((right < platformRight && right > platformLeft) || (left > platformLeft && left < platformRight)) && (bottom > (platformTop - offset) && bottom < platformTop + offset)){
-                flag = true;
-                //System.out.println("Touched platform");
-                //game.getController().bounceBackHero();
-                break;
-            }
-        }
-
-
-        touchingPlatform = flag;
-    }
 
     public boolean isDead(float abyssLevel){
         if(this.getPosition().getyPos() > abyssLevel){
@@ -161,7 +123,6 @@ public class Hero extends Solid implements Collidable, Serializable {
 
     public void increaseCurrCoin(int value){
         currCoins += value;
-//        Integer currentCoins = Integer.parseInt(game.getController().getCoinsCollectedLabel().getText());
         game.getController().getCoinsCollectedLabel().setText(Integer.toString(currCoins));
     }
 

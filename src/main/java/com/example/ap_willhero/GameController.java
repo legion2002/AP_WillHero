@@ -256,12 +256,8 @@ public class GameController implements Initializable{
         removeMenu();
 
 
-//        root.getChildren().remove(menu);
-
     }
-
-
-
+    
 
     public void removeMenu() {
         root.getChildren().remove(MainMenu);
@@ -321,7 +317,14 @@ public class GameController implements Initializable{
             gameObjectsPane.getChildren().remove(gameObjectsPane.getChildren().size() - 1);
         }
 
+
         for(Solid gameObject : game.getSolidList()){
+            if(gameObject instanceof FallingPlatform){
+                ((FallingPlatform) gameObject).setBrickPhotosSet(false);
+                for(Brick brick : ((FallingPlatform) gameObject).getBricks()){
+                    brick.setPause(new PauseTransition());
+                }
+            }
             if(gameObject.isStaged()){
                 if(gameObject instanceof RedOrc){
                     ImageView img = new ImageView(new Image("redOrc.jpeg"));
@@ -371,8 +374,27 @@ public class GameController implements Initializable{
                     p.setPlatformImage(img);
                     gameObjectsPane.getChildren().add(img);
                 }
+
+                else if(gameObject instanceof FallingPlatform){
+                    ((FallingPlatform) gameObject).setBrickPhotosSet(false);
+                    FallingPlatform p = (FallingPlatform) gameObject;
+                    //p.getRectangleForPlatform().setOpacity(0);
+                    Image img = new Image("FallingPlatformNode.png");
+                    int brickNumber = 0;
+                    int numberOfBricks = p.getBricks().size();
+                    for(int i = 0; i < numberOfBricks; i++){
+                        System.out.println("Adding brick number " + i);
+                        ImageView imgview = new ImageView(img);
+                        p.getBricks().get(i).setBrickImage(imgview, brickNumber);
+                        gameObjectsPane.getChildren().add(imgview);
+                        brickNumber++;
+                    }
+                    p.setBrickPhotosSet(true);
+                }
             }
             }
+
+        game.getHero().setGame(game);
 
         setUpGeneralClick();
         setUpMasterKeyFrame();
