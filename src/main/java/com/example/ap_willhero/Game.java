@@ -152,38 +152,25 @@ public class Game implements Serializable {
         }
         int maximumCoinWidth = 30;
         double distanceBetweenCoins = 50;
-        ImageView img1 = new ImageView();
-        Image image = new Image("coin.png");
-        img1.setImage(image);
-        img1.setFitHeight(maximumCoinWidth);
-        img1.setFitWidth(maximumCoinWidth);
-        Coin coin1 = new Coin(this, new Position(startingPoint + coinOffsetX, platform.getPos().getyPos() + coinOffsetY), img1);
+
+        Coin coin1 = new Coin(this, new Position(startingPoint + coinOffsetX, platform.getPos().getyPos() + coinOffsetY));
         SolidList.add(coin1);
-        gameController.getGameObjectsPane().getChildren().add(img1);
+
         if (platform.getWidth() / 2 < 100)
             return;
 
-        ImageView img2 = new ImageView();
-        img2.setImage(image);
-        img2.setFitHeight(maximumCoinWidth);
-        img2.setFitWidth(maximumCoinWidth);
-        Coin coin2 = new Coin(this, new Position(startingPoint + coinOffsetX + distanceBetweenCoins, platform.getPos().getyPos() + coinOffsetY), img2);
+        Coin coin2 = new Coin(this, new Position(startingPoint + coinOffsetX + distanceBetweenCoins, platform.getPos().getyPos() + coinOffsetY));
 
 
         SolidList.add(coin2);
 
-        gameController.getGameObjectsPane().getChildren().add(img2);
 
         if (platform.getWidth() / 2 > 100) {
             // We generate a batch of three coins
-            ImageView img3 = new ImageView();
-            img3.setImage(image);
-            img3.setFitHeight(maximumCoinWidth);
-            img3.setFitWidth(maximumCoinWidth);
 
-            Coin coin3 = new Coin(this, new Position(startingPoint + coinOffsetX + 2 * distanceBetweenCoins, platform.getPos().getyPos() + coinOffsetY), img3);
+            Coin coin3 = new Coin(this, new Position(startingPoint + coinOffsetX + 2 * distanceBetweenCoins, platform.getPos().getyPos() + coinOffsetY));
             SolidList.add(coin3);
-            gameController.getGameObjectsPane().getChildren().add(img3);
+
 
         }
 

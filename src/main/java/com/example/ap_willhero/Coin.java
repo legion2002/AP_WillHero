@@ -7,6 +7,7 @@ import java.io.Serializable;
 public class Coin extends Solid implements Serializable {
     private int coinVal;
     transient private ImageView coinImage;
+    final static int maximumCoinWidth = 30;
 
     public Game getGame() {
         return game;
@@ -21,11 +22,9 @@ public class Coin extends Solid implements Serializable {
 
     private boolean hasBeenCollected;
 
-    public Coin(Game game, Position pos, ImageView image){
+    public Coin(Game game, Position pos){
         this.game = game;
-        this.coinImage = image;
-        setWidth(coinImage.getFitWidth());
-        setHeight(coinImage.getFitHeight());
+
         setPos(new Position(pos.getxPos(), pos.getyPos()));
         coinVal = 1;
         hasBeenCollected = false;
@@ -36,6 +35,8 @@ public class Coin extends Solid implements Serializable {
         this.coinImage = img;
         img.setLayoutX(getPos().getxPos());
         img.setLayoutY(getPos().getyPos());
+        setWidth(coinImage.getFitWidth());
+        setHeight(coinImage.getFitHeight());
     }
 
     public int getCoinVal(){
@@ -62,8 +63,11 @@ public class Coin extends Solid implements Serializable {
     @Override
     public void setPos(Position p){
         super.setPos(p);
-        coinImage.setLayoutX(getPos().getxPos()) ;
-        coinImage.setLayoutY(getPos().getyPos()) ;
+        if(coinImage != null){
+            coinImage.setLayoutX(getPos().getxPos()) ;
+            coinImage.setLayoutY(getPos().getyPos()) ;
+        }
+
     }
     @Override
     public void translateSolidX(double i) {

@@ -497,6 +497,15 @@ public class GameController implements Initializable{
 
             }
 
+            else if(gameObject instanceof Coin){
+                Coin c = (Coin) gameObject;
+                ImageView img = new ImageView(new Image("coin.png"));
+                img.setFitHeight(Coin.maximumCoinWidth);
+                img.setFitWidth(Coin.maximumCoinWidth);
+                c.setCoinImage(img);
+                gameObjectsPane.getChildren().add(img);
+            }
+
             else if(gameObject instanceof FallingPlatform && !(((FallingPlatform)gameObject).isBrickPhotosSet())){
                 FallingPlatform p = (FallingPlatform) gameObject;
                 //p.getRectangleForPlatform().setOpacity(0);
