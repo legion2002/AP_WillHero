@@ -150,7 +150,7 @@
             </Pane>
          </children>
       </AnchorPane>
-      <Pane fx:id="loadGameMenu" prefHeight="600.0" prefWidth="1024.0" visible="false">
+      <Pane fx:id="loadGameMenu" prefHeight="600.0" prefWidth="1024.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00070d" height="600.0" opacity="0.58" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
             <ImageView fitHeight="400.0" fitWidth="332.0" layoutX="347.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
@@ -158,23 +158,30 @@
                   <Image url="@../../../images/LoadGameMenu.png" />
                </image>
             </ImageView>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="92.0" layoutX="374.0" layoutY="196.0" stroke="BLACK" strokeType="INSIDE" width="276.0" />
-            <Button layoutX="376.0" layoutY="198.0" mnemonicParsing="false" prefHeight="87.0" prefWidth="272.0" style="-fx-background-color: #46a6fa;" />
-            <Text layoutX="463.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game 1" wrappingWidth="80.35400390625">
+            <Button layoutX="376.0" layoutY="198.0" mnemonicParsing="false" onAction="#loadGameNumber1" prefHeight="87.0" prefWidth="272.0" style="-fx-background-color: #46a6fa;" />
+            <Button layoutX="376.0" layoutY="295.0" mnemonicParsing="false" onAction="#loadGameNumber2" prefHeight="87.0" prefWidth="272.0" style="-fx-background-color: #46a6fa;" />
+            <Button layoutX="376.0" layoutY="391.0" mnemonicParsing="false" onAction="#loadGameNumber3" prefHeight="87.0" prefWidth="272.0" style="-fx-background-color: #46a6fa;" />
+            <Label fx:id="SavedGameLocation3" layoutX="387.0" layoutY="425.0" text="Location : 0" />
+            <Label fx:id="SavedGameCoin3" layoutX="387.0" layoutY="446.0" text="Coins : 0" />
+            <Label layoutX="452.0" layoutY="295.0" text="Game 2">
                <font>
-                  <Font name="Segoe UI Black" size="20.0" />
+                  <Font name="Segoe UI Black" size="25.0" />
                </font>
-            </Text>
-            <Text layoutX="385.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location : 100" wrappingWidth="156.0">
+            </Label>
+            <Label fx:id="SavedGameLocation2" layoutX="387.0" layoutY="328.0" text="Location : 0" />
+            <Label fx:id="SavedGameCoin2" layoutX="387.0" layoutY="350.0" text="Coins : 0" />
+            <Label layoutX="459.0" layoutY="198.0" text="Game 1">
                <font>
-                  <Font name="Segoe UI Black" size="18.0" />
+                  <Font name="Segoe UI Black" size="25.0" />
                </font>
-            </Text>
-            <Text layoutX="385.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Coins : 55" wrappingWidth="108.0">
+            </Label>
+            <Label fx:id="SavedGameLocation1" layoutX="387.0" layoutY="231.0" text="Location : 0" />
+            <Label fx:id="SavedGameCoin1" layoutX="387.0" layoutY="252.0" text="Coins : 0" />
+            <Label layoutX="457.0" layoutY="391.0" text="Game 3">
                <font>
-                  <Font name="Berlin Sans FB Demi Bold" size="18.0" />
+                  <Font name="Segoe UI Black" size="25.0" />
                </font>
-            </Text>
+            </Label>
          </children>
       </Pane>
       <Pane fx:id="pauseGameMenu" prefHeight="600.0" prefWidth="1024.0">
@@ -204,10 +211,10 @@
                   <Image url="@../../../images/saveGameButton.png" />
                </image>
             </ImageView>
-            <Button fx:id="playGameButton" layoutX="556.0" layoutY="256.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
-            <Button fx:id="restartGameButton" layoutX="408.0" layoutY="359.0" mnemonicParsing="false" onAction="#loadGame" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
-            <Button fx:id="exitButton" layoutX="408.0" layoutY="256.0" mnemonicParsing="false" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
-            <Button fx:id="playGameButton1" layoutX="556.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#savingGame" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+            <Button fx:id="playGameButton" layoutX="556.0" layoutY="256.0" mnemonicParsing="false" onAction="#playFromPause" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+            <Button fx:id="restartGameButton" layoutX="408.0" layoutY="359.0" mnemonicParsing="false" onAction="#restartGame" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+            <Button fx:id="exitButton" layoutX="408.0" layoutY="256.0" mnemonicParsing="false" onAction="#exitToMainPage" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
+            <Button fx:id="playGameButton1" layoutX="556.0" layoutY="359.0" mnemonicParsing="false" onAction="#savingGame" onMouseClicked="#savingGame" opacity="0.0" prefHeight="55.0" prefWidth="60.0" />
             <Text fill="WHITE" layoutX="424.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Exit">
                <font>
                   <Font name="Segoe UI Black" size="15.0" />
@@ -232,8 +239,7 @@
       </Pane>
       <Pane fx:id="MainMenu" prefHeight="600.0" prefWidth="1024.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="600.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="1024.0" />
-            <ImageView fitHeight="624.0" fitWidth="1024.0" layoutY="10.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="624.0" fitWidth="1024.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/firstImg.jpeg" />
                </image>
@@ -245,7 +251,7 @@
                         <Font name="Segoe UI Black" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="loadGameButton" mnemonicParsing="false" onAction="#loadGame" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1.5;" text="Load Game" textFill="WHITE">
+                  <Button fx:id="loadGameButton" mnemonicParsing="false" onAction="#loadGameButtonClick" prefHeight="43.0" prefWidth="143.0" style="-fx-background-color: #46a6fa; -fx-border-color: #fefdf9; -fx-border-radius: 5; -fx-background-radius: 5; -fx-border-width: 1.5;" text="Load Game" textFill="WHITE">
                      <font>
                         <Font name="Segoe UI Black" size="12.0" />
                      </font>

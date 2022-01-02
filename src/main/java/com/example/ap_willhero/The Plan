@@ -1,6 +1,7 @@
-Flow of doing work -
-
-
-5) Weapons working
-6) Boss fight
-6) Serializable
+Stage 2 - "The Cleanup"
+===============================================
+1) Resurrect Hero
+2) Proper Linking
+3) Fix Collisions
+4) Coins Released Orc Death
+5) Coins not disappearing from solid list

@@ -75,20 +75,25 @@ public class GameController implements Initializable{
 
     @FXML
     transient private Label knifeLabel = new Label();
-
-
     @FXML
-    transient private ImageView pauseMenu = new ImageView();
+    transient private Label SavedGameLocation1 = new Label();
+    @FXML
+    transient private Label SavedGameLocation2 = new Label();
+    @FXML
+    transient private Label SavedGameLocation3 = new Label();
+    @FXML
+    transient private Label SavedGameCoin1 = new Label();
+    @FXML
+    transient private Label SavedGameCoin2 = new Label();
+    @FXML
+    transient private Label SavedGameCoin3 = new Label();
+
+
 
     @FXML
     transient private Button pauseMenuButton = new Button();
 
 
-    @FXML
-    transient private FadeTransition menuDisappearing = new FadeTransition();
-
-    @FXML
-    transient private FadeTransition pauseMenuAppearing = new FadeTransition();
 
     @FXML
     transient private Pane loadGameMenu = new Pane();
@@ -309,6 +314,8 @@ public class GameController implements Initializable{
         game.getHero().setHeroImage(heroImage);
 
         gameRoot.getChildren().remove(platformPane);
+        gameRoot.getChildren().remove(loadGameMenu);
+
         int numberOfFallingPlatforms = game.getFallingPlatformList().size();
         for(int i = 0; i < numberOfFallingPlatforms; i++){
             gameObjectsPane.getChildren().remove(gameObjectsPane.getChildren().size() - 1);
@@ -662,10 +669,21 @@ public class GameController implements Initializable{
 
     }
 
-    public void loadGame(ActionEvent event) throws IOException, ClassNotFoundException {
-        Main.loadGame(event);
+    public void loadGame(ActionEvent event, int gameNum) throws IOException, ClassNotFoundException {
+        Main.loadGame(event,  gameNum);
     }
 
+    public void exitToMainPage(){
+        root.getChildren().remove(pauseGameMenu);
+        root.getChildren().add(MainMenu);
+        onGeneralClick = null;
+
+    }
+    public void playFromPause(){
+        root.getChildren().remove(pauseGameMenu);
+
+
+    }
 
 
     public void restartGame(ActionEvent event) throws IOException {
@@ -689,10 +707,30 @@ public class GameController implements Initializable{
         System.exit(0);
     }
 
+    public void loadGameNumber1(ActionEvent event) throws IOException, ClassNotFoundException {
+        loadGame(event, 1);
+    }
+    public void loadGameNumber2(ActionEvent event) throws IOException, ClassNotFoundException {
+        loadGame(event, 2);
+
+    }
+    public void loadGameNumber3(ActionEvent event) throws IOException, ClassNotFoundException {
+        loadGame(event, 3);
+
+
+    }
+    public void loadGameButtonClick(){
+        root.getChildren().remove(MainMenu);
+        root.getChildren().add(loadGameMenu);
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         root.getChildren().remove(pauseGameMenu);
+        root.getChildren().remove(loadGameMenu);
+
 
 
     }

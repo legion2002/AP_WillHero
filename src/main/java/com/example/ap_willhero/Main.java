@@ -15,9 +15,8 @@ public class Main extends Application{
     GameController Controller;
     static Game currGame;
 
-
-    public static void loadGame(ActionEvent event) throws IOException, ClassNotFoundException {
-        deserialize(1);
+    public static void loadGame(ActionEvent event, int gameNum) throws IOException, ClassNotFoundException {
+        deserialize(gameNum);
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("Game.fxml"));
         Scene currScene = new Scene(loader.load(), 1024, 600 );
         GameController newGC = loader.getController();
@@ -41,7 +40,7 @@ public class Main extends Application{
     public static void deserialize(int chosenGame) throws IOException, ClassNotFoundException{
         ObjectInputStream in = null;
         try{
-            String filename = "D:\\Second Year\\First Sem\\AP\\AP Project\\AP_WillHero\\" + "StoringGame" + chosenGame;
+            String filename = "D:\\AP_Project\\AP_WillHero\\" + "StoringGame" + chosenGame;
             in = new ObjectInputStream(new FileInputStream(filename));
             Game loadedGame = (Game)in.readObject();
             currGame = loadedGame;
